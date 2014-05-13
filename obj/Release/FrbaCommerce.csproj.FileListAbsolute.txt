@@ -1,0 +1,12 @@
+C:\SMALL\obj\Release\ResolveAssemblyReference.cache
+C:\SMALL\obj\Release\FrbaCommerce.Form1.resources
+C:\SMALL\obj\Release\FrbaCommerce.Generar_Publicacion.frmGenerarPublicacion.resources
+C:\SMALL\obj\Release\FrbaCommerce.Login.Form1.resources
+C:\SMALL\obj\Release\FrbaCommerce.Properties.Resources.resources
+C:\SMALL\obj\Release\FrbaCommerce.Registro_de_Usuario.Form1.resources
+C:\SMALL\obj\Release\FrbaCommerce.csproj.GenerateResource.Cache
+C:\SMALL\bin\Release\FrbaCommerce.exe.config
+C:\SMALL\bin\Release\FrbaCommerce.exe
+C:\SMALL\bin\Release\FrbaCommerce.pdb
+C:\SMALL\obj\Release\FrbaCommerce.exe
+C:\SMALL\obj\Release\FrbaCommerce.pdb
