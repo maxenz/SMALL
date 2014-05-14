@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
+
 namespace FrbaCommerce
 {
     static class Program
@@ -15,7 +16,7 @@ namespace FrbaCommerce
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Generar_Publicacion.frmGenerarPublicacion());
+            Application.Run(new MenuInicio());
         }
     }
 }

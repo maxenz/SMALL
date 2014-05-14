@@ -75,5 +75,41 @@ namespace FrbaCommerce.DAO
             return tiposDePublicacion;
         }
 
+        //Esto hay que cambiarlo por el procedure
+        public static List<Publicacion> GetPublicaciones()
+        {
+
+            List<Publicacion> lPublicaciones = new List<Publicacion>();
+
+            SqlConnection cn = new SqlConnection();
+            SqlCommand cm = new SqlCommand();
+            SqlDataReader dr;
+
+            conexionSql(cn, cm);
+
+            cm.CommandType = CommandType.Text;
+            cm.CommandText = "select * from SMALL.Publicacion";
+
+            dr = cm.ExecuteReader();
+
+            while (dr.Read())
+            {
+                Publicacion p = new Publicacion(Convert.ToInt32(dr["Id"]),
+                    Convert.ToInt32(dr["Id_Visibilidad"]),
+                    Convert.ToInt32(dr["Id_Tipo_Publicacion"]),
+                    Convert.ToInt32(dr["Id_Estado"]),
+                    Convert.ToInt32(dr["Id_Persona"]),
+                    dr["Descripcion"].ToString(),
+                    Convert.ToDateTime(dr["Fecha_Inicio"]),
+                    Convert.ToDateTime(dr["Fecha_Vencimiento"]),
+                    Convert.ToInt32(dr["Stock"]),
+                    Convert.ToDouble(dr["Precio"]),
+                    Convert.ToBoolean(dr["Hab_Preguntas"]));
+
+                lPublicaciones.Add(p);
+            }
+            return lPublicaciones;
+        }
+
     }
 }

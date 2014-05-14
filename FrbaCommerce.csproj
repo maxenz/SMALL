@@ -89,6 +89,18 @@
     <Compile Include="CapaADO\ADOPublicacion.cs" />
     <Compile Include="CapaADO\ADOVisibilidad.cs" />
     <Compile Include="CapaADO\SqlConnector.cs" />
+    <Compile Include="Comprar-Ofertar\ComprarOfertar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Comprar-Ofertar\ComprarOfertar.designer.cs">
+      <DependentUpon>ComprarOfertar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Comprar-Ofertar\MostrarPublicacion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Comprar-Ofertar\MostrarPublicacion.designer.cs">
+      <DependentUpon>MostrarPublicacion.cs</DependentUpon>
+    </Compile>
     <Compile Include="Editar Publicacion\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -101,11 +113,11 @@
     <Compile Include="Facturar Publicaciones\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form1.cs">
+    <Compile Include="MenuInicio.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="MenuInicio.Designer.cs">
+      <DependentUpon>MenuInicio.cs</DependentUpon>
     </Compile>
     <Compile Include="Generar Publicacion\frmGenerarPublicacion.cs">
       <SubType>Form</SubType>
@@ -119,6 +131,7 @@
     <Compile Include="Gestion de Preguntas\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\FormHelper.cs" />
     <Compile Include="Historial Cliente\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -145,8 +158,11 @@
     <Compile Include="Modelo\Visibilidad.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="Comprar-Ofertar\ComprarOfertar.resx">
+      <DependentUpon>ComprarOfertar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MenuInicio.resx">
+      <DependentUpon>MenuInicio.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Generar Publicacion\frmGenerarPublicacion.resx">
       <DependentUpon>frmGenerarPublicacion.cs</DependentUpon>
@@ -182,9 +198,6 @@
     <Compile Include="Registro de Usuario\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Comprar-Ofertar\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
