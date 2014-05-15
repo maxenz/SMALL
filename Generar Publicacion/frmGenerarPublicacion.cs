@@ -13,22 +13,47 @@ namespace FrbaCommerce.Generar_Publicacion
 {
     public partial class frmGenerarPublicacion : Form
     {
-        Publicacion publicacion;
+        public Publicacion publicacion;
         List<Rubro> rubros;
 
         public frmGenerarPublicacion()
         {
             InitializeComponent();
-        }
-
-        private void frmGenerarPublicacion_Load(object sender, EventArgs e)
-        {
             setComboTiposDePublicacion();
             setComboVisibilidades();
             setComboEstadosPublicacion();
             setNumberPublicacion();
             setListBoxRubros();
             setGeneralInputs();
+        }
+
+        private void frmGenerarPublicacion_Load(object sender, EventArgs e)
+        {
+            if (this.publicacion != null)
+            {
+                setPublicacion();
+            }
+        }
+
+        private void setPublicacion()
+        {
+            cmbTipoPublicacion.SelectedValue = publicacion.ID_Tipo_Publicacion;
+            txtCodPublicacion.Text = publicacion.ID.ToString();
+            txtDescPublicacion.Text = publicacion.Descripcion;
+            cmbVisibilidadPublicacion.SelectedValue = publicacion.ID_Visibilidad;
+            dtpInicioPublicacion.Text = publicacion.Fecha_Inicio.ToString();
+            txtStock.Text = publicacion.Stock.ToString();
+            txtPrecio.Text = publicacion.Precio.ToString();
+            cmbEstadoPublicacion.SelectedValue = publicacion.ID_Estado;
+            chkSePermitePreguntas.Checked = publicacion.Hab_Preguntas;
+            for (int i = 0; i < lstBoxRubros.Items.Count; i++)
+            {
+                Rubro rubro = (Rubro)lstBoxRubros.Items[i];
+                if (publicacion.Rubros.Exists(x => x.ID == rubro.ID))
+                {
+                    lstBoxRubros.SetSelected(i, true);
+                }            
+            }
         }
 
         private void setComboEstadosPublicacion()
@@ -43,6 +68,7 @@ namespace FrbaCommerce.Generar_Publicacion
             this.lstBoxRubros.DataSource = ADORubro.getRubros();
             this.lstBoxRubros.DisplayMember = "Descripcion";
             this.lstBoxRubros.ValueMember = "ID";
+            this.lstBoxRubros.SelectedItem = null;
         }
 
         private void setGeneralInputs()
@@ -96,7 +122,7 @@ namespace FrbaCommerce.Generar_Publicacion
                 Convert.ToInt32(cmbEstadoPublicacion.SelectedValue),
                 idPersona, txtDescPublicacion.Text, dtpInicioPublicacion.Value,
                 Convert.ToDateTime(txtVencimientoPublicacion.Text), Convert.ToInt32(txtStock.Text),
-                Convert.ToDouble(txtPrecio.Text), chkSePermitePreguntas.Checked);
+                Convert.ToDouble(txtPrecio.Text), chkSePermitePreguntas.Checked,new List<Rubro>());
 
             rubros = new List<Rubro>();
             //foreach (var itm in lstBoxRubros.SelectedItems) {
@@ -170,6 +196,8 @@ namespace FrbaCommerce.Generar_Publicacion
                 txtValorInicialSubasta.ReadOnly = true;
             }
         }
+
+
 
 
 

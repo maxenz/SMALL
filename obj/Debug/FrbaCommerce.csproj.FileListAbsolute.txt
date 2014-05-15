@@ -9,4 +9,5 @@ C:\SMALL\obj\Debug\FrbaCommerce.exe
 C:\SMALL\obj\Debug\FrbaCommerce.pdb
 C:\SMALL\obj\Debug\FrbaCommerce.Login.Form1.resources
 C:\SMALL\obj\Debug\FrbaCommerce.Registro_de_Usuario.Form1.resources
-C:\SMALL\obj\Debug\FrbaCommerce.Form1.resources
+C:\SMALL\obj\Debug\FrbaCommerce.Comprar_Ofertar.ComprarOfertarForm.resources
+C:\SMALL\obj\Debug\FrbaCommerce.MenuInicio.resources

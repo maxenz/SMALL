@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using FrbaCommerce.Helpers;
 using FrbaCommerce.Comprar_Ofertar;
 using FrbaCommerce.Generar_Publicacion;
+using FrbaCommerce.Modelo;
 
 namespace FrbaCommerce
 {
@@ -26,7 +27,9 @@ namespace FrbaCommerce
 
         private void btnGenerarPublicacion_Click(object sender, EventArgs e)
         {
-            FormHelper.mostrarNuevaVentana(new frmGenerarPublicacion(), this);
+            frmGenerarPublicacion frmGenPub = new frmGenerarPublicacion();
+            frmGenPub.publicacion = DAO.ADOPublicacion.getPublicacion(2);
+            FormHelper.mostrarNuevaVentana(frmGenPub, this);
         }
     }
 }

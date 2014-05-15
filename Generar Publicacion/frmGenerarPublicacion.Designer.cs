@@ -182,7 +182,7 @@
             this.btnGenerarPublicacion.Name = "btnGenerarPublicacion";
             this.btnGenerarPublicacion.Size = new System.Drawing.Size(109, 23);
             this.btnGenerarPublicacion.TabIndex = 21;
-            this.btnGenerarPublicacion.Text = "Generar";
+            this.btnGenerarPublicacion.Text = "Guardar";
             this.btnGenerarPublicacion.UseVisualStyleBackColor = true;
             this.btnGenerarPublicacion.Click += new System.EventHandler(this.btnGenerarPublicacion_Click);
             // 

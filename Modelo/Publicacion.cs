@@ -18,10 +18,12 @@ namespace FrbaCommerce.Modelo
         public int Stock { get; set; }
         public double Precio { get; set; }
         public bool Hab_Preguntas { get; set; }
+        public List<Rubro> Rubros { get; set; }
 
         public Publicacion(int id,int id_visibilidad, int id_tipo_publicacion, int id_estado,
                             int id_persona, string descripcion, DateTime fecha_inicio,
-                            DateTime fecha_vencimiento, int stock, double precio, bool hab_preguntas)
+                            DateTime fecha_vencimiento, int stock, double precio, bool hab_preguntas,
+                            List<Rubro> rubros)
         {
             this.ID = id;
             this.ID_Visibilidad = id_visibilidad;
@@ -34,6 +36,7 @@ namespace FrbaCommerce.Modelo
             this.Stock = stock;
             this.Precio = precio;
             this.Hab_Preguntas = hab_preguntas;
+            this.Rubros = rubros;
         }
     }
 }

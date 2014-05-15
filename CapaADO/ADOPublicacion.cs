@@ -41,6 +41,15 @@ namespace FrbaCommerce.DAO
             return estadosPublicacion;
         }
 
+        public static Publicacion getPublicacion(int idPublicacion)
+        {
+            DataTable table = getDatatable("SELECT * FROM SMALL.Publicacion WHERE ID = " + idPublicacion);
+            Publicacion p = dataRowToPublicacion(table.Rows[0]);
+            p.Rubros = getRubrosFromPublicacion(p);
+            return p;
+                   
+        }
+
 
         private static DataTable getDatatable(string consulta) {
 
@@ -79,22 +88,40 @@ namespace FrbaCommerce.DAO
         public static List<Publicacion> GetPublicaciones()
         {
 
-            List<Publicacion> lPublicaciones = new List<Publicacion>();
+            List<Publicacion> lstPublicaciones = new List<Publicacion>();
+            DataTable tablePub = getDatatable("SELECT * FROM SMALL.Publicacion");
 
-            SqlConnection cn = new SqlConnection();
-            SqlCommand cm = new SqlCommand();
-            SqlDataReader dr;
-
-            conexionSql(cn, cm);
-
-            cm.CommandType = CommandType.Text;
-            cm.CommandText = "select * from SMALL.Publicacion";
-
-            dr = cm.ExecuteReader();
-
-            while (dr.Read())
+            foreach (DataRow dr in tablePub.Rows)
             {
-                Publicacion p = new Publicacion(Convert.ToInt32(dr["Id"]),
+                Publicacion pub = dataRowToPublicacion(dr);
+                pub.Rubros = getRubrosFromPublicacion(pub);          
+                lstPublicaciones.Add(pub);
+            }
+            
+            return lstPublicaciones;
+        }
+
+        private static List<Rubro> getRubrosFromPublicacion(Publicacion pub)
+        {
+            string qryRubros = "SELECT ID,Descripcion FROM SMALL.Rubro rub " +
+                                   "LEFT JOIN SMALL.Publicacion_Rubro pubrub ON " +
+                                   "(rub.ID = pubrub.ID_Rubro) " +
+                                   " WHERE pubrub.ID_Publicacion = " + pub.ID;
+            DataTable tableRub = getDatatable(qryRubros);
+            List<Rubro> rubros = new List<Rubro>();
+            foreach (DataRow dr in tableRub.Rows)
+            {
+                Rubro rub = new Rubro(Convert.ToInt32(dr["ID"]), dr["Descripcion"].ToString());
+                rubros.Add(rub);
+            }
+
+            return rubros;
+
+        }
+
+        private static Publicacion dataRowToPublicacion(DataRow dr)
+        {
+            Publicacion publicacion = new Publicacion(Convert.ToInt32(dr["Id"]),
                     Convert.ToInt32(dr["Id_Visibilidad"]),
                     Convert.ToInt32(dr["Id_Tipo_Publicacion"]),
                     Convert.ToInt32(dr["Id_Estado"]),
@@ -104,11 +131,9 @@ namespace FrbaCommerce.DAO
                     Convert.ToDateTime(dr["Fecha_Vencimiento"]),
                     Convert.ToInt32(dr["Stock"]),
                     Convert.ToDouble(dr["Precio"]),
-                    Convert.ToBoolean(dr["Hab_Preguntas"]));
+                    Convert.ToBoolean(dr["Hab_Preguntas"]), new List<Rubro>());
 
-                lPublicaciones.Add(p);
-            }
-            return lPublicaciones;
+            return publicacion;
         }
 
     }
