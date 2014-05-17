@@ -41,6 +41,17 @@ namespace FrbaCommerce.DAO
             return estadosPublicacion;
         }
 
+
+        public static EstadoPublicacion getEstadoPublicacion(int id)
+        {
+            DataTable table = getDatatable("SELECT * FROM SMALL.Estado_Publicacion WHERE ID = " +id);
+            DataRow dr = table.Rows[0];
+            EstadoPublicacion estadoPublicacion = new EstadoPublicacion(Convert.ToInt32(dr["ID"]),
+                                                    dr["Descripcion"].ToString());
+                       
+            return estadoPublicacion;
+        }
+
         public static Publicacion getPublicacion(int idPublicacion)
         {
             DataTable table = getDatatable("SELECT * FROM SMALL.Publicacion WHERE ID = " + idPublicacion);
@@ -77,11 +88,22 @@ namespace FrbaCommerce.DAO
             DataTable table = getDatatable("SELECT * FROM SMALL.Tipo_Publicacion");
             foreach (DataRow dr in table.Rows)
             {
-                TipoPublicacion tip_pub = new TipoPublicacion(dr["Descripcion"].ToString());
-                tip_pub.ID = Convert.ToInt32(dr["ID"]);
+                TipoPublicacion tip_pub = new TipoPublicacion(dr["Descripcion"].ToString(),
+                                            Convert.ToInt32(dr["ID"]));
                 tiposDePublicacion.Add(tip_pub);
             }
             return tiposDePublicacion;
+        }
+
+
+        public static TipoPublicacion getTipoPublicacion(int id)
+        {
+            DataTable table = getDatatable("SELECT * FROM SMALL.Tipo_Publicacion WHERE ID = " + id);
+            DataRow dr = table.Rows[0];
+            TipoPublicacion tip_pub = new TipoPublicacion(dr["Descripcion"].ToString(),
+                                        Convert.ToInt32(dr["ID"]));
+
+            return tip_pub;
         }
 
         //Esto hay que cambiarlo por el procedure

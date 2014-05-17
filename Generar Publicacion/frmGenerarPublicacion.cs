@@ -19,16 +19,18 @@ namespace FrbaCommerce.Generar_Publicacion
         public frmGenerarPublicacion()
         {
             InitializeComponent();
+
+        }
+
+        private void frmGenerarPublicacion_Load(object sender, EventArgs e)
+        {
             setComboTiposDePublicacion();
             setComboVisibilidades();
             setComboEstadosPublicacion();
             setNumberPublicacion();
             setListBoxRubros();
             setGeneralInputs();
-        }
 
-        private void frmGenerarPublicacion_Load(object sender, EventArgs e)
-        {
             if (this.publicacion != null)
             {
                 setPublicacion();
@@ -54,11 +56,107 @@ namespace FrbaCommerce.Generar_Publicacion
                     lstBoxRubros.SetSelected(i, true);
                 }            
             }
+
+            EstadoPublicacion estadoPublicacion = ADOPublicacion.getEstadoPublicacion(publicacion.ID_Estado);
+
+            switch (estadoPublicacion.Descripcion)
+            {
+                case "Activa":
+                    setCondicionesActiva();
+                    break;
+                case "Pausada":
+                    setCondicionesPausada();
+                    break;
+                case "Finalizada":
+                    setCondicionesFinalizada();
+                    break;
+            }
+        }
+
+        private string getDescripcionTipoPublicacion()
+        {
+            TipoPublicacion tip_pub = ADOPublicacion.getTipoPublicacion(publicacion.ID_Tipo_Publicacion);
+            return tip_pub.Descripcion;
+        }
+
+        private void setCondicionesFinalizada()
+        {
+            disableMostOfControls();
+            readonlyStockDescripcion();
+            cmbEstadoPublicacion.Enabled = false;
+        }
+
+        private void setCondicionesActiva()
+        {
+            disableMostOfControls();
+
+            if (getDescripcionTipoPublicacion() == "Subasta")
+            {
+                readonlyStockDescripcion();
+            }
+        }
+
+        private void setCondicionesPausada()
+        {
+            disableMostOfControls();
+            readonlyStockDescripcion();
+        }
+
+        private void disableMostOfControls()
+        {
+            List<string> vTextBox = new List<string>() { "txtCodPublicacion", "txtPrecio", "txtValorInicialSubasta" };
+            List<string> vCombo = new List<string>() { "cmbTipoPublicacion", "cmbVisibilidadPublicacion" };
+            lstBoxRubros.Enabled = false;
+            chkSePermitePreguntas.Enabled = false;
+            dtpInicioPublicacion.Enabled = false;
+            setReadOnlyTextBoxes(vTextBox);
+            setDisabledCombo(vCombo);
+            List<EstadoPublicacion> lst = ADOPublicacion.getEstadosPublicacion();
+            cmbEstadoPublicacion.DataSource = getEstadosWithFilters(new string[] { "Borrador" }, lst);
+            cmbEstadoPublicacion.SelectedValue = publicacion.ID_Estado;
+        }
+
+        private void readonlyStockDescripcion()
+        {
+            List<string> vTextBox = new List<string>() { "txtStock", "txtDescPublicacion" };
+            setReadOnlyTextBoxes(vTextBox);
+        }
+
+        private void setReadOnlyTextBoxes(List<string> vControls)
+        {
+            foreach (string desc in vControls)
+            {
+                ((TextBox)this.Controls.Find(desc, true)[0]).ReadOnly = true;
+            }
+        }
+
+        private void setDisabledCombo(List<string> vControls)
+        {
+            foreach (string desc in vControls)
+            {
+                ((ComboBox)this.Controls.Find(desc, true)[0]).Enabled = false;
+            }
+        }
+
+        private List<EstadoPublicacion> getEstadosWithFilters(string[] filters, List<EstadoPublicacion> lst)
+        {
+            foreach (string filter in filters)
+            {
+                lst = lst.Where(x => x.Descripcion != filter).ToList();
+            }
+
+            return lst;
+
         }
 
         private void setComboEstadosPublicacion()
         {
-            this.cmbEstadoPublicacion.DataSource = ADOPublicacion.getEstadosPublicacion();
+            List<EstadoPublicacion> lstEstados = ADOPublicacion.getEstadosPublicacion();
+            if (this.publicacion == null)
+            {
+                lstEstados = getEstadosWithFilters(new string[] { "Pausada", "Finalizada" }, lstEstados);
+            } 
+            this.cmbEstadoPublicacion.DataSource = lstEstados;
             this.cmbEstadoPublicacion.DisplayMember = "Descripcion";
             this.cmbEstadoPublicacion.ValueMember = "ID";
         }
@@ -107,6 +205,10 @@ namespace FrbaCommerce.Generar_Publicacion
 
         private void btnGenerarPublicacion_Click(object sender, EventArgs e)
         {
+
+            //falta validar si cuando modifican el stock se hace de forma incremental.
+            //tmb aca falta diferenciar si esta editando o generando la publicacion
+
             cleanErrorProviderInLabels();
             if (formIsValidated())
             {

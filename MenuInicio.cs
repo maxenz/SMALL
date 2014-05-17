@@ -28,7 +28,7 @@ namespace FrbaCommerce
         private void btnGenerarPublicacion_Click(object sender, EventArgs e)
         {
             frmGenerarPublicacion frmGenPub = new frmGenerarPublicacion();
-            frmGenPub.publicacion = DAO.ADOPublicacion.getPublicacion(2);
+            frmGenPub.publicacion = DAO.ADOPublicacion.getPublicacion(1);
             FormHelper.mostrarNuevaVentana(frmGenPub, this);
         }
     }
