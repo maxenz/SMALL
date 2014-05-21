@@ -111,7 +111,7 @@ namespace FrbaCommerce.DAO
         {
 
             List<Publicacion> lstPublicaciones = new List<Publicacion>();
-            DataTable tablePub = getDatatable("SELECT * FROM SMALL.Publicacion");
+            DataTable tablePub = getDatatable("SELECT top(100) * FROM SMALL.Publicacion");
 
             foreach (DataRow dr in tablePub.Rows)
             {
@@ -147,7 +147,7 @@ namespace FrbaCommerce.DAO
                     Convert.ToInt32(dr["Id_Visibilidad"]),
                     Convert.ToInt32(dr["Id_Tipo_Publicacion"]),
                     Convert.ToInt32(dr["Id_Estado"]),
-                    Convert.ToInt32(dr["Id_Persona"]),
+                    Convert.ToInt32(dr["Id_Persona_Venta"]),
                     dr["Descripcion"].ToString(),
                     Convert.ToDateTime(dr["Fecha_Inicio"]),
                     Convert.ToDateTime(dr["Fecha_Vencimiento"]),

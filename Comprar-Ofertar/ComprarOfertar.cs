@@ -60,7 +60,19 @@ namespace FrbaCommerce.Comprar_Ofertar
         {
             //clsEmpresa empresa = new clsEmpresa();
             List<Publicacion> lPublicaciones = ADOPublicacion.GetPublicaciones();//Metodo que devuelve un datatable como resultado de la ejecucion de una consulta 
-            dtPublicaciones = FormHelper.Convert<Publicacion>(lPublicaciones);
+            dtPublicaciones = FormHelper.ConvertToDT<Publicacion>(lPublicaciones);
+
+            dtPagina.Columns.Add("Id");
+            dtPagina.Columns.Add("Visibilidad");
+            dtPagina.Columns.Add("Tipo Publicacion");
+            dtPagina.Columns.Add("Estado");
+            dtPagina.Columns.Add("Persona Venta");
+            dtPagina.Columns.Add("Descripcion");
+            dtPagina.Columns.Add("Fecha Inicio");
+            dtPagina.Columns.Add("Fecha Venicimento");
+            dtPagina.Columns.Add("Stock");
+            dtPagina.Columns.Add("Precio");
+            dtPagina.Columns.Add("Habilita Preguntas");
 
             if (dtPublicaciones.Rows.Count > 0)
             {
@@ -97,17 +109,6 @@ namespace FrbaCommerce.Comprar_Ofertar
             //Ver esto pq esta agregando columnas cada vez que pagino!!!!!
             numeroRegistro = this.ini;
             dtPagina.Clear();
-            dtPagina.Columns.Add("Id");
-            dtPagina.Columns.Add("Visibilidad");
-            dtPagina.Columns.Add("Tipo Publicacion");
-            dtPagina.Columns.Add("Estado");
-            dtPagina.Columns.Add("Persona Venta");
-            dtPagina.Columns.Add("Descripcion");
-            dtPagina.Columns.Add("Fecha Inicio");
-            dtPagina.Columns.Add("Fecha Venicimento");
-            dtPagina.Columns.Add("Stock");
-            dtPagina.Columns.Add("Precio");
-            dtPagina.Columns.Add("Habilita Preguntas");
 
             for (int i = ini; i < fin; i++)
             {
@@ -118,7 +119,9 @@ namespace FrbaCommerce.Comprar_Ofertar
                 dtPagina.Rows.Add(fila[0], fila[1], fila[2], fila[3], fila[4], fila[5], fila[6], fila[7], fila[8], fila[9], fila[10]);
 
             }
-            dgvGrillaPublicaciones.Rows.Clear();
+            //ojo con esto que no está liberando la memoria del gridview, jaja, una negrada pero para salir del paso va!
+            dgvGrillaPublicaciones.DataSource = null;
+            dgvGrillaPublicaciones.Refresh();
             dgvGrillaPublicaciones.DataSource = dtPagina;
             dgvGrillaPublicaciones.AllowUserToAddRows = false;
 
@@ -184,11 +187,11 @@ namespace FrbaCommerce.Comprar_Ofertar
 
             int i = Convert.ToInt32(r.Cells[0].Value);
 
-            Form MP = new MostrarPublicacionForm(this, i);
+            Form MostrarPubForm = new MostrarPublicacionForm(this, i);
 
-            MP.Visible = true;
-            MP.Activate();
-            MP.Select();
+            MostrarPubForm.Visible = true;
+            MostrarPubForm.Activate();
+            MostrarPubForm.Select();
             this.Hide();
         }
     }

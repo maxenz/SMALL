@@ -16,6 +16,7 @@ namespace FrbaCommerce.Helpers
             ventanaPadre.Activate();
             ventanaPadre.Select();
         }
+
         public static void mostrarNuevaVentana(Form ventanaNueva, Form ventanaPadre)
         {
             ventanaNueva.Visible = true;
@@ -33,7 +34,7 @@ namespace FrbaCommerce.Helpers
             return grid;
         }
 
-        public static DataTable Convert<TItemType>(List<TItemType> list)
+        public static DataTable ConvertToDT<TItemType>(List<TItemType> list)
         {
             DataTable convertedData = new DataTable();
 
