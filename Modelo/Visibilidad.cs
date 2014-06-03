@@ -12,14 +12,17 @@ namespace FrbaCommerce.Modelo
         public double Precio { get; set; }
         public double Porcentaje { get; set; }
         public bool Activo { get; set; }
+        public int DiasActivo { get; set; }
 
-        public Visibilidad(int id,string descripcion, double precio, double porcentaje, bool activo)
+        public Visibilidad(int id,string descripcion, double precio, double porcentaje, bool activo,
+            int diasActivo)
         {
             this.ID = id;
             this.Descripcion = descripcion;
             this.Precio = precio;
             this.Porcentaje = porcentaje;
             this.Activo = activo;
+            this.DiasActivo = diasActivo;
         }
     }
 }

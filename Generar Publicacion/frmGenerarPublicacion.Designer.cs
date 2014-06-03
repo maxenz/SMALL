@@ -238,7 +238,7 @@
             this.dtpInicioPublicacion.Name = "dtpInicioPublicacion";
             this.dtpInicioPublicacion.Size = new System.Drawing.Size(125, 20);
             this.dtpInicioPublicacion.TabIndex = 10;
-            this.dtpInicioPublicacion.Value = new System.DateTime(1900, 1, 1, 0, 0, 0, 0);
+            this.dtpInicioPublicacion.Value = new System.DateTime(2014, 6, 3, 0, 0, 0, 0);
             this.dtpInicioPublicacion.ValueChanged += new System.EventHandler(this.dtpInicioPublicacion_ValueChanged);
             // 
             // lblVisibilidad
@@ -258,6 +258,7 @@
             this.cmbVisibilidadPublicacion.Name = "cmbVisibilidadPublicacion";
             this.cmbVisibilidadPublicacion.Size = new System.Drawing.Size(121, 21);
             this.cmbVisibilidadPublicacion.TabIndex = 8;
+            this.cmbVisibilidadPublicacion.SelectedIndexChanged += new System.EventHandler(this.cmbVisibilidadPublicacion_SelectedIndexChanged);
             // 
             // lblStock
             // 

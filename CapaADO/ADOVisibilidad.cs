@@ -25,7 +25,7 @@ namespace FrbaCommerce.DAO
                 Visibilidad visibilidad = new Visibilidad(Convert.ToInt32(dr["ID"])
                     ,dr["Descripcion"].ToString(),
                     Convert.ToDouble(dr["Precio"]),Convert.ToDouble(dr["Porcentaje"]),
-                    Convert.ToBoolean(dr["Activo"]));
+                    Convert.ToBoolean(dr["Activo"]),Convert.ToInt32(dr["Dias_Activo"]));
                 visibilidades.Add(visibilidad);
             }
             return visibilidades;

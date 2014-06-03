@@ -24,12 +24,17 @@ namespace FrbaCommerce.Generar_Publicacion
 
         private void frmGenerarPublicacion_Load(object sender, EventArgs e)
         {
+
             setComboTiposDePublicacion();
             setComboVisibilidades();
             setComboEstadosPublicacion();
             setNumberPublicacion();
             setListBoxRubros();
             setGeneralInputs();
+
+            dtpInicioPublicacion.Value = DateTime.Now;
+            dtpInicioPublicacion.Format = DateTimePickerFormat.Custom;
+            dtpInicioPublicacion.CustomFormat = "dd/MM/yyyy";
 
             if (this.publicacion != null)
             {
@@ -61,7 +66,7 @@ namespace FrbaCommerce.Generar_Publicacion
 
             switch (estadoPublicacion.Descripcion)
             {
-                case "Activa":
+                case "Publicada":
                     setCondicionesActiva();
                     break;
                 case "Pausada":
@@ -93,6 +98,7 @@ namespace FrbaCommerce.Generar_Publicacion
             if (getDescripcionTipoPublicacion() == "Subasta")
             {
                 readonlyStockDescripcion();
+                cmbEstadoPublicacion.Enabled = false;
             }
         }
 
@@ -191,28 +197,62 @@ namespace FrbaCommerce.Generar_Publicacion
 
         private void setComboVisibilidades()
         {
-            this.cmbVisibilidadPublicacion.DataSource = ADOVisibilidad.getVisibilidades();
             this.cmbVisibilidadPublicacion.DisplayMember = "Descripcion";
             this.cmbVisibilidadPublicacion.ValueMember = "ID";
+            this.cmbVisibilidadPublicacion.DataSource = ADOVisibilidad.getVisibilidades();
+
         }
 
         private void dtpInicioPublicacion_ValueChanged(object sender, EventArgs e)
         {
+            syncVisibilidadFecha();
+        }
+
+        private void syncVisibilidadFecha()
+        {
             DateTime fecInicioPubl = this.dtpInicioPublicacion.Value;
-            fecInicioPubl = fecInicioPubl.AddDays(10);
-            this.txtVencimientoPublicacion.Text = fecInicioPubl.ToString();
+            int idVisibilidad = Convert.ToInt32(cmbVisibilidadPublicacion.SelectedValue);
+            int diasActivo = DAO.ADOVisibilidad.getVisibilidades()
+                                .Where(x => x.ID == idVisibilidad)
+                                .Select(x => x.DiasActivo).FirstOrDefault();
+            fecInicioPubl = fecInicioPubl.AddDays(diasActivo);
+            this.txtVencimientoPublicacion.Text = fecInicioPubl.ToShortDateString();
+
         }
 
         private void btnGenerarPublicacion_Click(object sender, EventArgs e)
         {
-
-            //falta validar si cuando modifican el stock se hace de forma incremental.
-            //tmb aca falta diferenciar si esta editando o generando la publicacion
-
             cleanErrorProviderInLabels();
             if (formIsValidated())
             {
-                generarPublicacion();
+                if (this.publicacion == null)
+                {
+                    generarPublicacion();
+                }
+                else
+                {
+                    editarPublicacion();
+                }
+
+            }
+        }
+
+        private void editarPublicacion()
+        {
+            int estadoPublicacionID = this.publicacion.ID_Estado;
+            string descEstPublicacion = DAO.ADOPublicacion.getEstadoPublicacion(estadoPublicacionID).Descripcion;
+
+            if (descEstPublicacion == "Publicada")
+            {
+                if (Convert.ToInt32(txtStock.Text) < this.publicacion.Stock)
+                {
+                    MessageBox.Show("Solo puede modificar el stock de forma incremental");
+                    return;
+                }
+                else
+                {
+                    //edito la publicacion
+                }
             }
         }
 
@@ -248,10 +288,10 @@ namespace FrbaCommerce.Generar_Publicacion
         private bool formIsValidated()
         {
             bool vBool = true;
+  
 
             if (txtStock.Text == "")
-            {
-                
+            {              
                 errorProvider1.SetError(lblStock, "Debe ingresar el stock");
                 vBool = false;
             }
@@ -299,10 +339,11 @@ namespace FrbaCommerce.Generar_Publicacion
             }
         }
 
+        private void cmbVisibilidadPublicacion_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            dtpInicioPublicacion.Value = DateTime.Now;
+        }
 
-
-
-
-       
+  
     }
 }

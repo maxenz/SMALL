@@ -12,6 +12,13 @@ namespace FrbaCommerce.DAO
 {
     class ADOPublicacion : SqlConnector
     {
+
+        public static DataTable getPublicacionViaStore(int ID)
+        {
+            return SqlConnector.retrieveDataTable("GetPublicacion", ID);
+        }
+
+
         /*****************************
          * Obtengo el ultimo codigo de publicacion y le sumo 1 *
          ****************************/

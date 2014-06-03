@@ -11,3 +11,4 @@ C:\SMALL\obj\Debug\FrbaCommerce.Login.Form1.resources
 C:\SMALL\obj\Debug\FrbaCommerce.Registro_de_Usuario.Form1.resources
 C:\SMALL\obj\Debug\FrbaCommerce.Comprar_Ofertar.ComprarOfertarForm.resources
 C:\SMALL\obj\Debug\FrbaCommerce.MenuInicio.resources
+C:\SMALL\obj\Debug\FrbaCommerce.Comprar_Ofertar.MostrarPublicacionForm.resources
