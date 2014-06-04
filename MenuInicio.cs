@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using FrbaCommerce.Helpers;
 using FrbaCommerce.Comprar_Ofertar;
 using FrbaCommerce.Generar_Publicacion;
+using FrbaCommerce.Gestion_de_Preguntas;
 using FrbaCommerce.Modelo;
 
 namespace FrbaCommerce
@@ -33,6 +34,16 @@ namespace FrbaCommerce
             frmGenPub.publicacion.ID_Tipo_Publicacion = 1;
             frmGenPub.publicacion.ID_Estado = 1;
             FormHelper.mostrarNuevaVentana(frmGenPub, this);
+        }
+
+        private void btnResponderPreguntas_Click(object sender, EventArgs e)
+        {
+            FormHelper.mostrarNuevaVentana(new ResponderPreguntasForm(this), this);
+        }
+
+        private void btnVerRespuestas_Click(object sender, EventArgs e)
+        {
+            FormHelper.mostrarNuevaVentana(new VerRespuestasForm(this), this);
         }
     }
 }

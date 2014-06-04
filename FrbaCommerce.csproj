@@ -85,6 +85,7 @@
     <Compile Include="Calificar Vendedor\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="CapaADO\ADOPreguntarResponder.cs" />
     <Compile Include="CapaADO\ADORubro.cs" />
     <Compile Include="CapaADO\ADOPublicacion.cs" />
     <Compile Include="CapaADO\ADOVisibilidad.cs" />
@@ -113,6 +114,18 @@
     <Compile Include="Facturar Publicaciones\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Gestion de Preguntas\VerRespuestas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Gestion de Preguntas\VerRespuestas.Designer.cs">
+      <DependentUpon>VerRespuestas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Gestion de Preguntas\Responder.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Gestion de Preguntas\Responder.Designer.cs">
+      <DependentUpon>Responder.cs</DependentUpon>
+    </Compile>
     <Compile Include="Helpers\ValidationHelper.cs" />
     <Compile Include="MenuInicio.cs">
       <SubType>Form</SubType>
@@ -126,11 +139,11 @@
     <Compile Include="Generar Publicacion\frmGenerarPublicacion.Designer.cs">
       <DependentUpon>frmGenerarPublicacion.cs</DependentUpon>
     </Compile>
-    <Compile Include="Gestion de Preguntas\Form1.cs">
+    <Compile Include="Gestion de Preguntas\ResponderPreguntas.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Gestion de Preguntas\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Gestion de Preguntas\ResponderPreguntas.Designer.cs">
+      <DependentUpon>ResponderPreguntas.cs</DependentUpon>
     </Compile>
     <Compile Include="Helpers\FormHelper.cs" />
     <Compile Include="Historial Cliente\Form1.cs">
@@ -164,6 +177,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Comprar-Ofertar\MostrarPublicacion.resx">
       <DependentUpon>MostrarPublicacion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Gestion de Preguntas\VerRespuestas.resx">
+      <DependentUpon>VerRespuestas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Gestion de Preguntas\Responder.resx">
+      <DependentUpon>Responder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Gestion de Preguntas\ResponderPreguntas.resx">
+      <DependentUpon>ResponderPreguntas.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MenuInicio.resx">
       <DependentUpon>MenuInicio.cs</DependentUpon>

@@ -31,6 +31,8 @@
             this.lblTitulo = new System.Windows.Forms.Label();
             this.btnComprarOfertar = new System.Windows.Forms.Button();
             this.btnGenerarPublicacion = new System.Windows.Forms.Button();
+            this.btnResponderPreguntas = new System.Windows.Forms.Button();
+            this.btnVerRespuestas = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lblTitulo
@@ -63,11 +65,33 @@
             this.btnGenerarPublicacion.UseVisualStyleBackColor = true;
             this.btnGenerarPublicacion.Click += new System.EventHandler(this.btnGenerarPublicacion_Click);
             // 
+            // btnResponderPreguntas
+            // 
+            this.btnResponderPreguntas.Location = new System.Drawing.Point(29, 120);
+            this.btnResponderPreguntas.Name = "btnResponderPreguntas";
+            this.btnResponderPreguntas.Size = new System.Drawing.Size(120, 23);
+            this.btnResponderPreguntas.TabIndex = 17;
+            this.btnResponderPreguntas.Text = "Responder Preguntas";
+            this.btnResponderPreguntas.UseVisualStyleBackColor = true;
+            this.btnResponderPreguntas.Click += new System.EventHandler(this.btnResponderPreguntas_Click);
+            // 
+            // btnVerRespuestas
+            // 
+            this.btnVerRespuestas.Location = new System.Drawing.Point(29, 150);
+            this.btnVerRespuestas.Name = "btnVerRespuestas";
+            this.btnVerRespuestas.Size = new System.Drawing.Size(120, 23);
+            this.btnVerRespuestas.TabIndex = 18;
+            this.btnVerRespuestas.Text = "Ver Respuestas";
+            this.btnVerRespuestas.UseVisualStyleBackColor = true;
+            this.btnVerRespuestas.Click += new System.EventHandler(this.btnVerRespuestas_Click);
+            // 
             // MenuInicio
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 262);
+            this.Controls.Add(this.btnVerRespuestas);
+            this.Controls.Add(this.btnResponderPreguntas);
             this.Controls.Add(this.btnGenerarPublicacion);
             this.Controls.Add(this.btnComprarOfertar);
             this.Controls.Add(this.lblTitulo);
@@ -83,5 +107,7 @@
         private System.Windows.Forms.Label lblTitulo;
         private System.Windows.Forms.Button btnComprarOfertar;
         private System.Windows.Forms.Button btnGenerarPublicacion;
+        private System.Windows.Forms.Button btnResponderPreguntas;
+        private System.Windows.Forms.Button btnVerRespuestas;
     }
 }
