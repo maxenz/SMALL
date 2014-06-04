@@ -22,7 +22,7 @@ namespace FrbaCommerce.Comprar_Ofertar
         DataRow fila;
         //DataRow drAux;
 
-        int filasPagina = 15; // Definimos el numero de filas que deseamos ver por pagina, tambien puede leerse desde un archivo de configuracion.
+        int filasPagina = 50; // Definimos el numero de filas que deseamos ver por pagina, tambien puede leerse desde un archivo de configuracion.
         int nroPagina = 1;//Esto define el numero de pagina actual en al que  nos encontramos
         int ini = 0; //inicio del paginado
         int fin = 0;//fin del paginado
@@ -59,7 +59,7 @@ namespace FrbaCommerce.Comprar_Ofertar
         private void Buscar()
         {
             //clsEmpresa empresa = new clsEmpresa();
-            List<Publicacion> lPublicaciones = ADOPublicacion.GetPublicaciones();//Metodo que devuelve un datatable como resultado de la ejecucion de una consulta 
+            List<Publicacion> lPublicaciones = ADOPublicacion.GetPublicaciones();
             dtPublicaciones = FormHelper.ConvertToDT<Publicacion>(lPublicaciones);
 
             dtPagina.Columns.Add("Id");
@@ -76,14 +76,14 @@ namespace FrbaCommerce.Comprar_Ofertar
 
             if (dtPublicaciones.Rows.Count > 0)
             {
-                this.numPaginas(); //Funcion para calcular el numero total de paginas que tendra nuestra vista
-                this.paginar();//empezamos con la paginacion
-                lblCantidadTotal.Text = "Publicaciones Encontradas: " + dtPublicaciones.Rows.Count.ToString();//Cantidad totoal de registros encontrados
+                this.numPaginas(); //Funcion para calcular el numero total de paginas que tendra la vista
+                this.paginar();
+                lblCantidadTotal.Text = "Publicaciones Encontradas: " + dtPublicaciones.Rows.Count.ToString();//Total de registros encontrados
                 dgvGrillaPublicaciones.Select();
             }
             else
             {
-                dgvGrillaPublicaciones.Rows.Clear();//En el caso de que la busqueda no genere ningun registro limopiamos el datagridview
+                dgvGrillaPublicaciones.Rows.Clear();//Si no encuentra, limpiamos el datagridview
                 lblCantidadTotal.Text = "Publicaciones Encontradas: 0";
             }
         }
@@ -180,19 +180,29 @@ namespace FrbaCommerce.Comprar_Ofertar
             }
         }
 
-        private void dgvGrillaPublicaciones_CellClick(object sender, DataGridViewCellEventArgs e)
+
+        private void btnVolver_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            FormHelper.volverAPadre(_padre);
+        }
+
+        private void dgvGrillaPublicaciones_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             //Publicacion p = new Publicacion();
             DataGridViewRow r = (DataGridViewRow)dgvGrillaPublicaciones.Rows[e.RowIndex];
 
-            int i = Convert.ToInt32(r.Cells[0].Value);
+            int IdPublicacion = Convert.ToInt32(r.Cells[0].Value);
 
-            Form MostrarPubForm = new MostrarPublicacionForm(this, i);
+            bool SoloVeo = false;
+
+            Form MostrarPubForm = new MostrarPublicacionForm(this, IdPublicacion, SoloVeo);
 
             MostrarPubForm.Visible = true;
             MostrarPubForm.Activate();
             MostrarPubForm.Select();
             this.Hide();
+
         }
     }
 }

@@ -15,11 +15,14 @@ namespace FrbaCommerce.Comprar_Ofertar
     public partial class MostrarPublicacionForm : Form
     {
         int _IdPublicacion;
+        bool _soloVeo;
         Form _padre;
 
-        public MostrarPublicacionForm(Form Padre, int i)
+        public MostrarPublicacionForm(Form Padre, int IdPublicacion, bool SoloVeo)
         {
-            _IdPublicacion = i;
+            _padre = Padre;
+            _IdPublicacion = IdPublicacion;
+            _soloVeo = SoloVeo;
             InitializeComponent();
         }
 
@@ -33,15 +36,37 @@ namespace FrbaCommerce.Comprar_Ofertar
             lblMuestraStock.Text = p.Stock.ToString();
             lblMuestraPrecio.Text = p.Precio.ToString();
             txtDescripcion.Text = p.Descripcion;
+            txtComprar.Text = "0";
+            txtOfertar.Text = "0";
 
-            gbPreguntar.Visible = false;
+            //Probar bien esto para los casos en que transacciono y es compra, es oferta y no transacciono.
 
-            bool PermitePreguntas = true;
-
-            if (PermitePreguntas)
+            if (_soloVeo)
             {
                 lblNoPermite.Visible = false;
-                btnPreguntar.Visible = true;
+                btnPreguntar.Visible = false;
+                gbOfertar.Visible = false;
+                gbComprar.Visible = false;
+            }
+            else
+            {
+                bool PermitePreguntas = p.Hab_Preguntas;
+
+                if (PermitePreguntas)
+                {
+                    lblNoPermite.Visible = false;
+                    btnPreguntar.Visible = true;
+                }
+                else gbPreguntar.Visible = false;
+
+                if (p.ID_Tipo_Publicacion == 1)
+                {
+                    gbOfertar.Visible = false;
+                }
+                if (p.ID_Tipo_Publicacion == 2)
+                {
+                    gbComprar.Visible = false;
+                }
             }
 
         }
@@ -53,6 +78,7 @@ namespace FrbaCommerce.Comprar_Ofertar
             this.Width = 694;
             this.Height = 576;
             btnPreguntar.Visible = false;
+            
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
@@ -64,15 +90,33 @@ namespace FrbaCommerce.Comprar_Ofertar
             btnPreguntar.Visible = true;
         }
 
+        private void btnComprar_Click(object sender, EventArgs e)
+        {
+            if (txtComprar.Text == "" || txtComprar.Text == "0")
+                MessageBox.Show("Por favor, indique un precio de compra.", "Ojo!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            else if (Convert.ToDouble(lblMuestraStock.Text) < Int32.Parse(txtComprar.Text))
+            {
+                MessageBox.Show("La cantidad a comprar debe ser menor o igual al stock.", "Ojo!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                txtOfertar.Text = "0";
+            }
+            else
+                ;//Inserto la compra en la tabla
+                //Muestro la info del vendedor.
+                // hay que validar que no pueda preguntar ni comprar el usuario que vende.
+                //Verificar si tiene mas de 5 compras inmediatas u ofertas sin calificar!!!!!!!!!!
+        }
+
         private void btnOfertar_Click(object sender, EventArgs e)
         {
-            if (txtOfertar.Text == "")
+            if (txtOfertar.Text == "" || txtOfertar.Text == "0")
                 MessageBox.Show("Por favor, indique un precio de oferta.", "Ojo!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-            else if ( Convert.ToDouble(lblMuestraPrecio.Text) > Int32.Parse(txtOfertar.Text))
+            else if (Convert.ToDouble(lblMuestraPrecio.Text) > Int32.Parse(txtOfertar.Text))
             {
                 MessageBox.Show("El Precio de oferta debe ser mayor al precio actual.", "Ojo!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 txtOfertar.Text = "0";
             }
+            else
+                ;//inserto la oferta en la tabla
         }
 
         private void txtOfertar_KeyPress(object sender, KeyPressEventArgs e)
@@ -83,6 +127,19 @@ namespace FrbaCommerce.Comprar_Ofertar
         private void txtComprar_KeyPress(object sender, KeyPressEventArgs e)
         {
             ValidationHelper.SoloNumeroEntero(e);
+        }
+
+        private void btnVolver_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            FormHelper.volverAPadre(_padre);
+        }
+
+        private void btnEnviar_Click(object sender, EventArgs e)
+        {
+            //Ocultar el gbox de preguntar.
+            //validar los 255 caracteres!
+            //Inserto la pregunta en tabla!!!!!
         }
 
     }

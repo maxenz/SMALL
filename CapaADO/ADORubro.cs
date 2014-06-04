@@ -15,7 +15,7 @@ namespace FrbaCommerce.DAO
         public static List<Rubro> getRubros()
         {
             List<Rubro> rubros = new List<Rubro>();
-            DataTable table = getDatatable("SELECT * FROM SMALL.Rubro");
+            DataTable table = SqlConnector.retrieveDataTable("getRubros");
             foreach (DataRow dr in table.Rows)
             {
                 Rubro rubro = new Rubro(Convert.ToInt32(dr["ID"]),dr["Descripcion"].ToString());
@@ -23,24 +23,6 @@ namespace FrbaCommerce.DAO
                 rubros.Add(rubro);
             }
             return rubros;
-        }
-
-        private static DataTable getDatatable(string consulta)
-        {
-
-            SqlConnection cn = new SqlConnection();
-            SqlCommand cm = new SqlCommand();
-            SqlDataReader dr;
-            DataTable dt = new DataTable();
-            List<string> args = new List<string>();
-
-            conexionSql(cn, cm);
-            cm.CommandText = consulta;
-            dr = cm.ExecuteReader();
-            dt.Load(dr);
-
-            return dt;
-
         }
     }
 }

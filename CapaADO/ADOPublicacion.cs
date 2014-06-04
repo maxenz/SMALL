@@ -118,7 +118,7 @@ namespace FrbaCommerce.DAO
         {
 
             List<Publicacion> lstPublicaciones = new List<Publicacion>();
-            DataTable tablePub = getDatatable("SELECT top(100) * FROM SMALL.Publicacion");
+            DataTable tablePub = getDatatable("SELECT top(200) * FROM SMALL.Publicacion");
 
             foreach (DataRow dr in tablePub.Rows)
             {

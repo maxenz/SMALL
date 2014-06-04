@@ -170,6 +170,7 @@
             this.txtDescripcion.Location = new System.Drawing.Point(7, 20);
             this.txtDescripcion.Multiline = true;
             this.txtDescripcion.Name = "txtDescripcion";
+            this.txtDescripcion.ReadOnly = true;
             this.txtDescripcion.Size = new System.Drawing.Size(638, 108);
             this.txtDescripcion.TabIndex = 0;
             // 
@@ -181,6 +182,7 @@
             this.btnVolver.TabIndex = 2;
             this.btnVolver.Text = "Volver";
             this.btnVolver.UseVisualStyleBackColor = true;
+            this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
             // 
             // btnComprar
             // 
@@ -190,6 +192,7 @@
             this.btnComprar.TabIndex = 3;
             this.btnComprar.Text = "Comprar";
             this.btnComprar.UseVisualStyleBackColor = true;
+            this.btnComprar.Click += new System.EventHandler(this.btnComprar_Click);
             // 
             // btnOfertar
             // 
@@ -249,6 +252,7 @@
             this.btnEnviar.TabIndex = 6;
             this.btnEnviar.Text = "Enviar";
             this.btnEnviar.UseVisualStyleBackColor = true;
+            this.btnEnviar.Click += new System.EventHandler(this.btnEnviar_Click);
             // 
             // txtOfertar
             // 
@@ -311,7 +315,7 @@
             this.Controls.Add(this.gbDetalle);
             this.Controls.Add(this.gbPreguntar);
             this.Name = "MostrarPublicacionForm";
-            this.Text = "Form1";
+            this.Text = "Publicacion";
             this.Load += new System.EventHandler(this.MostrarPublicacionForm_Load);
             this.gbDetalle.ResumeLayout(false);
             this.gbDetalle.PerformLayout();

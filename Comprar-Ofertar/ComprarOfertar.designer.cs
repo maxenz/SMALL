@@ -51,15 +51,19 @@
             // 
             // dgvGrillaPublicaciones
             // 
+            this.dgvGrillaPublicaciones.AllowUserToAddRows = false;
+            this.dgvGrillaPublicaciones.AllowUserToDeleteRows = false;
             this.dgvGrillaPublicaciones.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvGrillaPublicaciones.Location = new System.Drawing.Point(23, 111);
             this.dgvGrillaPublicaciones.Name = "dgvGrillaPublicaciones";
+            this.dgvGrillaPublicaciones.ReadOnly = true;
             this.dgvGrillaPublicaciones.Size = new System.Drawing.Size(633, 349);
             this.dgvGrillaPublicaciones.TabIndex = 0;
-            this.dgvGrillaPublicaciones.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvGrillaPublicaciones_CellClick);
+            this.dgvGrillaPublicaciones.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvGrillaPublicaciones_CellDoubleClick);
             // 
             // cmbRubros
             // 
+            this.cmbRubros.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbRubros.FormattingEnabled = true;
             this.cmbRubros.Location = new System.Drawing.Point(90, 22);
             this.cmbRubros.Name = "cmbRubros";
@@ -109,6 +113,7 @@
             this.btnVolver.TabIndex = 6;
             this.btnVolver.Text = "Volver";
             this.btnVolver.UseVisualStyleBackColor = true;
+            this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
             // 
             // lblCantidadTotal
             // 
@@ -215,7 +220,7 @@
             this.groupBox2.Size = new System.Drawing.Size(654, 406);
             this.groupBox2.TabIndex = 17;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Seleccione la Publicacion Deseada:";
+            this.groupBox2.Text = "Doble click para ver la publicacion en detalle:";
             // 
             // ComprarOfertarForm
             // 
