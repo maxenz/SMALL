@@ -29,10 +29,10 @@ namespace FrbaCommerce
         private void btnGenerarPublicacion_Click(object sender, EventArgs e)
         {
             frmGenerarPublicacion frmGenPub = new frmGenerarPublicacion();
-            DataTable dtPrueba = DAO.ADOPublicacion.getPublicacionViaStore(12353);
+            //DataTable dtPrueba = DAO.ADOPublicacion.getPublicacion(12353);
             frmGenPub.publicacion = DAO.ADOPublicacion.getPublicacion(12354);
-            frmGenPub.publicacion.ID_Tipo_Publicacion = 1;
-            frmGenPub.publicacion.ID_Estado = 1;
+            //frmGenPub.publicacion.ID_Tipo_Publicacion = 1;
+            //frmGenPub.publicacion.ID_Estado = 1;
             FormHelper.mostrarNuevaVentana(frmGenPub, this);
         }
 

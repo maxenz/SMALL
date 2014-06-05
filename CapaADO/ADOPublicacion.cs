@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Data.SqlClient;
 using System.Data;
-
 using FrbaCommerce.CapaADO;
 using FrbaCommerce.Modelo;
 
@@ -12,113 +11,95 @@ namespace FrbaCommerce.DAO
 {
     class ADOPublicacion : SqlConnector
     {
-
-        public static DataTable getPublicacionViaStore(int ID)
-        {
-            return SqlConnector.retrieveDataTable("GetPublicacion", ID);
-        }
-
-
-        /*****************************
-         * Obtengo el ultimo codigo de publicacion y le sumo 1 *
-         ****************************/
+        // --> Obtengo el ultimo codigo de publicacion
         public static int getNewPublicacionNumber()
         {
-            int newPublicacionNumber = 0;
-            DataTable dt = getDatatable("SELECT TOP 1 ID FROM SMALL.Publicacion " +
-                                        "ORDER BY ID DESC");
-            if (dt.Rows.Count > 0) {
-                newPublicacionNumber = Convert.ToInt32(dt.Rows[0]["ID"]);
-            } 
-             
-            newPublicacionNumber += 1;
-            return newPublicacionNumber;
+            DataTable dt = SqlConnector.retrieveDataTable("GetNewPublicacionNumber");
+            return Convert.ToInt32(dt.Rows[0]["ID"]);
         }
 
+
+        // --> Obtengo la lista de estados de publicacion
         public static List<EstadoPublicacion> getEstadosPublicacion() {
 
             List<EstadoPublicacion> estadosPublicacion = new List<EstadoPublicacion>();
-            DataTable table = getDatatable("SELECT * FROM SMALL.Estado_Publicacion");
+            DataTable table = SqlConnector.retrieveDataTable("GetEstadosPublicacion");
             foreach (DataRow dr in table.Rows)
             {
-                EstadoPublicacion estadoPublicacion = new EstadoPublicacion(Convert.ToInt32(dr["ID"]),
-                    dr["Descripcion"].ToString());
+                EstadoPublicacion estadoPublicacion = dataRowToEstadoPublicacion(dr);
                 estadosPublicacion.Add(estadoPublicacion);
             }
             return estadosPublicacion;
         }
 
 
+        // --> Obtengo un estado de publicacion pasandole el id
         public static EstadoPublicacion getEstadoPublicacion(int id)
         {
-            DataTable table = getDatatable("SELECT * FROM SMALL.Estado_Publicacion WHERE ID = " +id);
+            DataTable table = SqlConnector.retrieveDataTable("GetEstadoPublicacion", id);
             DataRow dr = table.Rows[0];
-            EstadoPublicacion estadoPublicacion = new EstadoPublicacion(Convert.ToInt32(dr["ID"]),
-                                                    dr["Descripcion"].ToString());
+            EstadoPublicacion estadoPublicacion = dataRowToEstadoPublicacion(dr);
                        
             return estadoPublicacion;
         }
 
-        public static Publicacion getPublicacion(int idPublicacion)
+
+        // --> Paso una datarow a un objeto EstadoPublicacion
+        private static EstadoPublicacion dataRowToEstadoPublicacion(DataRow dr)
         {
-            DataTable table = getDatatable("SELECT * FROM SMALL.Publicacion WHERE ID = " + idPublicacion);
+            return new EstadoPublicacion(Convert.ToInt32(dr["ID"]),dr["Descripcion"].ToString());
+        }
+
+
+        // --> Obtengo una publicacion pasandole el id
+        public static Publicacion getPublicacion(int id)
+        {
+            DataTable table = SqlConnector.retrieveDataTable("GetPublicacion",id);
             Publicacion p = dataRowToPublicacion(table.Rows[0]);
             p.Rubros = getRubrosFromPublicacion(p);
-            return p;
-                   
+            return p;                
         }
 
 
-        private static DataTable getDatatable(string consulta) {
-
-            SqlConnection cn = new SqlConnection();
-            SqlCommand cm = new SqlCommand();
-            SqlDataReader dr;
-            DataTable dt = new DataTable();
-            List<string> args = new List<string>();
-
-                conexionSql(cn, cm);
-                cm.CommandText = consulta;
-                dr = cm.ExecuteReader();
-                dt.Load(dr);
-
-            return dt;
-
-        }
-
-         /*****************************
-         * Obtengo un listado de los tipos de publicacion *
-         ****************************/
+        // --> Obtengo los tipos de publicacion
         public static List<TipoPublicacion> getTiposDePublicacion()
         {
             List<TipoPublicacion> tiposDePublicacion = new List<TipoPublicacion>();
-            DataTable table = getDatatable("SELECT * FROM SMALL.Tipo_Publicacion");
+            DataTable table = SqlConnector.retrieveDataTable("GetTiposPublicacion");
             foreach (DataRow dr in table.Rows)
             {
-                TipoPublicacion tip_pub = new TipoPublicacion(dr["Descripcion"].ToString(),
-                                            Convert.ToInt32(dr["ID"]));
+                TipoPublicacion tip_pub = dataRowToTipoPublicacion(dr);
                 tiposDePublicacion.Add(tip_pub);
             }
             return tiposDePublicacion;
         }
 
 
+        // --> Obtengo un tipo de publicacion pasandole el id
         public static TipoPublicacion getTipoPublicacion(int id)
         {
-            DataTable table = getDatatable("SELECT * FROM SMALL.Tipo_Publicacion WHERE ID = " + id);
+            DataTable table = SqlConnector.retrieveDataTable("GetTipoPublicacion", id);
             DataRow dr = table.Rows[0];
-            TipoPublicacion tip_pub = new TipoPublicacion(dr["Descripcion"].ToString(),
-                                        Convert.ToInt32(dr["ID"]));
+            TipoPublicacion tip_pub = dataRowToTipoPublicacion(dr);
 
             return tip_pub;
         }
 
-        //Esto hay que cambiarlo por el procedure
+
+        // --> Paso una dataRow a un objeto TipoPublicacion
+        private static TipoPublicacion dataRowToTipoPublicacion(DataRow dr)
+        {
+
+            return new TipoPublicacion(dr["Descripcion"].ToString(),Convert.ToInt32(dr["ID"]));
+        }
+
+
+        // --> Obtengo las publicaciones
         public static List<Publicacion> GetPublicaciones()
         {
 
             List<Publicacion> lstPublicaciones = new List<Publicacion>();
-            DataTable tablePub = getDatatable("SELECT top(200) * FROM SMALL.Publicacion");
+            DataTable tablePub = SqlConnector.retrieveDataTable("GetPublicaciones");
 
             foreach (DataRow dr in tablePub.Rows)
             {
@@ -130,13 +111,12 @@ namespace FrbaCommerce.DAO
             return lstPublicaciones;
         }
 
+
+        // --> Obtengo los rubros de una publicacion
         private static List<Rubro> getRubrosFromPublicacion(Publicacion pub)
         {
-            string qryRubros = "SELECT ID,Descripcion FROM SMALL.Rubro rub " +
-                                   "LEFT JOIN SMALL.Publicacion_Rubro pubrub ON " +
-                                   "(rub.ID = pubrub.ID_Rubro) " +
-                                   " WHERE pubrub.ID_Publicacion = " + pub.ID;
-            DataTable tableRub = getDatatable(qryRubros);
+
+            DataTable tableRub = SqlConnector.retrieveDataTable("GetRubrosFromPublicacion", pub.ID);
             List<Rubro> rubros = new List<Rubro>();
             foreach (DataRow dr in tableRub.Rows)
             {
@@ -148,6 +128,8 @@ namespace FrbaCommerce.DAO
 
         }
 
+
+        // --> Paso una dataRow a un objeto Publicacion
         private static Publicacion dataRowToPublicacion(DataRow dr)
         {
             Publicacion publicacion = new Publicacion(Convert.ToInt32(dr["Id"]),
@@ -164,6 +146,17 @@ namespace FrbaCommerce.DAO
 
             return publicacion;
         }
+
+        public static int setPublicacion(Publicacion publicacion)
+        {
+
+            DataTable dt = SqlConnector.retrieveDataTable("SetPublicacion", publicacion);
+
+            return 1;
+
+        }
+
+
 
     }
 }

@@ -15,3 +15,17 @@ C:\SMALL\obj\Debug\FrbaCommerce.Comprar_Ofertar.MostrarPublicacionForm.resources
 C:\tpgestion\small\bin\Debug\FrbaCommerce.exe.config
 C:\tpgestion\small\obj\Debug\FrbaCommerce.exe
 C:\tpgestion\small\obj\Debug\FrbaCommerce.pdb
+C:\tpgestion\small\bin\Debug\FrbaCommerce.exe
+C:\tpgestion\small\bin\Debug\FrbaCommerce.pdb
+C:\tpgestion\small\obj\Debug\ResolveAssemblyReference.cache
+C:\tpgestion\small\obj\Debug\FrbaCommerce.Comprar_Ofertar.ComprarOfertarForm.resources
+C:\tpgestion\small\obj\Debug\FrbaCommerce.Comprar_Ofertar.MostrarPublicacionForm.resources
+C:\tpgestion\small\obj\Debug\FrbaCommerce.Gestion_de_Preguntas.VerRespuestasForm.resources
+C:\tpgestion\small\obj\Debug\FrbaCommerce.Gestion_de_Preguntas.ResponderForm.resources
+C:\tpgestion\small\obj\Debug\FrbaCommerce.Gestion_de_Preguntas.ResponderPreguntasForm.resources
+C:\tpgestion\small\obj\Debug\FrbaCommerce.MenuInicio.resources
+C:\tpgestion\small\obj\Debug\FrbaCommerce.Generar_Publicacion.frmGenerarPublicacion.resources
+C:\tpgestion\small\obj\Debug\FrbaCommerce.Login.Form1.resources
+C:\tpgestion\small\obj\Debug\FrbaCommerce.Properties.Resources.resources
+C:\tpgestion\small\obj\Debug\FrbaCommerce.Registro_de_Usuario.Form1.resources
+C:\tpgestion\small\obj\Debug\FrbaCommerce.csproj.GenerateResource.Cache

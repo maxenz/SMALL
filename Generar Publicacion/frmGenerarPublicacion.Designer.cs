@@ -30,6 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             this.gpGenerarPublicacion = new System.Windows.Forms.GroupBox();
+            this.btnLimpiarForm = new System.Windows.Forms.Button();
             this.lblValorInicialSubasta = new System.Windows.Forms.Label();
             this.txtValorInicialSubasta = new System.Windows.Forms.TextBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
@@ -57,7 +58,6 @@
             this.lblTipoPublicacion = new System.Windows.Forms.Label();
             this.cmbTipoPublicacion = new System.Windows.Forms.ComboBox();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.btnLimpiarForm = new System.Windows.Forms.Button();
             this.gpGenerarPublicacion.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
@@ -98,6 +98,16 @@
             this.gpGenerarPublicacion.TabIndex = 0;
             this.gpGenerarPublicacion.TabStop = false;
             this.gpGenerarPublicacion.Text = "Datos Principales";
+            // 
+            // btnLimpiarForm
+            // 
+            this.btnLimpiarForm.Location = new System.Drawing.Point(15, 174);
+            this.btnLimpiarForm.Name = "btnLimpiarForm";
+            this.btnLimpiarForm.Size = new System.Drawing.Size(109, 23);
+            this.btnLimpiarForm.TabIndex = 31;
+            this.btnLimpiarForm.Text = "Limpiar";
+            this.btnLimpiarForm.UseVisualStyleBackColor = true;
+            this.btnLimpiarForm.Click += new System.EventHandler(this.btnLimpiarForm_Click);
             // 
             // lblValorInicialSubasta
             // 
@@ -334,15 +344,6 @@
             // 
             this.errorProvider1.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
             this.errorProvider1.ContainerControl = this;
-            // 
-            // btnLimpiarForm
-            // 
-            this.btnLimpiarForm.Location = new System.Drawing.Point(15, 174);
-            this.btnLimpiarForm.Name = "btnLimpiarForm";
-            this.btnLimpiarForm.Size = new System.Drawing.Size(109, 23);
-            this.btnLimpiarForm.TabIndex = 31;
-            this.btnLimpiarForm.Text = "Limpiar";
-            this.btnLimpiarForm.UseVisualStyleBackColor = true;
             // 
             // frmGenerarPublicacion
             // 

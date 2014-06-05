@@ -176,7 +176,7 @@ namespace FrbaCommerce.CapaADO
             {
                 conexionSql(cn, cm);
                 cm.CommandType = CommandType.StoredProcedure;
-                cm.CommandText = "KEY_OVER_9000." + procedure;
+                cm.CommandText = "SMALL." + procedure;
                 if (_validateArgumentsAndParameters(args, values))
                 {
                     _loadSqlCommand(args, values, cm);
@@ -242,7 +242,7 @@ namespace FrbaCommerce.CapaADO
             {
                 conexionSql(cn, cm);
                 cm.CommandType = CommandType.Text;
-                cm.CommandText = "SELECT PARAMETER_NAME FROM information_schema.parameters WHERE SPECIFIC_SCHEMA='KEY_OVER_9000' AND SPECIFIC_NAME='" + procedure + "'";
+                cm.CommandText = "SELECT PARAMETER_NAME FROM information_schema.parameters WHERE SPECIFIC_SCHEMA='SMALL' AND SPECIFIC_NAME='" + procedure + "'";
                 dr = cm.ExecuteReader();
                 dt.Load(dr);
                 foreach (DataRow d in dt.Rows)

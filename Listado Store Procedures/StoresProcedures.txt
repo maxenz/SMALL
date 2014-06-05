@@ -1,0 +1,97 @@
+﻿LISTADO DE STORE PROCEDURES
+
+/********** GetRubros **********/ 
+
+CREATE PROCEDURE [SMALL].[GetRubros]
+AS
+BEGIN
+    SELECT ID,Descripcion
+    FROM SMALL.Rubro
+END
+
+
+/********** GetNewPublicacionNumber **********/ 
+
+CREATE PROCEDURE [SMALL].[GetNewPublicacionNumber]
+AS
+BEGIN
+	SELECT TOP 1 ID FROM SMALL.Publicacion 
+	ORDER BY ID DESC
+END
+
+
+/********** GetEstadosPublicacion **********/ 
+
+CREATE PROCEDURE [SMALL].[GetEstadosPublicacion]
+AS
+BEGIN
+	SELECT * FROM SMALL.Estado_Publicacion
+	ORDER BY ID
+END
+
+
+/********** GetEstadoPublicacion **********/ 
+
+CREATE PROCEDURE [SMALL].[GetEstadoPublicacion]
+@id INT = 0
+AS
+BEGIN
+	SELECT * FROM SMALL.Estado_Publicacion
+	WHERE ID = @id
+	ORDER BY ID
+END
+
+/********** GetPublicacion **********/ 
+
+CREATE PROCEDURE [SMALL].[GetPublicacion]
+@id INT = 0
+AS
+BEGIN
+	SELECT * FROM SMALL.Publicacion
+	WHERE ID = @id
+	ORDER BY ID
+END
+
+/********** GetTiposPublicacion **********/ 
+
+CREATE PROCEDURE [SMALL].[GetTiposPublicacion]
+AS
+BEGIN
+	SELECT * FROM SMALL.Tipo_Publicacion
+	ORDER BY ID
+END
+
+
+/********** GetTipoPublicacion **********/ 
+
+CREATE PROCEDURE [SMALL].[GetTipoPublicacion]
+@id INT = 0
+AS
+BEGIN
+	SELECT * FROM SMALL.Tipo_Publicacion
+	WHERE ID = @id
+	ORDER BY ID
+END
+
+
+/********** GetPublicaciones **********/ 
+
+CREATE PROCEDURE [SMALL].[GetPublicaciones]
+AS
+BEGIN
+	SELECT TOP(200) * FROM SMALL.Publicacion
+	ORDER BY ID
+END
+
+/********** GetRubrosFromPublicacion **********/ 
+
+CREATE PROCEDURE [SMALL].[GetRubrosFromPublicacion]
+@id INT = 0
+AS
+BEGIN
+	SELECT rub.ID,rub.Descripcion FROM SMALL.Rubro rub
+    LEFT JOIN SMALL.Publicacion_Rubro pubrub ON(rub.ID = pubrub.ID_Rubro) 
+    WHERE pubrub.ID_Publicacion = @id
+    ORDER BY rub.ID
+END
+
