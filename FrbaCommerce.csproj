@@ -89,6 +89,7 @@
     <Compile Include="CapaADO\ADORubro.cs" />
     <Compile Include="CapaADO\ADOPublicacion.cs" />
     <Compile Include="CapaADO\ADOVisibilidad.cs" />
+    <Compile Include="CapaADO\ADOPersona.cs" />
     <Compile Include="CapaADO\SqlConnector.cs" />
     <Compile Include="Comprar-Ofertar\ComprarOfertar.cs">
       <SubType>Form</SubType>
@@ -108,11 +109,11 @@
     <Compile Include="Editar Publicacion\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Facturar Publicaciones\Form1.cs">
+    <Compile Include="Facturar Publicaciones\frmFacturarPublicaciones.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Facturar Publicaciones\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Facturar Publicaciones\frmFacturarPublicaciones.Designer.cs">
+      <DependentUpon>frmFacturarPublicaciones.cs</DependentUpon>
     </Compile>
     <Compile Include="Gestion de Preguntas\VerRespuestas.cs">
       <SubType>Form</SubType>
@@ -167,6 +168,7 @@
     </Compile>
     <Compile Include="Modelo\EstadoPublicacion.cs" />
     <Compile Include="Modelo\Globals.cs" />
+    <Compile Include="Modelo\Persona.cs" />
     <Compile Include="Modelo\Publicacion.cs" />
     <Compile Include="Modelo\Rubro.cs" />
     <Compile Include="Modelo\TipoPublicacion.cs" />
@@ -178,6 +180,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Comprar-Ofertar\MostrarPublicacion.resx">
       <DependentUpon>MostrarPublicacion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Facturar Publicaciones\frmFacturarPublicaciones.resx">
+      <DependentUpon>frmFacturarPublicaciones.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Gestion de Preguntas\VerRespuestas.resx">
       <DependentUpon>VerRespuestas.cs</DependentUpon>
@@ -225,6 +230,9 @@
     <Compile Include="Registro de Usuario\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Listado Store Procedures\StoresProcedures.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

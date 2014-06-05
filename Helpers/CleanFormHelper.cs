@@ -63,5 +63,15 @@ namespace FrbaCommerce.Helpers
 
         }
 
+        // --> Seteo readonly los textboxes
+        public void setReadOnlyTextBoxes(Form frm, List<TextBox> lst, bool vBool)
+        {
+            foreach (TextBox t in lst)
+            {
+                t.ReadOnly = vBool;
+            }
+
+        }
+
     }
 }

@@ -347,6 +347,15 @@ namespace FrbaCommerce.Generar_Publicacion
             bool vBool = true;
 
 
+            if (cmbTipoPublicacion.SelectedText == "Subasta")
+            {
+                if (txtValorInicialSubasta.Text == "")
+                {
+                    errorProvider1.SetError(lblValorInicialSubasta, "Debe ingresar el valor inicial de la subasta");
+                    vBool = false;
+                }
+            }
+
             if (txtStock.Text == "")
             {
                 errorProvider1.SetError(lblStock, "Debe ingresar el stock");

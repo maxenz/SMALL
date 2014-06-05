@@ -11,6 +11,7 @@ using FrbaCommerce.Comprar_Ofertar;
 using FrbaCommerce.Generar_Publicacion;
 using FrbaCommerce.Gestion_de_Preguntas;
 using FrbaCommerce.Modelo;
+using FrbaCommerce.Facturar_Publicaciones;
 
 namespace FrbaCommerce
 {
@@ -44,6 +45,11 @@ namespace FrbaCommerce
         private void btnVerRespuestas_Click(object sender, EventArgs e)
         {
             FormHelper.mostrarNuevaVentana(new VerRespuestasForm(this), this);
+        }
+
+        private void btnFacturarPublicaciones_Click(object sender, EventArgs e)
+        {
+            FormHelper.mostrarNuevaVentana(new frmFacturarPublicaciones(), this);
         }
     }
 }

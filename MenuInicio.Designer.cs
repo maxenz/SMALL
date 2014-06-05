@@ -33,6 +33,7 @@
             this.btnGenerarPublicacion = new System.Windows.Forms.Button();
             this.btnResponderPreguntas = new System.Windows.Forms.Button();
             this.btnVerRespuestas = new System.Windows.Forms.Button();
+            this.btnFacturarPublicaciones = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lblTitulo
@@ -85,11 +86,22 @@
             this.btnVerRespuestas.UseVisualStyleBackColor = true;
             this.btnVerRespuestas.Click += new System.EventHandler(this.btnVerRespuestas_Click);
             // 
+            // btnFacturarPublicaciones
+            // 
+            this.btnFacturarPublicaciones.Location = new System.Drawing.Point(29, 179);
+            this.btnFacturarPublicaciones.Name = "btnFacturarPublicaciones";
+            this.btnFacturarPublicaciones.Size = new System.Drawing.Size(120, 23);
+            this.btnFacturarPublicaciones.TabIndex = 19;
+            this.btnFacturarPublicaciones.Text = "Facturar ";
+            this.btnFacturarPublicaciones.UseVisualStyleBackColor = true;
+            this.btnFacturarPublicaciones.Click += new System.EventHandler(this.btnFacturarPublicaciones_Click);
+            // 
             // MenuInicio
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 262);
+            this.Controls.Add(this.btnFacturarPublicaciones);
             this.Controls.Add(this.btnVerRespuestas);
             this.Controls.Add(this.btnResponderPreguntas);
             this.Controls.Add(this.btnGenerarPublicacion);
@@ -109,5 +121,6 @@
         private System.Windows.Forms.Button btnGenerarPublicacion;
         private System.Windows.Forms.Button btnResponderPreguntas;
         private System.Windows.Forms.Button btnVerRespuestas;
+        private System.Windows.Forms.Button btnFacturarPublicaciones;
     }
 }

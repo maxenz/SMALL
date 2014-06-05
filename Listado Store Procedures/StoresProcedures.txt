@@ -95,3 +95,15 @@ BEGIN
     ORDER BY rub.ID
 END
 
+/********** GetPersonas **********/ 
+
+CREATE PROCEDURE [SMALL].[GetPersonas]
+AS
+BEGIN
+	SELECT * FROM SMALL.Persona per
+	LEFT JOIN SMALL.Cliente cli ON (cli.ID_Persona = per.ID)
+	LEFT JOIN SMALL.Empresa emp ON (emp.ID_Persona = per.ID)
+	ORDER BY ID
+END
+
+
