@@ -8,6 +8,8 @@ using System.Text;
 using System.Windows.Forms;
 using FrbaCommerce.Modelo;
 using FrbaCommerce.DAO;
+using FrbaCommerce.Helpers;
+using System.Runtime.InteropServices;
 
 namespace FrbaCommerce.Generar_Publicacion
 {
@@ -44,6 +46,7 @@ namespace FrbaCommerce.Generar_Publicacion
 
         private void setPublicacion()
         {
+            btnLimpiarForm.Enabled = false;
             cmbTipoPublicacion.SelectedValue = publicacion.ID_Tipo_Publicacion;
             txtCodPublicacion.Text = publicacion.ID.ToString();
             txtDescPublicacion.Text = publicacion.Descripcion;
@@ -186,7 +189,6 @@ namespace FrbaCommerce.Generar_Publicacion
             this.cmbTipoPublicacion.DataSource = ADOPublicacion.getTiposDePublicacion();
             this.cmbTipoPublicacion.DisplayMember = "Descripcion";
             this.cmbTipoPublicacion.ValueMember = "ID";
-
         }
 
         private void setNumberPublicacion()
@@ -344,6 +346,15 @@ namespace FrbaCommerce.Generar_Publicacion
             dtpInicioPublicacion.Value = DateTime.Now;
         }
 
-  
+        private void btnLimpiarForm_Click(object sender, EventArgs e)
+        {
+            CleanFormHelper cfh = new CleanFormHelper();
+            List<TextBox> lstTextbox = cfh.collectTextBoxes(this, gpGenerarPublicacion.Controls);
+            List<ComboBox> lstCombobox = cfh.collectComboBoxes(this, gpGenerarPublicacion.Controls);
+            cfh.cleanTextBoxes(this, lstTextbox);
+            cfh.cleanComboBoxes(this, lstCombobox);
+            chkSePermitePreguntas.Checked = false;
+            lstBoxRubros.ClearSelected();
+        }
     }
 }

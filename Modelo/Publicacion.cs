@@ -7,7 +7,7 @@ namespace FrbaCommerce.Modelo
 {
     public class Publicacion
     {
-        public int ID { get; set; }
+        public long ID { get; set; }
         public int ID_Visibilidad { get; set; }
         public int ID_Tipo_Publicacion { get; set; }
         public int ID_Estado { get; set; }
