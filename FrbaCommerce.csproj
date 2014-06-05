@@ -126,6 +126,7 @@
     <Compile Include="Gestion de Preguntas\Responder.Designer.cs">
       <DependentUpon>Responder.cs</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\CleanFormHelper.cs" />
     <Compile Include="Helpers\ValidationHelper.cs" />
     <Compile Include="MenuInicio.cs">
       <SubType>Form</SubType>

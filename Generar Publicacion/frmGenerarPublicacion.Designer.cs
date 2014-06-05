@@ -57,12 +57,14 @@
             this.lblTipoPublicacion = new System.Windows.Forms.Label();
             this.cmbTipoPublicacion = new System.Windows.Forms.ComboBox();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.btnLimpiarForm = new System.Windows.Forms.Button();
             this.gpGenerarPublicacion.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // gpGenerarPublicacion
             // 
+            this.gpGenerarPublicacion.Controls.Add(this.btnLimpiarForm);
             this.gpGenerarPublicacion.Controls.Add(this.lblValorInicialSubasta);
             this.gpGenerarPublicacion.Controls.Add(this.txtValorInicialSubasta);
             this.gpGenerarPublicacion.Controls.Add(this.textBox1);
@@ -178,7 +180,7 @@
             // 
             // btnGenerarPublicacion
             // 
-            this.btnGenerarPublicacion.Location = new System.Drawing.Point(226, 174);
+            this.btnGenerarPublicacion.Location = new System.Drawing.Point(399, 174);
             this.btnGenerarPublicacion.Name = "btnGenerarPublicacion";
             this.btnGenerarPublicacion.Size = new System.Drawing.Size(109, 23);
             this.btnGenerarPublicacion.TabIndex = 21;
@@ -333,6 +335,15 @@
             this.errorProvider1.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
             this.errorProvider1.ContainerControl = this;
             // 
+            // btnLimpiarForm
+            // 
+            this.btnLimpiarForm.Location = new System.Drawing.Point(15, 174);
+            this.btnLimpiarForm.Name = "btnLimpiarForm";
+            this.btnLimpiarForm.Size = new System.Drawing.Size(109, 23);
+            this.btnLimpiarForm.TabIndex = 31;
+            this.btnLimpiarForm.Text = "Limpiar";
+            this.btnLimpiarForm.UseVisualStyleBackColor = true;
+            // 
             // frmGenerarPublicacion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -379,5 +390,6 @@
         private System.Windows.Forms.ErrorProvider errorProvider1;
         private System.Windows.Forms.Label lblValorInicialSubasta;
         private System.Windows.Forms.TextBox txtValorInicialSubasta;
+        private System.Windows.Forms.Button btnLimpiarForm;
     }
 }
