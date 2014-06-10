@@ -19,11 +19,12 @@ namespace FrbaCommerce.Modelo
         public double Precio { get; set; }
         public bool Hab_Preguntas { get; set; }
         public List<Rubro> Rubros { get; set; }
+        public double ValorInicialSubasta { get; set; }
 
         public Publicacion(int id,int id_visibilidad, int id_tipo_publicacion, int id_estado,
                             int id_persona, string descripcion, DateTime fecha_inicio,
                             DateTime fecha_vencimiento, int stock, double precio, bool hab_preguntas,
-                            List<Rubro> rubros)
+                            List<Rubro> rubros,double vInicialSubasta)
         {
             this.ID = id;
             this.ID_Visibilidad = id_visibilidad;
@@ -37,6 +38,7 @@ namespace FrbaCommerce.Modelo
             this.Precio = precio;
             this.Hab_Preguntas = hab_preguntas;
             this.Rubros = rubros;
+            this.ValorInicialSubasta = vInicialSubasta;
         }
     }
 }

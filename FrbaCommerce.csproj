@@ -167,6 +167,7 @@
     <Compile Include="Login\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Modelo\RubroPublicacion.cs" />
     <Compile Include="Modelo\EstadoPublicacion.cs" />
     <Compile Include="Modelo\Globals.cs" />
     <Compile Include="Modelo\Persona.cs" />

@@ -15,11 +15,12 @@ namespace FrbaCommerce.Generar_Publicacion
 {
     public partial class frmGenerarPublicacion : Form
     {
+        Form _padre;
         public Publicacion publicacion;
-        List<Rubro> rubros;
 
-        public frmGenerarPublicacion()
+        public frmGenerarPublicacion(Form padre)
         {
+            _padre = padre;
             InitializeComponent();
 
         }
@@ -302,7 +303,15 @@ namespace FrbaCommerce.Generar_Publicacion
                 }
                 else
                 {
-                    //edito la publicacion
+                    setPublicacionFromFields();
+                    DAO.ADOPublicacion.updatePublicacion(publicacion);
+                    
+                    //FALTA LA PARTE DE EDITAR LOS RUBROS!
+
+                    MessageBox.Show("La publicación se ha modificado exitosamente");
+
+                    this.Hide();
+                    FormHelper.volverAPadre(_padre);
                 }
             }
         }
@@ -310,20 +319,43 @@ namespace FrbaCommerce.Generar_Publicacion
         // --> Genero la publicacion
         private void generarPublicacion()
         {
-            int idPersona = 1;
-            publicacion = new Publicacion(0, Convert.ToInt32(cmbVisibilidadPublicacion.SelectedValue),
+
+            setPublicacionFromFields();
+
+            DAO.ADOPublicacion.setPublicacion(publicacion);
+
+            List<RubroPublicacion> lstRubrosPublicacion = new List<RubroPublicacion>();
+            foreach (Rubro rub in lstBoxRubros.SelectedItems) {
+                RubroPublicacion rp = new RubroPublicacion(Convert.ToInt32(publicacion.ID), rub.ID);
+                lstRubrosPublicacion.Add(rp);
+            }
+
+            DAO.ADOPublicacion.setRubrosPublicacion(lstRubrosPublicacion);
+
+            MessageBox.Show("La publicación se ha generado exitosamente");
+
+            this.Hide();
+            FormHelper.volverAPadre(_padre);
+             
+          
+        }
+
+        private void setPublicacionFromFields()
+        {
+            double vis;
+            vis = txtValorInicialSubasta.Text == "" ? 0 : Convert.ToDouble(txtValorInicialSubasta.Text);
+
+            int idPersona = 37;
+            int codPublicacion = Convert.ToInt32(txtCodPublicacion.Text);
+
+            publicacion = new Publicacion(codPublicacion,
+                Convert.ToInt32(cmbVisibilidadPublicacion.SelectedValue),
                 Convert.ToInt32(cmbTipoPublicacion.SelectedValue),
                 Convert.ToInt32(cmbEstadoPublicacion.SelectedValue),
                 idPersona, txtDescPublicacion.Text, dtpInicioPublicacion.Value,
                 Convert.ToDateTime(txtVencimientoPublicacion.Text), Convert.ToInt32(txtStock.Text),
-                Convert.ToDouble(txtPrecio.Text), chkSePermitePreguntas.Checked, new List<Rubro>());
-
-            DAO.ADOPublicacion.setPublicacion(publicacion);
-
-            rubros = new List<Rubro>();
-            //foreach (var itm in lstBoxRubros.SelectedItems) {
-            //    rubros = new Rubro(
-            //}
+                Convert.ToDouble(txtPrecio.Text), chkSePermitePreguntas.Checked, new List<Rubro>(),
+                vis);
 
         }
 

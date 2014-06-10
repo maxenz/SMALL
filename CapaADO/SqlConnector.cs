@@ -114,7 +114,7 @@ namespace FrbaCommerce.CapaADO
             {
                 conexionSql(cn, cm);
                 cm.CommandType = CommandType.StoredProcedure;
-                cm.CommandText = "KEY_OVER_9000."+procedure;
+                cm.CommandText = "SMALL."+procedure;
                 if (_validateArgumentsAndParameters(args, values))
                 {
                     _loadSqlCommand(args, values, cm);
@@ -145,7 +145,7 @@ namespace FrbaCommerce.CapaADO
             {
                 conexionSql(cn, cm);
                 cm.CommandType = CommandType.StoredProcedure;
-                cm.CommandText = "KEY_OVER_9000." + procedure;
+                cm.CommandText = "SMALL." + procedure;
                 if (_validateArgumentsAndParameters(args, values))
                 {
                     _loadSqlCommand(args, values, cm);

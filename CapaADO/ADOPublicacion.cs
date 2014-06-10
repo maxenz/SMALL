@@ -132,6 +132,18 @@ namespace FrbaCommerce.DAO
         // --> Paso una dataRow a un objeto Publicacion
         private static Publicacion dataRowToPublicacion(DataRow dr)
         {
+            string strValSubasta = dr["Valor_Inicial_Subasta"].ToString();
+            double valInSubasta;
+            if (strValSubasta == null)
+            {
+                valInSubasta = Convert.ToDouble(strValSubasta);
+            }
+            else
+            {
+                valInSubasta = 0;
+            }
+
+
             Publicacion publicacion = new Publicacion(Convert.ToInt32(dr["Id"]),
                     Convert.ToInt32(dr["Id_Visibilidad"]),
                     Convert.ToInt32(dr["Id_Tipo_Publicacion"]),
@@ -142,21 +154,38 @@ namespace FrbaCommerce.DAO
                     Convert.ToDateTime(dr["Fecha_Vencimiento"]),
                     Convert.ToInt32(dr["Stock"]),
                     Convert.ToDouble(dr["Precio"]),
-                    Convert.ToBoolean(dr["Hab_Preguntas"]), new List<Rubro>());
+                    Convert.ToBoolean(dr["Hab_Preguntas"]), new List<Rubro>(),
+                    valInSubasta);
 
             return publicacion;
         }
 
-        public static int setPublicacion(Publicacion publicacion)
+        public static void setPublicacion(Publicacion p)
         {
 
-            DataTable dt = SqlConnector.retrieveDataTable("SetPublicacion", publicacion);
-
-            return 1;
-
+            executePublicacion("SetPublicacion", p);
         }
 
+        public static void updatePublicacion(Publicacion p)
+        {
+            executePublicacion("UpdatePublicacion", p);
+        }
 
+        private static  void executePublicacion(string storeProcedure, Publicacion p)
+        {
+            SqlConnector.executeProcedure(storeProcedure, p.ID,
+                                p.ID_Visibilidad, p.ID_Tipo_Publicacion, p.ID_Estado, p.ID_Persona,
+                                p.Descripcion, p.Fecha_Inicio, p.Fecha_Vencimiento, p.Stock,
+                                p.Precio, p.ValorInicialSubasta, p.Hab_Preguntas);
+        }
+
+        public static void setRubrosPublicacion(List<RubroPublicacion> lst)
+        {
+            foreach (RubroPublicacion rp in lst)
+            {
+                SqlConnector.executeProcedure("SetRubroPublicacion", rp.idPublicacion, rp.idRubro);
+            }
+        }
 
     }
 }

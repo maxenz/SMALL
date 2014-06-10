@@ -124,7 +124,7 @@ END
 
 /********** GetPublicacionesAFacturar **********/ 
 
-ALTER PROCEDURE [SMALL].[GetPublicacionesAFacturar]
+CREATE PROCEDURE [SMALL].[GetPublicacionesAFacturar]
 @cantAFacturar INT, @fechaUltimaFacturada VARCHAR(100), @idPersona INT
 AS
 BEGIN
@@ -133,5 +133,43 @@ BEGIN
 	 AND ID_Estado = 3
 	 AND ID_Persona_Venta = @idPersona
 	ORDER BY Fecha_Vencimiento ASC
+END
+
+/********** SetPublicacion **********/ 
+
+CREATE PROCEDURE [SMALL].[SetPublicacion]
+@codigoPublicacion INT, @idVisibilidad INT, @idTipoPublicacion INT, @idEstado INT,
+@idPersona INT, @descripcion nvarchar(225),@fechaInicio datetime,
+@fechaVencimiento datetime, @stock INT, @precio numeric(18,2),
+@valorInicialSubasta numeric(18,2), @habPreguntas bit
+AS
+BEGIN
+
+INSERT INTO SMALL.Publicacion (ID,ID_Visibilidad, ID_Tipo_Publicacion, ID_Estado,
+ID_Persona_Venta, Descripcion, Fecha_Inicio, Fecha_Vencimiento, Stock,
+Precio, Valor_Inicial_Subasta, Hab_Preguntas) 
+VALUES
+(@codigoPublicacion,@idVisibilidad,@idTipoPublicacion,@idEstado,@idPersona,@descripcion,@fechaInicio,
+@fechaVencimiento, @stock, @precio, @valorInicialSubasta, @habPreguntas)
+
+END
+
+/********** UpdatePublicacion **********/ 
+
+CREATE PROCEDURE [SMALL].[UpdatePublicacion]
+@codigoPublicacion INT, @idVisibilidad INT, @idTipoPublicacion INT, @idEstado INT,
+@idPersona INT, @descripcion nvarchar(225),@fechaInicio datetime,
+@fechaVencimiento datetime, @stock INT, @precio numeric(18,2),
+@valorInicialSubasta numeric(18,2), @habPreguntas bit
+AS
+BEGIN
+
+UPDATE SMALL.Publicacion SET ID_Visibilidad = @idVisibilidad,
+ID_Tipo_Publicacion = @idTipoPublicacion, ID_Estado = @idEstado, ID_Persona_Venta = @idPersona,
+Descripcion = @descripcion, Fecha_Inicio = @fechaInicio, Fecha_Vencimiento = @fechaVencimiento,
+Stock = @stock, Precio = @precio, Valor_Inicial_Subasta = @valorInicialSubasta,
+Hab_Preguntas = @habPreguntas
+WHERE ID = @codigoPublicacion
+
 END
 
