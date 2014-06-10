@@ -106,4 +106,32 @@ BEGIN
 	ORDER BY ID
 END
 
+/********** GetLastPublicacionFacturada **********/ 
+
+CREATE PROCEDURE [SMALL].[GetLastPublicacionFacturada]
+@idPersona INT = 0
+AS
+BEGIN
+	SELECT TOP 1 fac.ID as ID_Factura,itm.ID_Publicacion, pub.Fecha_Vencimiento
+	FROM SMALL.Item_Factura itm
+	LEFT JOIN SMALL.Factura fac ON (fac.ID = itm.ID_Venta)
+	LEFT JOIN SMALL.Publicacion pub ON (itm.ID_Publicacion = pub.ID)
+	WHERE fac.ID_Persona = @idPersona
+	GROUP BY fac.ID, itm.ID_Publicacion, pub.Fecha_Vencimiento
+	ORDER BY pub.Fecha_Vencimiento DESC
+
+END
+
+/********** GetPublicacionesAFacturar **********/ 
+
+ALTER PROCEDURE [SMALL].[GetPublicacionesAFacturar]
+@cantAFacturar INT, @fechaUltimaFacturada VARCHAR(100), @idPersona INT
+AS
+BEGIN
+	SELECT TOP (@cantAFacturar) * FROM small.PUBLICACION
+	WHERE Fecha_Vencimiento > @fechaUltimaFacturada
+	 AND ID_Estado = 3
+	 AND ID_Persona_Venta = @idPersona
+	ORDER BY Fecha_Vencimiento ASC
+END
 

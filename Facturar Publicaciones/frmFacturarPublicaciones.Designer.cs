@@ -33,15 +33,15 @@
             this.txtCantidadRendir = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.cmbFormaDePago = new System.Windows.Forms.ComboBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.txtNroTarjeta = new System.Windows.Forms.TextBox();
-            this.txtVencimientoTarjeta = new System.Windows.Forms.TextBox();
-            this.txtCodSegTarjeta = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
             this.btnFacturarPublicaciones = new System.Windows.Forms.Button();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.txtCodSegTarjeta = new System.Windows.Forms.TextBox();
+            this.txtVencimientoTarjeta = new System.Windows.Forms.TextBox();
+            this.txtNroTarjeta = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.cmbFormaDePago = new System.Windows.Forms.ComboBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -101,14 +101,63 @@
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
             // 
-            // label2
+            // btnFacturarPublicaciones
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(9, 66);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(135, 13);
-            this.label2.TabIndex = 4;
-            this.label2.Text = "Seleccione Forma de Pago";
+            this.btnFacturarPublicaciones.Location = new System.Drawing.Point(110, 168);
+            this.btnFacturarPublicaciones.Name = "btnFacturarPublicaciones";
+            this.btnFacturarPublicaciones.Size = new System.Drawing.Size(75, 23);
+            this.btnFacturarPublicaciones.TabIndex = 12;
+            this.btnFacturarPublicaciones.Text = "Facturar";
+            this.btnFacturarPublicaciones.UseVisualStyleBackColor = true;
+            this.btnFacturarPublicaciones.Click += new System.EventHandler(this.btnFacturarPublicaciones_Click);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(225, 110);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(54, 13);
+            this.label5.TabIndex = 11;
+            this.label5.Text = "Cod. Seg.";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(165, 110);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(35, 13);
+            this.label4.TabIndex = 10;
+            this.label4.Text = "Venc.";
+            // 
+            // txtCodSegTarjeta
+            // 
+            this.txtCodSegTarjeta.Location = new System.Drawing.Point(223, 126);
+            this.txtCodSegTarjeta.Name = "txtCodSegTarjeta";
+            this.txtCodSegTarjeta.Size = new System.Drawing.Size(56, 20);
+            this.txtCodSegTarjeta.TabIndex = 9;
+            // 
+            // txtVencimientoTarjeta
+            // 
+            this.txtVencimientoTarjeta.Location = new System.Drawing.Point(162, 126);
+            this.txtVencimientoTarjeta.Name = "txtVencimientoTarjeta";
+            this.txtVencimientoTarjeta.Size = new System.Drawing.Size(55, 20);
+            this.txtVencimientoTarjeta.TabIndex = 8;
+            // 
+            // txtNroTarjeta
+            // 
+            this.txtNroTarjeta.Location = new System.Drawing.Point(6, 126);
+            this.txtNroTarjeta.Name = "txtNroTarjeta";
+            this.txtNroTarjeta.Size = new System.Drawing.Size(150, 20);
+            this.txtNroTarjeta.TabIndex = 7;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(9, 110);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(78, 13);
+            this.label3.TabIndex = 6;
+            this.label3.Text = "Nro. de Tarjeta";
             // 
             // cmbFormaDePago
             // 
@@ -120,62 +169,14 @@
             this.cmbFormaDePago.TabIndex = 5;
             this.cmbFormaDePago.SelectedIndexChanged += new System.EventHandler(this.cmbFormaDePago_SelectedIndexChanged);
             // 
-            // label3
+            // label2
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(9, 110);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(78, 13);
-            this.label3.TabIndex = 6;
-            this.label3.Text = "Nro. de Tarjeta";
-            // 
-            // txtNroTarjeta
-            // 
-            this.txtNroTarjeta.Location = new System.Drawing.Point(6, 126);
-            this.txtNroTarjeta.Name = "txtNroTarjeta";
-            this.txtNroTarjeta.Size = new System.Drawing.Size(150, 20);
-            this.txtNroTarjeta.TabIndex = 7;
-            // 
-            // txtVencimientoTarjeta
-            // 
-            this.txtVencimientoTarjeta.Location = new System.Drawing.Point(162, 126);
-            this.txtVencimientoTarjeta.Name = "txtVencimientoTarjeta";
-            this.txtVencimientoTarjeta.Size = new System.Drawing.Size(55, 20);
-            this.txtVencimientoTarjeta.TabIndex = 8;
-            // 
-            // txtCodSegTarjeta
-            // 
-            this.txtCodSegTarjeta.Location = new System.Drawing.Point(223, 126);
-            this.txtCodSegTarjeta.Name = "txtCodSegTarjeta";
-            this.txtCodSegTarjeta.Size = new System.Drawing.Size(56, 20);
-            this.txtCodSegTarjeta.TabIndex = 9;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(165, 110);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(35, 13);
-            this.label4.TabIndex = 10;
-            this.label4.Text = "Venc.";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(225, 110);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(54, 13);
-            this.label5.TabIndex = 11;
-            this.label5.Text = "Cod. Seg.";
-            // 
-            // btnFacturarPublicaciones
-            // 
-            this.btnFacturarPublicaciones.Location = new System.Drawing.Point(110, 168);
-            this.btnFacturarPublicaciones.Name = "btnFacturarPublicaciones";
-            this.btnFacturarPublicaciones.Size = new System.Drawing.Size(75, 23);
-            this.btnFacturarPublicaciones.TabIndex = 12;
-            this.btnFacturarPublicaciones.Text = "Facturar";
-            this.btnFacturarPublicaciones.UseVisualStyleBackColor = true;
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(9, 66);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(135, 13);
+            this.label2.TabIndex = 4;
+            this.label2.Text = "Seleccione Forma de Pago";
             // 
             // frmFacturarPublicaciones
             // 
