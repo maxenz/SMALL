@@ -1,33 +1,31 @@
-﻿LISTADO DE STORE PROCEDURES
-
-/********** GetRubros **********/ 
+﻿/********** GetRubros **********/ 
 
 CREATE PROCEDURE [SMALL].[GetRubros]
 AS
-BEGIN
+
     SELECT ID,Descripcion
     FROM SMALL.Rubro
-END
+GO
 
 
 /********** GetNewPublicacionNumber **********/ 
 
 CREATE PROCEDURE [SMALL].[GetNewPublicacionNumber]
 AS
-BEGIN
+
 	SELECT TOP 1 ID FROM SMALL.Publicacion 
 	ORDER BY ID DESC
-END
+GO
 
 
 /********** GetEstadosPublicacion **********/ 
 
 CREATE PROCEDURE [SMALL].[GetEstadosPublicacion]
 AS
-BEGIN
+
 	SELECT * FROM SMALL.Estado_Publicacion
 	ORDER BY ID
-END
+GO
 
 
 /********** GetEstadoPublicacion **********/ 
@@ -35,31 +33,31 @@ END
 CREATE PROCEDURE [SMALL].[GetEstadoPublicacion]
 @id INT = 0
 AS
-BEGIN
+
 	SELECT * FROM SMALL.Estado_Publicacion
 	WHERE ID = @id
 	ORDER BY ID
-END
+GO
 
 /********** GetPublicacion **********/ 
 
 CREATE PROCEDURE [SMALL].[GetPublicacion]
 @id INT = 0
 AS
-BEGIN
+
 	SELECT * FROM SMALL.Publicacion
 	WHERE ID = @id
 	ORDER BY ID
-END
+GO
 
 /********** GetTiposPublicacion **********/ 
 
 CREATE PROCEDURE [SMALL].[GetTiposPublicacion]
 AS
-BEGIN
+
 	SELECT * FROM SMALL.Tipo_Publicacion
 	ORDER BY ID
-END
+GO
 
 
 /********** GetTipoPublicacion **********/ 
@@ -67,51 +65,51 @@ END
 CREATE PROCEDURE [SMALL].[GetTipoPublicacion]
 @id INT = 0
 AS
-BEGIN
+
 	SELECT * FROM SMALL.Tipo_Publicacion
 	WHERE ID = @id
 	ORDER BY ID
-END
+GO
 
 
 /********** GetPublicaciones **********/ 
 
 CREATE PROCEDURE [SMALL].[GetPublicaciones]
 AS
-BEGIN
+
 	SELECT TOP(200) * FROM SMALL.Publicacion
 	ORDER BY ID
-END
+GO
 
 /********** GetRubrosFromPublicacion **********/ 
 
 CREATE PROCEDURE [SMALL].[GetRubrosFromPublicacion]
 @id INT = 0
 AS
-BEGIN
+
 	SELECT rub.ID,rub.Descripcion FROM SMALL.Rubro rub
     LEFT JOIN SMALL.Publicacion_Rubro pubrub ON(rub.ID = pubrub.ID_Rubro) 
     WHERE pubrub.ID_Publicacion = @id
     ORDER BY rub.ID
-END
+GO
 
 /********** GetPersonas **********/ 
 
 CREATE PROCEDURE [SMALL].[GetPersonas]
 AS
-BEGIN
+
 	SELECT * FROM SMALL.Persona per
 	LEFT JOIN SMALL.Cliente cli ON (cli.ID_Persona = per.ID)
 	LEFT JOIN SMALL.Empresa emp ON (emp.ID_Persona = per.ID)
 	ORDER BY ID
-END
+GO
 
 /********** GetLastPublicacionFacturada **********/ 
 
 CREATE PROCEDURE [SMALL].[GetLastPublicacionFacturada]
 @idPersona INT = 0
 AS
-BEGIN
+
 	SELECT TOP 1 fac.ID as ID_Factura,itm.ID_Publicacion, pub.Fecha_Vencimiento
 	FROM SMALL.Item_Factura itm
 	LEFT JOIN SMALL.Factura fac ON (fac.ID = itm.ID_Venta)
@@ -120,19 +118,20 @@ BEGIN
 	GROUP BY fac.ID, itm.ID_Publicacion, pub.Fecha_Vencimiento
 	ORDER BY pub.Fecha_Vencimiento DESC
 
-END
+GO
 
 /********** GetPublicacionesAFacturar **********/ 
 
 CREATE PROCEDURE [SMALL].[GetPublicacionesAFacturar]
 @cantAFacturar INT, @fechaUltimaFacturada VARCHAR(100), @idPersona INT
 AS
-BEGIN
+
 	SELECT TOP (@cantAFacturar) * FROM small.PUBLICACION
 	WHERE Fecha_Vencimiento > @fechaUltimaFacturada
 	 AND ID_Estado = 3
 	 AND ID_Persona_Venta = @idPersona
 	ORDER BY Fecha_Vencimiento ASC
+
 END
 
 /********** SetPublicacion **********/ 
@@ -172,4 +171,7 @@ Hab_Preguntas = @habPreguntas
 WHERE ID = @codigoPublicacion
 
 END
+
+
+GO
 
