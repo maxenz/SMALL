@@ -72,15 +72,6 @@ AS
 GO
 
 
-/********** GetPublicaciones **********/ 
-
-CREATE PROCEDURE [SMALL].[GetPublicaciones]
-AS
-
-	SELECT TOP(200) * FROM SMALL.Publicacion
-	ORDER BY ID
-GO
-
 /********** GetRubrosFromPublicacion **********/ 
 
 CREATE PROCEDURE [SMALL].[GetRubrosFromPublicacion]

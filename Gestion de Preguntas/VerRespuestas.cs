@@ -17,9 +17,11 @@ namespace FrbaCommerce.Gestion_de_Preguntas
     public partial class VerRespuestasForm : Form
     {
         Form _padre;
+        int _persona;
 
-        public VerRespuestasForm(Form Padre)
+        public VerRespuestasForm(Form Padre, int IdPersona)
         {
+            _persona = IdPersona;
             _padre = Padre;
             InitializeComponent();
         }
@@ -50,7 +52,7 @@ namespace FrbaCommerce.Gestion_de_Preguntas
 
             bool SoloVeo = true;
 
-            Form MostrarPubForm = new MostrarPublicacionForm(this, IdPublicacion, SoloVeo);
+            Form MostrarPubForm = new MostrarPublicacionForm(this, IdPublicacion, SoloVeo,_persona);
 
             MostrarPubForm.Visible = true;
             MostrarPubForm.Activate();

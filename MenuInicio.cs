@@ -24,7 +24,7 @@ namespace FrbaCommerce
         
         private void btnComprarOfertar_Click_1(object sender, EventArgs e)
         {
-            FormHelper.mostrarNuevaVentana(new ComprarOfertarForm(this), this);
+            FormHelper.mostrarNuevaVentana(new ComprarOfertarForm(this, 84), this);
         }
 
         private void btnGenerarPublicacion_Click(object sender, EventArgs e)
@@ -46,7 +46,7 @@ namespace FrbaCommerce
 
         private void btnVerRespuestas_Click(object sender, EventArgs e)
         {
-            FormHelper.mostrarNuevaVentana(new VerRespuestasForm(this), this);
+            FormHelper.mostrarNuevaVentana(new VerRespuestasForm(this, 1), this);
         }
 
         private void btnFacturarPublicaciones_Click(object sender, EventArgs e)

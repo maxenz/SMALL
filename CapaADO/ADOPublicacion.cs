@@ -95,11 +95,11 @@ namespace FrbaCommerce.DAO
 
 
         // --> Obtengo las publicaciones
-        public static List<Publicacion> GetPublicaciones()
+        public static List<Publicacion> GetPublicaciones(int IdRubro, string Descripcion)
         {
 
             List<Publicacion> lstPublicaciones = new List<Publicacion>();
-            DataTable tablePub = SqlConnector.retrieveDataTable("GetPublicaciones");
+            DataTable tablePub = SqlConnector.retrieveDataTable("GetPublicaciones", IdRubro, Descripcion);
 
             foreach (DataRow dr in tablePub.Rows)
             {

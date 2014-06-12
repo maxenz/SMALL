@@ -14,12 +14,14 @@ namespace FrbaCommerce.Comprar_Ofertar
 {
     public partial class MostrarPublicacionForm : Form
     {
+        int _persona;
         int _IdPublicacion;
         bool _soloVeo;
         Form _padre;
 
-        public MostrarPublicacionForm(Form Padre, int IdPublicacion, bool SoloVeo)
+        public MostrarPublicacionForm(Form Padre, int IdPublicacion, bool SoloVeo, int IdPersona)
         {
+            _persona = IdPersona;
             _padre = Padre;
             _IdPublicacion = IdPublicacion;
             _soloVeo = SoloVeo;
@@ -92,23 +94,30 @@ namespace FrbaCommerce.Comprar_Ofertar
 
         private void btnComprar_Click(object sender, EventArgs e)
         {
-            if (txtComprar.Text == "" || txtComprar.Text == "0")
-                MessageBox.Show("Por favor, indique un precio de compra.", "Ojo!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-            else if (Convert.ToDouble(lblMuestraStock.Text) < Int32.Parse(txtComprar.Text))
-            {
-                MessageBox.Show("La cantidad a comprar debe ser menor o igual al stock.", "Ojo!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                txtOfertar.Text = "0";
-            }
+            int DebeMasDeCinco;
+            DebeMasDeCinco = ADOComprar.CheckDebeCalificaciones(_persona);
+            if (Convert.ToBoolean(DebeMasDeCinco) == true)
+                MessageBox.Show("Usted tiene mas de 5 calificaciones pendientes, regularice su situacion y vuelva a intentarlo", "Deshabilitado para transaccionar", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             else
-                ;//Inserto la compra en la tabla
-                //Muestro la info del vendedor.
-                // hay que validar que no pueda preguntar ni comprar el usuario que vende.
-                //Verificar si tiene mas de 5 compras inmediatas u ofertas sin calificar!!!!!!!!!!
+            {
+                if (txtComprar.Text == "" || Convert.ToInt32(txtComprar.Text) == 0)
+                    MessageBox.Show("Por favor, indique un precio de compra.", "Ojo!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                else if (Convert.ToDouble(lblMuestraStock.Text) < Int32.Parse(txtComprar.Text))
+                {
+                    MessageBox.Show("La cantidad a comprar debe ser menor o igual al stock.", "Ojo!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    txtOfertar.Text = "0";
+                }
+                else
+                    ;//Inserto la compra en la tabla
+                    //Muestro la info del vendedor.
+
+            }
         }
 
         private void btnOfertar_Click(object sender, EventArgs e)
         {
-            if (txtOfertar.Text == "" || txtOfertar.Text == "0")
+            //Validar si tiene más de 5 compras/ofertas sin calificar, en ese caso no puede ofertar
+            if (txtOfertar.Text == "" || Convert.ToInt32(txtOfertar.Text) == 0)
                 MessageBox.Show("Por favor, indique un precio de oferta.", "Ojo!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             else if (Convert.ToDouble(lblMuestraPrecio.Text) > Int32.Parse(txtOfertar.Text))
             {
@@ -117,6 +126,16 @@ namespace FrbaCommerce.Comprar_Ofertar
             }
             else
                 ;//inserto la oferta en la tabla
+        }
+        
+        private void btnEnviar_Click(object sender, EventArgs e)
+        {
+            // hay que validar que no pueda preguntar ni comprar el usuario que vende.
+            //validar que no pueda preguntar en mi propia publicacion!!
+            //Ocultar el gbox de preguntar.
+            //Limpiar textbox.
+            //validar los 255 caracteres!
+            //Inserto la pregunta en tabla!!!!!
         }
 
         private void txtOfertar_KeyPress(object sender, KeyPressEventArgs e)
@@ -134,13 +153,5 @@ namespace FrbaCommerce.Comprar_Ofertar
             this.Hide();
             FormHelper.volverAPadre(_padre);
         }
-
-        private void btnEnviar_Click(object sender, EventArgs e)
-        {
-            //Ocultar el gbox de preguntar.
-            //validar los 255 caracteres!
-            //Inserto la pregunta en tabla!!!!!
-        }
-
     }
 }

@@ -16,6 +16,8 @@ namespace FrbaCommerce.Comprar_Ofertar
     public partial class ComprarOfertarForm : Form
     {
         Form _padre;
+        int _persona;
+
 
         DataTable dtPublicaciones = new DataTable();
         DataTable dtPagina = new DataTable();
@@ -28,15 +30,16 @@ namespace FrbaCommerce.Comprar_Ofertar
         int fin = 0;//fin del paginado
         int numeroRegistro;
 
-        public ComprarOfertarForm(Form padre)
+        public ComprarOfertarForm(Form padre, int IdPersona)
         {
+            _persona = IdPersona;
             _padre = padre;
             InitializeComponent();
         }
 
         private void ComprarOfertarForm_Load(object sender, EventArgs e)
         {
-
+            //En este load debería verificar el estado de las publicaciones en relacion a la fecha del momento.
             cmbRubros.DataSource = ADORubro.getRubros();
             cmbRubros.DisplayMember = "Descripcion";
             cmbRubros.ValueMember = "ID";
@@ -51,17 +54,18 @@ namespace FrbaCommerce.Comprar_Ofertar
             //lPublicaciones = ADOPublicacion.GetPublicaciones();
 
             //this.dgvGrillaPublicaciones.DataSource = lPublicaciones;
-
-            this.Buscar();
+            int IdRubro = Convert.ToInt32(cmbRubros.SelectedValue);
+            string Descripcion = txtDescripcion.Text;
+            this.Buscar(IdRubro, Descripcion);
 
         }
 
-        private void Buscar()
+        private void Buscar(int IdRubro, string Descripcion)
         {
-            //clsEmpresa empresa = new clsEmpresa();
-            List<Publicacion> lPublicaciones = ADOPublicacion.GetPublicaciones();
+            List<Publicacion> lPublicaciones = ADOPublicacion.GetPublicaciones(IdRubro, Descripcion);
             dtPublicaciones = FormHelper.ConvertToDT<Publicacion>(lPublicaciones);
 
+            dtPagina.Columns.Clear();
             dtPagina.Columns.Add("Id");
             dtPagina.Columns.Add("Visibilidad");
             dtPagina.Columns.Add("Tipo Publicacion");
@@ -106,7 +110,6 @@ namespace FrbaCommerce.Comprar_Ofertar
 
             //dgvGrillaPublicaciones.Rows.Clear();
             //int indiceInsertar;
-            //Ver esto pq esta agregando columnas cada vez que pagino!!!!!
             numeroRegistro = this.ini;
             dtPagina.Clear();
 
@@ -116,13 +119,19 @@ namespace FrbaCommerce.Comprar_Ofertar
                 //DataRow dr = dtPagina.NewRow();
                 fila = dtPublicaciones.Rows[i];
                 //numeroRegistro = numeroRegistro + 1;
-                dtPagina.Rows.Add(fila[0], fila[1], fila[2], fila[3], fila[4], fila[5], fila[6], fila[7], fila[8], fila[9], fila[10]);
-
+                dtPagina.Rows.Add(fila[0], fila[1], fila[2], fila[3], fila[4], fila[5], 
+                                  fila[6], fila[7], fila[8], fila[9], fila[10]);
+                
+                //TODO: Ver como se muestra compra inmediata y el estado de la publicacion
             }
             //ojo con esto que no está liberando la memoria del gridview, jaja, una negrada pero para salir del paso va!
+            //dgvGrillaPublicaciones.Dispose(); con esto no funciona.
             dgvGrillaPublicaciones.DataSource = null;
             dgvGrillaPublicaciones.Refresh();
             dgvGrillaPublicaciones.DataSource = dtPagina;
+            dgvGrillaPublicaciones.Columns[1].Visible = false;
+            dgvGrillaPublicaciones.Columns[4].Visible = false;
+            dgvGrillaPublicaciones.Columns[10].Visible = false;
             dgvGrillaPublicaciones.AllowUserToAddRows = false;
 
         }
@@ -193,10 +202,16 @@ namespace FrbaCommerce.Comprar_Ofertar
             DataGridViewRow r = (DataGridViewRow)dgvGrillaPublicaciones.Rows[e.RowIndex];
 
             int IdPublicacion = Convert.ToInt32(r.Cells[0].Value);
+            int IdEstado = Convert.ToInt32(r.Cells[3].Value);
 
-            bool SoloVeo = false;
+            bool SoloVeo;
 
-            Form MostrarPubForm = new MostrarPublicacionForm(this, IdPublicacion, SoloVeo);
+            if(IdEstado == 2) //Si el estado es pausado, solo se va a ver y no se va a poder operar.
+                SoloVeo = true;
+            else
+                SoloVeo = false;
+
+            Form MostrarPubForm = new MostrarPublicacionForm(this, IdPublicacion, SoloVeo, _persona);
 
             MostrarPubForm.Visible = true;
             MostrarPubForm.Activate();

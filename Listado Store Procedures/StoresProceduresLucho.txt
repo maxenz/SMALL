@@ -1,0 +1,62 @@
+/********** GetPublicaciones **********/ 
+
+CREATE PROCEDURE [SMALL].[GetPublicaciones](@IdRubro int, @Descripcion nvarchar(250))
+AS
+	select * from SMALL.Publicacion, SMALL.Publicacion_Rubro, SMALL.Rubro
+	where SMALL.Publicacion.ID = SMALL.Publicacion_Rubro.ID_Publicacion
+	and SMALL.Publicacion_Rubro.ID_Rubro = SMALL.Rubro.ID
+	and SMALL.Rubro.ID = @IdRubro 
+	and CAST(SMALL.Publicacion.Descripcion as nvarchar(250))
+	like '%' + CAST(@Descripcion as nvarchar(250)) + '%'
+	and SMALL.Publicacion.ID_Estado in (1,2)
+	order by SMALL.Publicacion.ID_Visibilidad
+GO
+
+/********** CheckDebeCalificaciones ***********/ 
+
+CREATE procedure [SMALL].[CheckDebeCalificaciones](@IdPersona int)
+AS
+	Declare @CantCalificaciones int
+	Declare @CantCompras int
+	Declare @CantOfertasGanadas int
+
+	select @CantCalificaciones = COUNT(*) from SMALL.Calificacion
+	where SMALL.Calificacion.ID_Persona_Calificacion = @IdPersona
+
+	select @CantCompras = COUNT(*) from SMALL.Compra
+	where SMALL.Compra.ID_Persona_Compra = @IdPersona
+
+	select @CantOfertasGanadas = COUNT(*) from SMALL.Oferta
+	where SMALL.Oferta.ID_Persona_Oferta = @IdPersona
+	and SMALL.Oferta.Es_Oferta_Ganadora = 1
+
+	if (((@CantCompras + @CantOfertasGanadas) - @CantCalificaciones) > 5)
+	return 1
+	else
+	return 0
+
+
+GO
+
+/********* InsertaCompra ********************/
+Create Procedure [SMALL].[InsertaCompra](@IdPublicacion int, @IdPersona int, @Cantidad int, @Fecha DateTime)
+
+as
+Declare @StockFinal int
+insert into SMALL.Compra
+values (@IdPublicacion, @IdPersona, @Cantidad, @Fecha) 
+
+update SMALL.Publicacion set SMALL.Publicacion.Stock = SMALL.Publicacion.Stock - @Cantidad
+where SMALL.Publicacion.ID = @IdPublicacion
+
+select @StockFinal = SMALL.Publicacion.Stock from SMALL.Publicacion
+where SMALL.Publicacion.ID = @IdPublicacion
+
+if (@StockFinal = 0)--Si eran los ultimos stocks
+begin
+	update SMALL.Publicacion set SMALL.Publicacion.ID_Estado = 3 --Lo paso a estado finalizado.
+	where SMALL.Publicacion.ID = @IdPublicacion
+end
+
+go
+
