@@ -20,7 +20,8 @@ namespace FrbaCommerce.DAO
 
 
         // --> Obtengo la lista de estados de publicacion
-        public static List<EstadoPublicacion> getEstadosPublicacion() {
+        public static List<EstadoPublicacion> getEstadosPublicacion()
+        {
 
             List<EstadoPublicacion> estadosPublicacion = new List<EstadoPublicacion>();
             DataTable table = SqlConnector.retrieveDataTable("GetEstadosPublicacion");
@@ -39,7 +40,7 @@ namespace FrbaCommerce.DAO
             DataTable table = SqlConnector.retrieveDataTable("GetEstadoPublicacion", id);
             DataRow dr = table.Rows[0];
             EstadoPublicacion estadoPublicacion = dataRowToEstadoPublicacion(dr);
-                       
+
             return estadoPublicacion;
         }
 
@@ -47,17 +48,17 @@ namespace FrbaCommerce.DAO
         // --> Paso una datarow a un objeto EstadoPublicacion
         private static EstadoPublicacion dataRowToEstadoPublicacion(DataRow dr)
         {
-            return new EstadoPublicacion(Convert.ToInt32(dr["ID"]),dr["Descripcion"].ToString());
+            return new EstadoPublicacion(Convert.ToInt32(dr["ID"]), dr["Descripcion"].ToString());
         }
 
 
         // --> Obtengo una publicacion pasandole el id
         public static Publicacion getPublicacion(int id)
         {
-            DataTable table = SqlConnector.retrieveDataTable("GetPublicacion",id);
+            DataTable table = SqlConnector.retrieveDataTable("GetPublicacion", id);
             Publicacion p = dataRowToPublicacion(table.Rows[0]);
             p.Rubros = getRubrosFromPublicacion(p);
-            return p;                
+            return p;
         }
 
 
@@ -90,7 +91,7 @@ namespace FrbaCommerce.DAO
         private static TipoPublicacion dataRowToTipoPublicacion(DataRow dr)
         {
 
-            return new TipoPublicacion(dr["Descripcion"].ToString(),Convert.ToInt32(dr["ID"]));
+            return new TipoPublicacion(dr["Descripcion"].ToString(), Convert.ToInt32(dr["ID"]));
         }
 
 
@@ -104,16 +105,16 @@ namespace FrbaCommerce.DAO
             foreach (DataRow dr in tablePub.Rows)
             {
                 Publicacion pub = dataRowToPublicacion(dr);
-                pub.Rubros = getRubrosFromPublicacion(pub);          
+                pub.Rubros = getRubrosFromPublicacion(pub);
                 lstPublicaciones.Add(pub);
             }
-            
+
             return lstPublicaciones;
         }
 
 
         // --> Obtengo los rubros de una publicacion
-        private static List<Rubro> getRubrosFromPublicacion(Publicacion pub)
+        public static List<Rubro> getRubrosFromPublicacion(Publicacion pub)
         {
 
             DataTable tableRub = SqlConnector.retrieveDataTable("GetRubrosFromPublicacion", pub.ID);
@@ -171,7 +172,7 @@ namespace FrbaCommerce.DAO
             executePublicacion("UpdatePublicacion", p);
         }
 
-        private static  void executePublicacion(string storeProcedure, Publicacion p)
+        private static void executePublicacion(string storeProcedure, Publicacion p)
         {
             SqlConnector.executeProcedure(storeProcedure, p.ID,
                                 p.ID_Visibilidad, p.ID_Tipo_Publicacion, p.ID_Estado, p.ID_Persona,
@@ -185,6 +186,12 @@ namespace FrbaCommerce.DAO
             {
                 SqlConnector.executeProcedure("SetRubroPublicacion", rp.idPublicacion, rp.idRubro);
             }
+        }
+
+
+        public static void deleteRubroPublicacion(int idPublicacion, int idRubro)
+        {
+            SqlConnector.executeProcedure("DeleteRubroPublicacion", idPublicacion, idRubro);
         }
 
     }

@@ -301,19 +301,26 @@ namespace FrbaCommerce.Generar_Publicacion
                     MessageBox.Show("Solo puede modificar el stock de forma incremental");
                     return;
                 }
-                else
-                {
+
+            }
+
                     setPublicacionFromFields();
                     DAO.ADOPublicacion.updatePublicacion(publicacion);
-                    
-                    //FALTA LA PARTE DE EDITAR LOS RUBROS!
 
+                    List<Rubro> rubFromPub = DAO.ADOPublicacion.getRubrosFromPublicacion(publicacion);
+
+                    foreach (Rubro r in rubFromPub)
+                    {
+                        DAO.ADOPublicacion.deleteRubroPublicacion(Convert.ToInt32(publicacion.ID), r.ID);
+                    }
+                
+                    DAO.ADOPublicacion.setRubrosPublicacion(getSelectedRubPubl());
+                                
                     MessageBox.Show("La publicación se ha modificado exitosamente");
 
                     this.Hide();
                     FormHelper.volverAPadre(_padre);
-                }
-            }
+            
         }
 
         // --> Genero la publicacion
@@ -324,11 +331,7 @@ namespace FrbaCommerce.Generar_Publicacion
 
             DAO.ADOPublicacion.setPublicacion(publicacion);
 
-            List<RubroPublicacion> lstRubrosPublicacion = new List<RubroPublicacion>();
-            foreach (Rubro rub in lstBoxRubros.SelectedItems) {
-                RubroPublicacion rp = new RubroPublicacion(Convert.ToInt32(publicacion.ID), rub.ID);
-                lstRubrosPublicacion.Add(rp);
-            }
+            List<RubroPublicacion> lstRubrosPublicacion = getSelectedRubPubl();
 
             DAO.ADOPublicacion.setRubrosPublicacion(lstRubrosPublicacion);
 
@@ -338,6 +341,18 @@ namespace FrbaCommerce.Generar_Publicacion
             FormHelper.volverAPadre(_padre);
              
           
+        }
+
+        private List<RubroPublicacion> getSelectedRubPubl()
+        {
+            List<RubroPublicacion> lstRubrosPublicacion = new List<RubroPublicacion>();
+            foreach (Rubro rub in lstBoxRubros.SelectedItems)
+            {
+                RubroPublicacion rp = new RubroPublicacion(Convert.ToInt32(publicacion.ID), rub.ID);
+                lstRubrosPublicacion.Add(rp);
+            }
+
+            return lstRubrosPublicacion;
         }
 
         private void setPublicacionFromFields()
@@ -354,7 +369,7 @@ namespace FrbaCommerce.Generar_Publicacion
                 Convert.ToInt32(cmbEstadoPublicacion.SelectedValue),
                 idPersona, txtDescPublicacion.Text, dtpInicioPublicacion.Value,
                 Convert.ToDateTime(txtVencimientoPublicacion.Text), Convert.ToInt32(txtStock.Text),
-                Convert.ToDouble(txtPrecio.Text), chkSePermitePreguntas.Checked, new List<Rubro>(),
+                Convert.ToDouble(txtPrecio.Text), chkSePermitePreguntas.Checked, publicacion.Rubros,
                 vis);
 
         }

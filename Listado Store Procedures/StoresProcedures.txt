@@ -166,3 +166,14 @@ END
 
 GO
 
+/********** UpdatePublicacion **********/ 
+
+CREATE PROCEDURE [SMALL].[DeleteRubroPublicacion]
+@idPublicacion INT, @idRubro INT
+AS
+BEGIN
+
+DELETE FROM SMALL.Publicacion_Rubro WHERE ID_Publicacion = @idPublicacion AND ID_Rubro = @idRubro
+
+END
+

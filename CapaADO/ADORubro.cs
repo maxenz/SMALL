@@ -18,11 +18,13 @@ namespace FrbaCommerce.DAO
             DataTable table = SqlConnector.retrieveDataTable("getRubros");
             foreach (DataRow dr in table.Rows)
             {
-                Rubro rubro = new Rubro(Convert.ToInt32(dr["ID"]),dr["Descripcion"].ToString());
+                Rubro rubro = new Rubro(Convert.ToInt32(dr["ID"]), dr["Descripcion"].ToString());
 
                 rubros.Add(rubro);
             }
             return rubros;
         }
     }
+ 
+
 }
