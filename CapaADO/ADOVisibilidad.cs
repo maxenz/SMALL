@@ -22,13 +22,28 @@ namespace FrbaCommerce.DAO
             DataTable table = getDatatable("SELECT * FROM SMALL.Visibilidad");
             foreach (DataRow dr in table.Rows)
             {
-                Visibilidad visibilidad = new Visibilidad(Convert.ToInt32(dr["ID"])
-                    ,dr["Descripcion"].ToString(),
-                    Convert.ToDouble(dr["Precio"]),Convert.ToDouble(dr["Porcentaje"]),
-                    Convert.ToBoolean(dr["Activo"]),Convert.ToInt32(dr["Dias_Activo"]));
+                Visibilidad visibilidad = dataRowToVisibilidad(dr);
                 visibilidades.Add(visibilidad);
             }
             return visibilidades;
+        }
+
+        public static Visibilidad getVisibilidad(int idVisibilidad)
+        {
+            DataRow dr = SqlConnector.retrieveDataTable("GetVisibilidad",idVisibilidad).Rows[0];
+            return dataRowToVisibilidad(dr);
+
+        }
+
+        private static Visibilidad dataRowToVisibilidad(DataRow dr)
+        {
+            Visibilidad vis = new Visibilidad(Convert.ToInt32(dr["ID"])
+                    , dr["Descripcion"].ToString(),
+                    Convert.ToDouble(dr["Precio"]), Convert.ToDouble(dr["Porcentaje"]),
+                    Convert.ToBoolean(dr["Activo"]), Convert.ToInt32(dr["Dias_Activo"]));
+
+            return vis;
+
         }
 
 

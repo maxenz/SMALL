@@ -177,3 +177,89 @@ DELETE FROM SMALL.Publicacion_Rubro WHERE ID_Publicacion = @idPublicacion AND ID
 
 END
 
+
+/********** DeleteRubroPublicacion **********/ 
+CREATE PROCEDURE [SMALL].[DeleteRubroPublicacion]
+@idPublicacion INT, @idRubro INT
+AS
+BEGIN
+
+DELETE FROM SMALL.Publicacion_Rubro WHERE ID_Publicacion = @idPublicacion AND ID_Rubro = @idRubro
+
+END
+
+/********** SetFactura **********/ 
+
+CREATE PROCEDURE [SMALL].[SetFactura](@formaDePago VARCHAR(200),
+ @descDePago VARCHAR(200),@idPersona INT, @fecha DATETIME)
+
+AS
+
+Declare @idFactura INT
+
+SELECT @idFactura = MAX(ID) + 1 FROM SMALL.Factura
+
+INSERT INTO SMALL.Factura (ID,ID_Persona,Fecha,Forma_Pago,Desc_Forma_Pago)
+VALUES
+(@idFactura,@idPersona,@fecha,@formaDePago,@descDePago)
+
+SELECT MAX(ID) AS ID FROM SMALL.Factura
+
+GO
+
+/********** GetVisibilidad **********/ 
+
+CREATE PROCEDURE [SMALL].[GetVisibilidad](@idVisibilidad INT)
+
+AS
+
+SELECT * FROM SMALL.Visibilidad WHERE ID = @idVisibilidad
+
+GO
+
+/********** GetComprasPublicacion **********/ 
+
+CREATE PROCEDURE [SMALL].[GetComprasPublicacion](@idPublicacion INT)
+
+AS
+
+SELECT * FROM SMALL.Compra WHERE ID_Publicacion = @idPublicacion
+
+GO
+
+/********** GetOfertaGanadora **********/ 
+
+CREATE PROCEDURE [SMALL].[GetOfertaGanadora](@idPublicacion INT)
+
+AS
+
+SELECT *
+ FROM SMALL.Oferta 
+ WHERE ID_Publicacion = @idPublicacion AND Es_Oferta_Ganadora = 1
+ 
+ GO
+ 
+/********** SetItemFactura **********/ 
+ 
+ CREATE PROCEDURE [SMALL].[SetItemFactura](@idFactura INT,
+ @cantidad INT, @monto numeric(18,2), @idPublicacion INT)
+ 
+ AS
+ 
+INSERT INTO SMALL.Item_Factura (ID_Venta, Cantidad, Monto, ID_Publicacion)
+VALUES
+(@idFactura, @cantidad, @monto, @idPublicacion)
+ 
+ GO
+ 
+ /********** UpdateMontoFactura **********/ 
+ 
+ CREATE PROCEDURE [SMALL].[UpdateMontoFactura](@idFactura INT,
+ @monto numeric(18,2))
+ 
+ AS
+ 
+UPDATE SMALL.Factura SET Total = @monto WHERE ID = @idFactura 
+ 
+ GO
+ 

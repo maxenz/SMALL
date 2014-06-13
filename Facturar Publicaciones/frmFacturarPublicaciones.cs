@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using FrbaCommerce.Helpers;
 using FrbaCommerce.DAO;
+using FrbaCommerce.Modelo;
 
 namespace FrbaCommerce.Facturar_Publicaciones
 {
@@ -65,24 +66,93 @@ namespace FrbaCommerce.Facturar_Publicaciones
 
         private void btnFacturarPublicaciones_Click(object sender, EventArgs e)
         {
-            string fecUltPubFacturada = ADOFacturacion
-                                    .getLastPublicacionFacturada(37).Rows[0]["Fecha_Vencimiento"].ToString();
+            int idPersona = Convert.ToInt32(cmbPersonaFacturar.SelectedValue);
+            int cantAFacturar = Convert.ToInt32(txtCantidadRendir.Text);
+
+            idPersona = 37;
+
+            string formaDePago;
+            string descFormaDePago;
+            if (cmbFormaDePago.Text == "Efectivo") {
+                formaDePago = "Efectivo";
+                descFormaDePago = "Pago en Efectivo";
+            } else {
+                formaDePago = "Tarjeta de Credito";
+                descFormaDePago = txtNroTarjeta + " / " + txtVencimientoTarjeta + " / " + txtCodSegTarjeta;
+            }
+            
+            DateTime fecUltPubFacturada = Convert.ToDateTime(ADOFacturacion
+                                    .getLastPublicacionFacturada(idPersona).Rows[0]["Fecha_Vencimiento"]);
             //primero obtengo cual es la ultima publicacion facturada. para que sea mas sencillo
             //las ordeno segun fecha de vencimiento
 
             DataTable dtPubAFacturar = ADOFacturacion
-                                        .getPublicacionesAFacturar(2, fecUltPubFacturada, 37);
+                                        .getPublicacionesAFacturar(cantAFacturar, fecUltPubFacturada, idPersona);
 
 
+            // Genero factura y devuelvo el id que fue creado.
+            int nroFactura = Convert.ToInt32(ADOFacturacion
+                                .setFactura(formaDePago, descFormaDePago, idPersona).Rows[0]["ID"]);
 
-            //al tener la ultima publicacion facturada, obtengo la siguiente publicacion finalizada, que
-            // obviamente por logica no va a estar facturada (ya que no puedo saltear publicaciones)
+            double acumFactura = 0;
 
-            // entonces a partir de esa publicacion, facturo la cantidad pedida por la persona
+            foreach (DataRow dr in dtPubAFacturar.Rows)
+            {
+                int tipoDePublicacion = Convert.ToInt32(dr["ID_Tipo_Publicacion"]);
+                int idPublicacion = Convert.ToInt32(dr["ID"]);
+                int idVisibilidad = Convert.ToInt32(dr["ID_Visibilidad"]);
+                Visibilidad vsb = ADOVisibilidad.getVisibilidad(idVisibilidad);
+                double coefVisibilidad = vsb.Porcentaje;
+                double impFijoVisibilidad = vsb.Precio;
+                int stockPublicacion = Convert.ToInt32(dr["Stock"]);
+                double precioPublicacion = Convert.ToDouble(dr["Precio"]);
 
-            //en un store procedure, creo factura. obtengo id y la seteo en una variable.
-            // entonces, voy creando items_factura segun las compras de cada publicacion + 
-            // el costo de publicacion. aca hay que ver el tema de gratis tambien
+                double acumImportePublicacion = 0;
+                int acumCantidadPublicacion = 0;
+
+                if (tipoDePublicacion == 1)
+                {
+
+                    DataTable comprasDePublicacion = ADOFacturacion
+                                                    .getComprasPublicacion(idPublicacion);
+                    foreach (DataRow drComp in comprasDePublicacion.Rows)
+                    {
+                        int cantidadCompra = Convert.ToInt32(drComp["Cantidad"]);    
+                        double cobroPorCompras = precioPublicacion * cantidadCompra * coefVisibilidad;
+                        acumImportePublicacion += cobroPorCompras;
+                        acumCantidadPublicacion += cantidadCompra;
+                    }
+
+
+                    //aca hay que ver el tema de cuando puede ser gratis
+
+                    //es una compra inmediata
+                }
+                else
+                {
+                    DataRow ofertaGanadora = ADOFacturacion
+                                                .retrieveDataTable("GetOfertaGanadora", idPublicacion).Rows[0];
+
+                    double montoOfertado = Convert.ToDouble(ofertaGanadora["Monto"]);
+                    double cobroPorMontoOfertado = montoOfertado * coefVisibilidad;
+                    acumImportePublicacion += cobroPorMontoOfertado;
+                    //es una subasta
+                }
+
+                acumImportePublicacion += impFijoVisibilidad;
+
+
+                ADOFacturacion.executeProcedure("SetItemFactura", nroFactura, acumCantidadPublicacion,
+                    acumImportePublicacion, idPublicacion);
+
+
+                acumFactura += acumImportePublicacion;
+
+            }
+
+            ADOFacturacion.executeProcedure("UpdateMontoFactura", nroFactura, acumFactura);
+
+
         }
     }
 }

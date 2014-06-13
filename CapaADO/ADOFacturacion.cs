@@ -17,11 +17,21 @@ namespace FrbaCommerce.DAO
             return SqlConnector.retrieveDataTable("GetLastPublicacionFacturada", pUsr);
         }
 
-        public static DataTable getPublicacionesAFacturar(int cantAFacturar, string fechaUltimaFacturada,
+        public static DataTable getPublicacionesAFacturar(int cantAFacturar, DateTime fechaUltimaFacturada,
             int idPersona)
         {
             return SqlConnector.retrieveDataTable("GetPublicacionesAFacturar", cantAFacturar, fechaUltimaFacturada,
                 idPersona);
+        }
+
+        public static DataTable setFactura(string formaDePago, string descFormaDePago, int idPersona)
+        {
+            return SqlConnector.retrieveDataTable("SetFactura", formaDePago, descFormaDePago, idPersona, DateTime.Now);
+        }
+
+        public static DataTable getComprasPublicacion(int idPublicacion)
+        {
+            return SqlConnector.retrieveDataTable("GetComprasPublicacion", idPublicacion);
         }
 
 
