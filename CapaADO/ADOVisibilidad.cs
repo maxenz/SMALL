@@ -19,7 +19,7 @@ namespace FrbaCommerce.DAO
         public static List<Visibilidad> getVisibilidades()
         {
             List<Visibilidad> visibilidades = new List<Visibilidad>();
-            DataTable table = getDatatable("SELECT * FROM SMALL.Visibilidad");
+            DataTable table = SqlConnector.retrieveDataTable("GetVisibilidades");
             foreach (DataRow dr in table.Rows)
             {
                 Visibilidad visibilidad = dataRowToVisibilidad(dr);
@@ -44,24 +44,6 @@ namespace FrbaCommerce.DAO
                     Convert.ToInt32(dr["Contador"]));
 
             return vis;
-
-        }
-
-
-        private static DataTable getDatatable(string consulta) {
-
-            SqlConnection cn = new SqlConnection();
-            SqlCommand cm = new SqlCommand();
-            SqlDataReader dr;
-            DataTable dt = new DataTable();
-            List<string> args = new List<string>();
-
-                conexionSql(cn, cm);
-                cm.CommandText = consulta;
-                dr = cm.ExecuteReader();
-                dt.Load(dr);
-
-            return dt;
 
         }
 
