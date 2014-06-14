@@ -124,8 +124,6 @@ namespace FrbaCommerce.Facturar_Publicaciones
                     }
 
 
-                    //aca hay que ver el tema de cuando puede ser gratis
-
                     //es una compra inmediata
                 }
                 else
@@ -141,7 +139,20 @@ namespace FrbaCommerce.Facturar_Publicaciones
 
                 acumImportePublicacion += impFijoVisibilidad;
 
-
+                Visibilidad vs = ADOVisibilidad.getVisibilidad(idVisibilidad);
+                int cantFactDeTipoVis = vs.Contador;
+                if (cantFactDeTipoVis == 9)
+                {
+                    acumImportePublicacion = 0;
+                    ADOVisibilidad.setContadorVisibilidad(idVisibilidad, 0);
+                    //seter valor contador en 0
+                }
+                else
+                {
+                    ADOVisibilidad.setContadorVisibilidad(idVisibilidad, cantFactDeTipoVis + 1);
+                    //setear en cantFact + 1
+                }
+               
                 ADOFacturacion.executeProcedure("SetItemFactura", nroFactura, acumCantidadPublicacion,
                     acumImportePublicacion, idPublicacion);
 

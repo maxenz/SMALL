@@ -263,3 +263,12 @@ UPDATE SMALL.Factura SET Total = @monto WHERE ID = @idFactura
  
  GO
  
+  /********** SetContadorVisibilidad **********/ 
+ 
+ CREATE PROCEDURE [SMALL].[SetContadorVisibilidad](@idVisibilidad INT, @contador INT)
+ 
+ AS
+ 
+ UPDATE SMALL.Visibilidad SET Contador = @contador WHERE ID = @idVisibilidad
+ 
+ GO

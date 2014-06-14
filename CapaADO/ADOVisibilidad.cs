@@ -40,7 +40,8 @@ namespace FrbaCommerce.DAO
             Visibilidad vis = new Visibilidad(Convert.ToInt32(dr["ID"])
                     , dr["Descripcion"].ToString(),
                     Convert.ToDouble(dr["Precio"]), Convert.ToDouble(dr["Porcentaje"]),
-                    Convert.ToBoolean(dr["Activo"]), Convert.ToInt32(dr["Dias_Activo"]));
+                    Convert.ToBoolean(dr["Activo"]), Convert.ToInt32(dr["Dias_Activo"]),
+                    Convert.ToInt32(dr["Contador"]));
 
             return vis;
 
@@ -61,6 +62,13 @@ namespace FrbaCommerce.DAO
                 dt.Load(dr);
 
             return dt;
+
+        }
+
+        public static void setContadorVisibilidad(int idVisibilidad, int contador)
+        {
+
+            SqlConnector.executeProcedure("SetContadorVisibilidad", idVisibilidad, contador);
 
         }
 

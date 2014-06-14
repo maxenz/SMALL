@@ -13,9 +13,10 @@ namespace FrbaCommerce.Modelo
         public double Porcentaje { get; set; }
         public bool Activo { get; set; }
         public int DiasActivo { get; set; }
+        public int Contador { get; set; }
 
         public Visibilidad(int id,string descripcion, double precio, double porcentaje, bool activo,
-            int diasActivo)
+            int diasActivo, int contador)
         {
             this.ID = id;
             this.Descripcion = descripcion;
@@ -23,6 +24,7 @@ namespace FrbaCommerce.Modelo
             this.Porcentaje = porcentaje;
             this.Activo = activo;
             this.DiasActivo = diasActivo;
+            this.Contador = contador;
         }
     }
 }
