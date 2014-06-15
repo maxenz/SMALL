@@ -66,11 +66,14 @@ namespace FrbaCommerce.Facturar_Publicaciones
 
         private void btnFacturarPublicaciones_Click(object sender, EventArgs e)
         {
+            // --> obtengo idPersona del combo, y cantidad a facturar de textbox
             int idPersona = Convert.ToInt32(cmbPersonaFacturar.SelectedValue);
             int cantAFacturar = Convert.ToInt32(txtCantidadRendir.Text);
 
+            // --> esto lo tengo que obtener de una variable global
             idPersona = 37;
 
+            // --> dependiendo de la forma de pago seleccionado, son los datos que genero en la factura
             string formaDePago;
             string descFormaDePago;
             if (cmbFormaDePago.Text == "Efectivo") {
@@ -81,23 +84,26 @@ namespace FrbaCommerce.Facturar_Publicaciones
                 descFormaDePago = txtNroTarjeta + " / " + txtVencimientoTarjeta + " / " + txtCodSegTarjeta;
             }
             
+            // --> obtengo la fecha de la ultima publicacion facturada
             DateTime fecUltPubFacturada = Convert.ToDateTime(ADOFacturacion
                                     .getLastPublicacionFacturada(idPersona).Rows[0]["Fecha_Vencimiento"]);
-            //primero obtengo cual es la ultima publicacion facturada. para que sea mas sencillo
-            //las ordeno segun fecha de vencimiento
-
+            
+            // --> obtengo las publicaciones a facturar
             DataTable dtPubAFacturar = ADOFacturacion
                                         .getPublicacionesAFacturar(cantAFacturar, fecUltPubFacturada, idPersona);
 
 
-            // Genero factura y devuelvo el id que fue creado.
+            // --> Genero factura y devuelvo el id que fue creado.
             int nroFactura = Convert.ToInt32(ADOFacturacion
                                 .setFactura(formaDePago, descFormaDePago, idPersona).Rows[0]["ID"]);
 
             double acumFactura = 0;
 
+            // --> Para cada publicacion a facturar..
             foreach (DataRow dr in dtPubAFacturar.Rows)
             {
+                // --> seteo los datos generales que me van a servir para generar la facturacion de la pub.
+
                 int tipoDePublicacion = Convert.ToInt32(dr["ID_Tipo_Publicacion"]);
                 int idPublicacion = Convert.ToInt32(dr["ID"]);
                 int idVisibilidad = Convert.ToInt32(dr["ID_Visibilidad"]);
@@ -110,33 +116,36 @@ namespace FrbaCommerce.Facturar_Publicaciones
                 double acumImportePublicacion = 0;
                 int acumCantidadPublicacion = 0;
 
+                // --> Si es una compra inmediata..
                 if (tipoDePublicacion == 1)
                 {
-
+                    // --> Obtengo todas las compras hechas de esa publicacion
                     DataTable comprasDePublicacion = ADOFacturacion
                                                     .getComprasPublicacion(idPublicacion);
                     foreach (DataRow drComp in comprasDePublicacion.Rows)
                     {
+                        // Sumo precio * cantidad * coefVisibilidadDescuento
                         int cantidadCompra = Convert.ToInt32(drComp["Cantidad"]);    
                         double cobroPorCompras = precioPublicacion * cantidadCompra * coefVisibilidad;
                         acumImportePublicacion += cobroPorCompras;
                         acumCantidadPublicacion += cantidadCompra;
                     }
 
-
-                    //es una compra inmediata
                 }
                 else
                 {
+                    // --> Obtengo la oferta ganadora de la subasta
                     DataRow ofertaGanadora = ADOFacturacion
                                                 .retrieveDataTable("GetOfertaGanadora", idPublicacion).Rows[0];
 
                     double montoOfertado = Convert.ToDouble(ofertaGanadora["Monto"]);
                     double cobroPorMontoOfertado = montoOfertado * coefVisibilidad;
                     acumImportePublicacion += cobroPorMontoOfertado;
-                    //es una subasta
+                    acumCantidadPublicacion = stockPublicacion;
+  
                 }
 
+                // --> Le sumo al importe por las ventas, el importe fijo de la visibilidad
                 acumImportePublicacion += impFijoVisibilidad;
 
                 Visibilidad vs = ADOVisibilidad.getVisibilidad(idVisibilidad);
@@ -158,7 +167,7 @@ namespace FrbaCommerce.Facturar_Publicaciones
 
 
                 acumFactura += acumImportePublicacion;
-
+                
             }
 
             ADOFacturacion.executeProcedure("UpdateMontoFactura", nroFactura, acumFactura);

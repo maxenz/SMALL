@@ -283,4 +283,17 @@ UPDATE SMALL.Factura SET Total = @monto WHERE ID = @idFactura
  
  GO
  
+ /********** GetCantPublActualesGratis **********/ 
+    
+CREATE PROCEDURE [SMALL].[GetCantPublActualesGratis] (@idUsuario INT)
+
+AS
+
+	SELECT COUNT(*) as Cantidad
+	FROM SMALL.Publicacion 
+	WHERE ID_Persona_Venta = @idUsuario AND
+	ID_Estado <> 3
+
+GO
+ 
  

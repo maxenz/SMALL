@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using FrbaCommerce.Helpers;
+using FrbaCommerce.Gestion_de_Preguntas;
 
 namespace FrbaCommerce.Gestion_de_Preguntas
 {
@@ -39,9 +40,9 @@ namespace FrbaCommerce.Gestion_de_Preguntas
 
         private void btnResponder_Click(object sender, EventArgs e)
         {
+            
             //Acá llamo al SP que me inserta la pregunta en el ID de pregunta correspondiente!!
         }
-
 
 
     }

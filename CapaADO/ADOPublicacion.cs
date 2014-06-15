@@ -194,5 +194,11 @@ namespace FrbaCommerce.DAO
             SqlConnector.executeProcedure("DeleteRubroPublicacion", idPublicacion, idRubro);
         }
 
+
+        public static int getCantPublActualesGratis(int idUsuario)
+        {
+            DataTable dt = SqlConnector.retrieveDataTable("GetCantPublActualesGratis", idUsuario);
+            return Convert.ToInt32(dt.Rows[0]["Cantidad"]);
+        }
     }
 }

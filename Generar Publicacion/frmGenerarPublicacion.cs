@@ -393,6 +393,15 @@ namespace FrbaCommerce.Generar_Publicacion
         {
             bool vBool = true;
 
+            var idUsuario = 37;
+
+            //valido que el usr no puede tener mas de 3 publicaciones gratis al mismo tiempo
+
+            if (ADOPublicacion.getCantPublActualesGratis(idUsuario) == 3)
+            {
+                MessageBox.Show("Ya tiene 3 publicaciones gratis sin finalizar, no puede tener más");
+                return false;
+            }
 
             if (cmbTipoPublicacion.SelectedText == "Subasta")
             {
