@@ -12,6 +12,8 @@ using FrbaCommerce.Generar_Publicacion;
 using FrbaCommerce.Gestion_de_Preguntas;
 using FrbaCommerce.Modelo;
 using FrbaCommerce.Facturar_Publicaciones;
+using FrbaCommerce.Calificar_Vendedor;
+
 
 namespace FrbaCommerce
 {
@@ -52,6 +54,11 @@ namespace FrbaCommerce
         private void btnFacturarPublicaciones_Click(object sender, EventArgs e)
         {
             FormHelper.mostrarNuevaVentana(new frmFacturarPublicaciones(), this);
+        }
+
+        private void btnCalificar_Click(object sender, EventArgs e)
+        {
+            FormHelper.mostrarNuevaVentana(new Calificar(this,37), this);
         }
     }
 }

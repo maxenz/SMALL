@@ -112,6 +112,23 @@ namespace FrbaCommerce.DAO
             return lstPublicaciones;
         }
 
+        public static List<Publicacion> getPublicacionesACalificar(int idRubro, int idPersona) {
+
+            List<Publicacion> lstPublicaciones = new List<Publicacion>();
+            DataTable tablePub = SqlConnector.retrieveDataTable("GetPublicacionesCalificaciones",
+                idRubro, idPersona);
+
+            foreach (DataRow dr in tablePub.Rows)
+            {
+                Publicacion pub = dataRowToPublicacion(dr);
+                pub.Rubros = getRubrosFromPublicacion(pub);
+                lstPublicaciones.Add(pub);
+            }
+
+            return lstPublicaciones;
+
+        }
+
 
         // --> Obtengo los rubros de una publicacion
         public static List<Rubro> getRubrosFromPublicacion(Publicacion pub)

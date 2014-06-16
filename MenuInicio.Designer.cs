@@ -34,6 +34,7 @@
             this.btnResponderPreguntas = new System.Windows.Forms.Button();
             this.btnVerRespuestas = new System.Windows.Forms.Button();
             this.btnFacturarPublicaciones = new System.Windows.Forms.Button();
+            this.btnCalificar = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lblTitulo
@@ -96,11 +97,22 @@
             this.btnFacturarPublicaciones.UseVisualStyleBackColor = true;
             this.btnFacturarPublicaciones.Click += new System.EventHandler(this.btnFacturarPublicaciones_Click);
             // 
+            // btnCalificar
+            // 
+            this.btnCalificar.Location = new System.Drawing.Point(29, 208);
+            this.btnCalificar.Name = "btnCalificar";
+            this.btnCalificar.Size = new System.Drawing.Size(120, 23);
+            this.btnCalificar.TabIndex = 20;
+            this.btnCalificar.Text = "Calificar";
+            this.btnCalificar.UseVisualStyleBackColor = true;
+            this.btnCalificar.Click += new System.EventHandler(this.btnCalificar_Click);
+            // 
             // MenuInicio
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 262);
+            this.Controls.Add(this.btnCalificar);
             this.Controls.Add(this.btnFacturarPublicaciones);
             this.Controls.Add(this.btnVerRespuestas);
             this.Controls.Add(this.btnResponderPreguntas);
@@ -122,5 +134,6 @@
         private System.Windows.Forms.Button btnResponderPreguntas;
         private System.Windows.Forms.Button btnVerRespuestas;
         private System.Windows.Forms.Button btnFacturarPublicaciones;
+        private System.Windows.Forms.Button btnCalificar;
     }
 }

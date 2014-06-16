@@ -295,5 +295,24 @@ AS
 	ID_Estado <> 3
 
 GO
+
+/********** GetPublicacionesCalificaciones **********/
+
+CREATE PROCEDURE [SMALL].[GetPublicacionesCalificaciones]
+(@idRubro INT, @idPersona INT)
+AS
+
+SELECT *
+FROM SMALL.Publicacion pub
+JOIN SMALL.Publicacion_Rubro pr ON (pr.ID_Publicacion = pub.ID)
+WHERE pr.ID_Rubro = @idRubro
+AND
+pub.ID_Persona_Venta = @idPersona
+AND pub.ID_Estado = 3
+AND
+((SELECT COUNT(*) FROM SMALL.Calificacion WHERE ID_Publicacion = pub.ID) = 0)
+ORDER BY pub.Fecha_Vencimiento ASC
+
+GO
  
  
