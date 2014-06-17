@@ -98,6 +98,7 @@
     <Compile Include="CapaADO\ADOVisibilidad.cs" />
     <Compile Include="CapaADO\ADOPersona.cs" />
     <Compile Include="CapaADO\ADOFacturacion.cs" />
+    <Compile Include="CapaADO\ADOCalificacion.cs" />
     <Compile Include="CapaADO\SqlConnector.cs" />
     <Compile Include="Comprar-Ofertar\ComprarOfertar.cs">
       <SubType>Form</SubType>

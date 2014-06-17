@@ -299,19 +299,35 @@ GO
 /********** GetPublicacionesCalificaciones **********/
 
 CREATE PROCEDURE [SMALL].[GetPublicacionesCalificaciones]
-(@idRubro INT, @idPersona INT)
+(@idPersona INT)
 AS
 
 SELECT *
 FROM SMALL.Publicacion pub
 JOIN SMALL.Publicacion_Rubro pr ON (pr.ID_Publicacion = pub.ID)
-WHERE pr.ID_Rubro = @idRubro
-AND
+WHERE 
 pub.ID_Persona_Venta = @idPersona
 AND pub.ID_Estado = 3
 AND
 ((SELECT COUNT(*) FROM SMALL.Calificacion WHERE ID_Publicacion = pub.ID) = 0)
 ORDER BY pub.Fecha_Vencimiento ASC
+
+GO
+
+/********** SetCalificacion **********/
+
+CREATE PROCEDURE [SMALL].[SetCalificacion]
+(@idPublicacion INT, @cEstrellas INT, @detalle VARCHAR(200),@fechaActual DATETIME)
+
+AS
+DECLARE
+@idCalif INT
+
+SELECT @idCalif = (MAX(ID)+1) FROM SMALL.Calificacion
+
+INSERT INTO SMALL.Calificacion (ID,ID_Publicacion,Estrellas,Descripcion,Fecha)
+VALUES
+(@idCalif,@idPublicacion,@cEstrellas,@detalle,@fechaActual)
 
 GO
  

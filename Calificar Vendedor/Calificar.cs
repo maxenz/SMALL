@@ -45,10 +45,25 @@ namespace FrbaCommerce.Calificar_Vendedor
 
         private void Buscar(int IdRubro, string Descripcion)
         {
-
             int idPersona = 37;
 
-            List<Publicacion> lPublicaciones = ADOPublicacion.getPublicacionesACalificar(IdRubro, idPersona);
+            List<Publicacion> lPublicaciones = ADOPublicacion.getPublicacionesACalificar(idPersona);
+
+            if (IdRubro != 0)
+            {
+               
+                lPublicaciones = lPublicaciones
+                    .Where(x => x.Rubros.Exists(j => j.ID == IdRubro))
+                    .ToList();
+            }
+            
+            if (Descripcion != "")
+            {
+                lPublicaciones = lPublicaciones
+                                .Where(x => x.Descripcion.Contains(Descripcion))
+                                .ToList();
+            }
+
             int skipReg = (nroPagina * 10) - 10;
             fin = (lPublicaciones.Count() / 10);
             if (lPublicaciones.Count() % 10 > 0) fin++;
@@ -56,12 +71,6 @@ namespace FrbaCommerce.Calificar_Vendedor
             lPublicaciones = lPublicaciones.Skip(skipReg).Take(10).ToList();
             dgvGrillaPublicaciones.DataSource = lPublicaciones;
 
-        }
-
-        private void btnVolver_Click(object sender, EventArgs e)
-        {
-            this.Hide();
-            FormHelper.volverAPadre(_padre);
         }
 
         private void Calificar_Load(object sender, EventArgs e)
@@ -109,6 +118,12 @@ namespace FrbaCommerce.Calificar_Vendedor
             int idPublicacion = Convert.ToInt32(dgvGrillaPublicaciones.Rows[e.RowIndex].Cells["ID"].Value);
             FormHelper.mostrarNuevaVentana(new CalificarDetalle(this, 37, idPublicacion), this);
             this.Hide();
+        }
+
+        private void btnVolver_Click_1(object sender, EventArgs e)
+        {
+            this.Hide();
+            FormHelper.mostrarNuevaVentana(new MenuInicio(),this);
         }
 
     }

@@ -29,3 +29,4 @@ C:\tpgestion\small\obj\Release\FrbaCommerce.exe
 C:\tpgestion\small\obj\Release\FrbaCommerce.pdb
 C:\tpgestion\small\obj\Release\FrbaCommerce.Facturar_Publicaciones.frmFacturarPublicaciones.resources
 C:\tpgestion\small\obj\Release\FrbaCommerce.Calificar_Vendedor.Calificar.resources
+C:\tpgestion\small\obj\Release\FrbaCommerce.Calificar_Vendedor.CalificarDetalle.resources

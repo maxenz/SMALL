@@ -112,11 +112,11 @@ namespace FrbaCommerce.DAO
             return lstPublicaciones;
         }
 
-        public static List<Publicacion> getPublicacionesACalificar(int idRubro, int idPersona) {
+        public static List<Publicacion> getPublicacionesACalificar( int idPersona) {
 
             List<Publicacion> lstPublicaciones = new List<Publicacion>();
             DataTable tablePub = SqlConnector.retrieveDataTable("GetPublicacionesCalificaciones",
-                idRubro, idPersona);
+                 idPersona);
 
             foreach (DataRow dr in tablePub.Rows)
             {

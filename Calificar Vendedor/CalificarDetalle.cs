@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using FrbaCommerce.Helpers;
 
 namespace FrbaCommerce.Calificar_Vendedor
 {
@@ -35,7 +36,19 @@ namespace FrbaCommerce.Calificar_Vendedor
 
         private void btnCalificar_Click(object sender, EventArgs e)
         {
+
+            int cEstrellas = Convert.ToInt32(cmbCalificacion.Text);
+            string detalleCalif = txtDetalleCalificacion.Text;
+
+            DAO.ADOCalificacion.setCalificacion(_idPublicacion, cEstrellas, detalleCalif);
+
+            MessageBox.Show("La calificación se ha enviado correctamente");
+
+            this.Hide();
+            FormHelper.mostrarNuevaVentana(new Calificar(this, 37), new MenuInicio());
             
+            
+
         }
     }
 }
