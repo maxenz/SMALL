@@ -17,5 +17,16 @@ namespace FrbaCommerce.DAO
             return SqlConnector.executeProcedureWithReturnValue("CheckDebeCalificaciones", IdPersona);
         }
 
+        // --> Inserto la compra
+        public static void InsertaCompra(int IdPublicacion, int IdPersona, int Cantidad, DateTime Fecha)
+        {
+            SqlConnector.executeProcedure("InsertaCompra", IdPublicacion, IdPersona, Cantidad, Fecha);
+        }
+
+        public static void InsertaOferta(int IdPublicacion, int IdPersona, int Precio, DateTime Fecha)
+        {
+            SqlConnector.executeProcedure("InsertaOferta", IdPublicacion, IdPersona, Precio, Fecha);
+        }
+
     }
 }

@@ -14,17 +14,29 @@ namespace FrbaCommerce.DAO
 {
     class ADOPreguntarResponder : SqlConnector
     {
+        // --> Inserto la pregunta en la tabla
+        public static void InsertaPregunta(int IdPublicacion, int IdPersona, string Pregunta)
+        {
+            SqlConnector.executeProcedure("InsertaPregunta", IdPublicacion, IdPersona, Pregunta);
+        }
+
+        // --> Inserto la pregunta en la tabla
+        public static void InsertaRespuesta(int IdPreguntaRespuesta, string Respuesta, DateTime Fecha)
+        {
+            SqlConnector.executeProcedure("InsertaRespuesta", IdPreguntaRespuesta, Respuesta, Fecha);
+        }
+
         //Preguntas que me hacen y todavia no respondí!!!!!
         public static DataTable getPeguntasSinResponder(int IdUsuarioVenta)
         {
-            DataTable table = getDatatable("SELECT * FROM SMALL.Pregunta_Respuesta where ID_Publicacion = " + IdUsuarioVenta);
+            DataTable table = SqlConnector.retrieveDataTable("getPreguntasSinResponder", IdUsuarioVenta);
             return table;
         }
 
         //Preguntas que hice a otras publicaciones y ya me respondieron!!!!
         public static DataTable getPeguntasRespondidas(int IdUsuarioPregunta)
         {
-            DataTable table = getDatatable("SELECT * FROM SMALL.Pregunta_Respuesta where ID_Publicacion = " + IdUsuarioPregunta);
+            DataTable table = SqlConnector.retrieveDataTable("getPreguntasRespondidas", IdUsuarioPregunta);
             return table;
         }
 
