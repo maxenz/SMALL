@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
-
+using FrbaCommerce.Login;
 
 namespace FrbaCommerce
 {
@@ -16,7 +16,9 @@ namespace FrbaCommerce
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MenuInicio());
+            var menu = new MenuPrincipal();
+            var login = new LoginForm(menu);
+            if (login.ShowDialog() == DialogResult.OK) Application.Run(menu);
         }
     }
 }

@@ -9,7 +9,7 @@ using System.Text.RegularExpressions;
 
 namespace FrbaCommerce.CapaADO
 {
-    class SqlConnector
+    public class SqlConnector
     {
         /// <summary>
         /// Realiza la conexion a la base de datos.

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type='text/xsl' href='_UpgradeReport_Files/UpgradeReport.xslt'?><UpgradeLog>
+<Properties><Property Name="Solution" Value="FrbaCommerce">
+</Property><Property Name="Archivo de la solución" Value="C:\Users\Comparín\Documents\GitHub\SMALL\FrbaCommerce.sln">
+</Property><Property Name="Date" Value="martes, 17 de junio de 2014">
+</Property><Property Name="Time" Value="08:39 a.m.">
+</Property></Properties><Event ErrorLevel="0" Project="FrbaCommerce" Source="FrbaCommerce.csproj" Description="Proyecto convertido correctamente">
+</Event><Event ErrorLevel="3" Project="FrbaCommerce" Source="FrbaCommerce.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="" Source="FrbaCommerce.sln" Description="La solución se convirtió correctamente">
+</Event><Event ErrorLevel="3" Project="" Source="FrbaCommerce.sln" Description="Converted">
+</Event><Event ErrorLevel="0" Project="FrbaCommerce" Source="FrbaCommerce.csproj" Description="Examen completo: no es necesario actualizar los archivos de proyecto.">
+</Event></UpgradeLog>
