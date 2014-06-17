@@ -61,21 +61,19 @@ namespace FrbaCommerce.Login
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string nombreUsuario = tBoxNombreUsuario.Text;
-            Globals.userID = DAOUsuario.GetUserID(nombreUsuario);
 
-            //Loggeo directo hasta que esten hechos los procedimientos en la BDD
-            _principal.mostrarPantallaUsuario(new Usuario("", new List<Rol>()));
-            DialogResult = DialogResult.OK;
-            Close();
-            return;
+            ////Loggeo directo hasta que esten hechos los procedimientos en la BDD
+            //_principal.mostrarPantallaUsuario(new Usuario("", new List<Rol>()));
+            //DialogResult = DialogResult.OK;
+            //Close();
+            //return;
             //
-
-            //string nombreUsuario = tBoxNombreUsuario.Text;
-            string password = tBoxNombreUsuario.Text;
+            string nombreUsuario = tBoxNombreUsuario.Text;
+            string password = tBoxPassword.Text;
             try
             {
                 Usuario usuario = DAOUsuario.GetUsuario(nombreUsuario, password);
+                Globals.userID = DAOUsuario.GetUserID(nombreUsuario);
                 Globals.userID = DAOUsuario.GetUserID(nombreUsuario);
                 MessageBox.Show("Bienvenido " + nombreUsuario);
                 _principal.mostrarPantallaUsuario(usuario);
