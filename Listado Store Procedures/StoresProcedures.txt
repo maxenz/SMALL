@@ -114,7 +114,7 @@ GO
 /********** GetPublicacionesAFacturar **********/ 
 
 CREATE PROCEDURE [SMALL].[GetPublicacionesAFacturar]
-@cantAFacturar INT, @fechaUltimaFacturada VARCHAR(100), @idPersona INT
+(@cantAFacturar INT, @fechaUltimaFacturada VARCHAR(100), @idPersona INT)
 AS
 
 	SELECT TOP (@cantAFacturar) * FROM small.PUBLICACION
@@ -123,17 +123,16 @@ AS
 	 AND ID_Persona_Venta = @idPersona
 	ORDER BY Fecha_Vencimiento ASC
 
-END
+GO
 
 /********** SetPublicacion **********/ 
 
 CREATE PROCEDURE [SMALL].[SetPublicacion]
-@codigoPublicacion INT, @idVisibilidad INT, @idTipoPublicacion INT, @idEstado INT,
+(@codigoPublicacion INT, @idVisibilidad INT, @idTipoPublicacion INT, @idEstado INT,
 @idPersona INT, @descripcion nvarchar(225),@fechaInicio datetime,
 @fechaVencimiento datetime, @stock INT, @precio numeric(18,2),
-@valorInicialSubasta numeric(18,2), @habPreguntas bit
+@valorInicialSubasta numeric(18,2), @habPreguntas bit)
 AS
-BEGIN
 
 INSERT INTO SMALL.Publicacion (ID,ID_Visibilidad, ID_Tipo_Publicacion, ID_Estado,
 ID_Persona_Venta, Descripcion, Fecha_Inicio, Fecha_Vencimiento, Stock,
@@ -142,17 +141,16 @@ VALUES
 (@codigoPublicacion,@idVisibilidad,@idTipoPublicacion,@idEstado,@idPersona,@descripcion,@fechaInicio,
 @fechaVencimiento, @stock, @precio, @valorInicialSubasta, @habPreguntas)
 
-END
+GO
 
 /********** UpdatePublicacion **********/ 
 
 CREATE PROCEDURE [SMALL].[UpdatePublicacion]
-@codigoPublicacion INT, @idVisibilidad INT, @idTipoPublicacion INT, @idEstado INT,
+(@codigoPublicacion INT, @idVisibilidad INT, @idTipoPublicacion INT, @idEstado INT,
 @idPersona INT, @descripcion nvarchar(225),@fechaInicio datetime,
 @fechaVencimiento datetime, @stock INT, @precio numeric(18,2),
-@valorInicialSubasta numeric(18,2), @habPreguntas bit
+@valorInicialSubasta numeric(18,2), @habPreguntas bit)
 AS
-BEGIN
 
 UPDATE SMALL.Publicacion SET ID_Visibilidad = @idVisibilidad,
 ID_Tipo_Publicacion = @idTipoPublicacion, ID_Estado = @idEstado, ID_Persona_Venta = @idPersona,
@@ -161,32 +159,16 @@ Stock = @stock, Precio = @precio, Valor_Inicial_Subasta = @valorInicialSubasta,
 Hab_Preguntas = @habPreguntas
 WHERE ID = @codigoPublicacion
 
-END
-
-
 GO
-
-/********** UpdatePublicacion **********/ 
-
-CREATE PROCEDURE [SMALL].[DeleteRubroPublicacion]
-@idPublicacion INT, @idRubro INT
-AS
-BEGIN
-
-DELETE FROM SMALL.Publicacion_Rubro WHERE ID_Publicacion = @idPublicacion AND ID_Rubro = @idRubro
-
-END
-
 
 /********** DeleteRubroPublicacion **********/ 
 CREATE PROCEDURE [SMALL].[DeleteRubroPublicacion]
-@idPublicacion INT, @idRubro INT
+(@idPublicacion INT, @idRubro INT)
 AS
-BEGIN
 
 DELETE FROM SMALL.Publicacion_Rubro WHERE ID_Publicacion = @idPublicacion AND ID_Rubro = @idRubro
 
-END
+GO
 
 /********** SetFactura **********/ 
 
@@ -279,7 +261,7 @@ UPDATE SMALL.Factura SET Total = @monto WHERE ID = @idFactura
  
  AS
  
-  SELECT * FROM SMALL.Visibilidades
+  SELECT * FROM SMALL.Visibilidad
  
  GO
  
@@ -304,7 +286,6 @@ AS
 
 SELECT *
 FROM SMALL.Publicacion pub
-JOIN SMALL.Publicacion_Rubro pr ON (pr.ID_Publicacion = pub.ID)
 WHERE 
 pub.ID_Persona_Venta = @idPersona
 AND pub.ID_Estado = 3
@@ -317,7 +298,8 @@ GO
 /********** SetCalificacion **********/
 
 CREATE PROCEDURE [SMALL].[SetCalificacion]
-(@idPublicacion INT, @cEstrellas INT, @detalle VARCHAR(200),@fechaActual DATETIME)
+(@idPublicacion INT, @cEstrellas INT, @detalle VARCHAR(200),@fechaActual DATETIME,
+@idPersona INT)
 
 AS
 DECLARE
@@ -325,10 +307,24 @@ DECLARE
 
 SELECT @idCalif = (MAX(ID)+1) FROM SMALL.Calificacion
 
-INSERT INTO SMALL.Calificacion (ID,ID_Publicacion,Estrellas,Descripcion,Fecha)
+INSERT INTO SMALL.Calificacion (ID,ID_Publicacion,Estrellas,Descripcion,Fecha, ID_Persona_Calificacion)
 VALUES
-(@idCalif,@idPublicacion,@cEstrellas,@detalle,@fechaActual)
+(@idCalif,@idPublicacion,@cEstrellas,@detalle,@fechaActual,@idPersona)
 
 GO
+
+/********** SetRubroPublicacion **********/
+
+CREATE PROCEDURE [SMALL].[SetRubroPublicacion]
+(@idPublicacion INT, @idRubro INT)
+
+AS
+
+INSERT INTO SMALL.Publicacion_Rubro (ID_Publicacion,ID_Rubro)
+VALUES
+(@idPublicacion,@idRubro)
+
+GO
+
  
  

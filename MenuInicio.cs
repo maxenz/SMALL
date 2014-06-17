@@ -33,7 +33,7 @@ namespace FrbaCommerce
         {
             frmGenerarPublicacion frmGenPub = new frmGenerarPublicacion(this);
             //DataTable dtPrueba = DAO.ADOPublicacion.getPublicacion(12353);
-            frmGenPub.publicacion = DAO.ADOPublicacion.getPublicacion(68386);
+            //frmGenPub.publicacion = DAO.ADOPublicacion.getPublicacion(68386);
             //frmGenPub.publicacion.ID_Tipo_Publicacion = 1;
             //frmGenPub.publicacion.ID_Estado = 1;
             FormHelper.mostrarNuevaVentana(frmGenPub, this);

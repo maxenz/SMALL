@@ -369,7 +369,7 @@ namespace FrbaCommerce.Generar_Publicacion
                 Convert.ToInt32(cmbEstadoPublicacion.SelectedValue),
                 idPersona, txtDescPublicacion.Text, dtpInicioPublicacion.Value,
                 Convert.ToDateTime(txtVencimientoPublicacion.Text), Convert.ToInt32(txtStock.Text),
-                Convert.ToDouble(txtPrecio.Text), chkSePermitePreguntas.Checked, publicacion.Rubros,
+                Convert.ToDouble(txtPrecio.Text), chkSePermitePreguntas.Checked, new List<Rubro>(),
                 vis);
 
         }

@@ -14,9 +14,11 @@ namespace FrbaCommerce.DAO
     {
         public static void setCalificacion(int idPublicacion, int cEstrellas, string detalle)
         {
+            int idPersona = 37;
+
             DateTime fechaActual = DateTime.Now;
             SqlConnector.executeProcedure("SetCalificacion", idPublicacion, cEstrellas,
-                detalle, fechaActual);
+                detalle, fechaActual, idPersona);
 
         }
     }
