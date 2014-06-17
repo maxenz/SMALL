@@ -8,7 +8,7 @@ AS
 	and SMALL.Rubro.ID = @IdRubro 
 	and CAST(SMALL.Publicacion.Descripcion as nvarchar(250))
 	like '%' + CAST(@Descripcion as nvarchar(250)) + '%'
-	and SMALL.Publicacion.ID_Estado in (1,2)
+	and SMALL.Publicacion.ID_Estado in (1,4) -- Solo se ven las publicadas y pausadas.
 	order by SMALL.Publicacion.ID_Visibilidad
 GO
 
@@ -60,3 +60,61 @@ end
 
 go
 
+/********* InsertaOferta ********************/
+
+Create Procedure [SMALL].[InsertaOferta](@IdPublicacion int, @IdPersona int, @Precio int, @Fecha DateTime)
+
+As
+
+Insert Into SMALL.Oferta
+Values (@IdPublicacion, @IdPersona, @Precio, @Fecha, 0) 
+
+Update SMALL.Publicacion Set SMALL.Publicacion.Precio = @Precio
+Where SMALL.Publicacion.ID = @IdPublicacion
+
+Go
+
+/********* InsertaPregunta ********************/
+
+Create Procedure [SMALL].[InsertaPregunta](@IdPublicacion int, @IdPersona int, @Pregunta nvarchar(256))
+As
+
+Insert Into SMALL.Pregunta_Respuesta
+Values (@IdPublicacion, @IdPersona, @Pregunta, null, null)
+
+Go
+
+/********* getPreguntasSinResponder ********************/
+
+Create Procedure [SMALL].[getPreguntasSinResponder](@IdPersonaVenta int)
+As
+
+Select SMALL.Publicacion.ID, SMALL.Pregunta_Respuesta.ID, SMALL.Publicacion.Descripcion, SMALL.Pregunta_Respuesta.Pregunta 
+From SMALL.Pregunta_Respuesta, SMALL.Publicacion
+where SMALL.Pregunta_Respuesta.ID_Publicacion = SMALL.Publicacion.ID
+and SMALL.Pregunta_Respuesta.Respuesta IS NULL
+and SMALL.Publicacion.ID_Persona_Venta = @IdPersonaVenta
+
+Go
+
+/********* InsertaRespuesta ********************/
+
+Create Procedure [SMALL].[InsertaRespuesta](@IdPreguntaRespuesta int, @Respuesta nvarchar(256), @Fecha DateTime)
+As
+
+update SMALL.Pregunta_Respuesta set Respuesta = @Respuesta, Fech_Respuesta = @Fecha
+where SMALL.Pregunta_Respuesta.ID = @IdPreguntaRespuesta
+
+Go
+
+
+/********* getPreguntasRespondidas ********************/
+
+Create Procedure [SMALL].[getPreguntasRespondidas](@IdPersonaPregunta int)
+As
+
+Select * From SMALL.Pregunta_Respuesta
+Where ID_Persona_Respuesta = @IdPersonaPregunta
+and Respuesta is not null
+
+Go
