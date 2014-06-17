@@ -172,7 +172,9 @@ namespace FrbaCommerce.Facturar_Publicaciones
 
             ADOFacturacion.executeProcedure("UpdateMontoFactura", nroFactura, acumFactura);
 
-
+            MessageBox.Show("La facturación se ha procesado correctamente. Se realizo la factura N°: "
+                + nroFactura.ToString() + ", por el importe de: $" + acumFactura.ToString());
+            FormHelper.mostrarNuevaVentana(new MenuInicio(), this);
         }
     }
 }

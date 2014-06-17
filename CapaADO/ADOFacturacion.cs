@@ -34,10 +34,5 @@ namespace FrbaCommerce.DAO
             return SqlConnector.retrieveDataTable("GetComprasPublicacion", idPublicacion);
         }
 
-
-     
-
-
-
     }
 }

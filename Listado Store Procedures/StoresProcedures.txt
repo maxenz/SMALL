@@ -179,7 +179,7 @@ AS
 
 Declare @idFactura INT
 
-SELECT @idFactura = MAX(ID) + 1 FROM SMALL.Factura
+SELECT @idFactura = (MAX(ID) + 1) FROM SMALL.Factura
 
 INSERT INTO SMALL.Factura (ID,ID_Persona,Fecha,Forma_Pago,Desc_Forma_Pago)
 VALUES
