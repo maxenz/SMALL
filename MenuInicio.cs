@@ -13,6 +13,7 @@ using FrbaCommerce.Gestion_de_Preguntas;
 using FrbaCommerce.Modelo;
 using FrbaCommerce.Facturar_Publicaciones;
 using FrbaCommerce.Calificar_Vendedor;
+using FrbaCommerce.Listado_Estadistico;
 
 
 namespace FrbaCommerce
@@ -43,7 +44,7 @@ namespace FrbaCommerce
 
         private void btnResponderPreguntas_Click(object sender, EventArgs e)
         {
-            FormHelper.mostrarNuevaVentana(new ResponderPreguntasForm(this), this);
+            FormHelper.mostrarNuevaVentana(new ResponderPreguntasForm(this, 84), this);
         }
 
         private void btnVerRespuestas_Click(object sender, EventArgs e)
@@ -60,6 +61,11 @@ namespace FrbaCommerce
         {
             FormHelper.mostrarNuevaVentana(new Calificar(this,37), this);
             
+        }
+
+        private void btnListados_Click(object sender, EventArgs e)
+        {
+            FormHelper.mostrarNuevaVentana(new ListadosForm(this), this);
         }
     }
 }

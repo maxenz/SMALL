@@ -35,6 +35,7 @@
             this.btnVerRespuestas = new System.Windows.Forms.Button();
             this.btnFacturarPublicaciones = new System.Windows.Forms.Button();
             this.btnCalificar = new System.Windows.Forms.Button();
+            this.btnListados = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lblTitulo
@@ -107,11 +108,22 @@
             this.btnCalificar.UseVisualStyleBackColor = true;
             this.btnCalificar.Click += new System.EventHandler(this.btnCalificar_Click);
             // 
+            // btnListados
+            // 
+            this.btnListados.Location = new System.Drawing.Point(29, 238);
+            this.btnListados.Name = "btnListados";
+            this.btnListados.Size = new System.Drawing.Size(120, 23);
+            this.btnListados.TabIndex = 21;
+            this.btnListados.Text = "Listados Estadísticos";
+            this.btnListados.UseVisualStyleBackColor = true;
+            this.btnListados.Click += new System.EventHandler(this.btnListados_Click);
+            // 
             // MenuInicio
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 262);
+            this.ClientSize = new System.Drawing.Size(284, 294);
+            this.Controls.Add(this.btnListados);
             this.Controls.Add(this.btnCalificar);
             this.Controls.Add(this.btnFacturarPublicaciones);
             this.Controls.Add(this.btnVerRespuestas);
@@ -135,5 +147,6 @@
         private System.Windows.Forms.Button btnVerRespuestas;
         private System.Windows.Forms.Button btnFacturarPublicaciones;
         private System.Windows.Forms.Button btnCalificar;
+        private System.Windows.Forms.Button btnListados;
     }
 }
