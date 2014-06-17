@@ -25,7 +25,6 @@ C:\tpgestion\small\obj\Debug\FrbaCommerce.Gestion_de_Preguntas.ResponderForm.res
 C:\tpgestion\small\obj\Debug\FrbaCommerce.Gestion_de_Preguntas.ResponderPreguntasForm.resources
 C:\tpgestion\small\obj\Debug\FrbaCommerce.MenuInicio.resources
 C:\tpgestion\small\obj\Debug\FrbaCommerce.Generar_Publicacion.frmGenerarPublicacion.resources
-C:\tpgestion\small\obj\Debug\FrbaCommerce.Login.Form1.resources
 C:\tpgestion\small\obj\Debug\FrbaCommerce.Properties.Resources.resources
 C:\tpgestion\small\obj\Debug\FrbaCommerce.Registro_de_Usuario.Form1.resources
 C:\tpgestion\small\obj\Debug\FrbaCommerce.csproj.GenerateResource.Cache
@@ -64,3 +63,17 @@ C:\Users\Comparín\Documents\GitHub\SMALL\obj\Debug\FrbaCommerce.ABM_Rol.Filtrar
 C:\Users\Comparín\Documents\GitHub\SMALL\obj\Debug\FrbaCommerce.ABM_Rol.ModificarRolForm.resources
 C:\Users\Comparín\Documents\GitHub\SMALL\obj\Debug\FrbaCommerce.Login.LoginForm.resources
 C:\Users\Comparín\Documents\GitHub\SMALL\obj\Debug\FrbaCommerce.MenuPrincipal.resources
+C:\tpgestion\small\obj\Debug\FrbaCommerce.Abm_Cliente.AbmClienteForm.resources
+C:\tpgestion\small\obj\Debug\FrbaCommerce.Abm_Cliente.AltaClienteForm.resources
+C:\tpgestion\small\obj\Debug\FrbaCommerce.Abm_Cliente.FiltrarClienteForm.resources
+C:\tpgestion\small\obj\Debug\FrbaCommerce.Abm_Cliente.ModClienteForm.resources
+C:\tpgestion\small\obj\Debug\FrbaCommerce.Abm_Empresa.AbmEmpresaForm.resources
+C:\tpgestion\small\obj\Debug\FrbaCommerce.Abm_Empresa.AltaEmpresaForm.resources
+C:\tpgestion\small\obj\Debug\FrbaCommerce.Abm_Empresa.FiltrarEmpresaForm.resources
+C:\tpgestion\small\obj\Debug\FrbaCommerce.Abm_Empresa.ModificarEmpresaForm.resources
+C:\tpgestion\small\obj\Debug\FrbaCommerce.ABM_Rol.AbmRolForm.resources
+C:\tpgestion\small\obj\Debug\FrbaCommerce.ABM_Rol.AltaRolForm.resources
+C:\tpgestion\small\obj\Debug\FrbaCommerce.ABM_Rol.FiltrarRolForm.resources
+C:\tpgestion\small\obj\Debug\FrbaCommerce.ABM_Rol.ModificarRolForm.resources
+C:\tpgestion\small\obj\Debug\FrbaCommerce.Login.LoginForm.resources
+C:\tpgestion\small\obj\Debug\FrbaCommerce.MenuPrincipal.resources

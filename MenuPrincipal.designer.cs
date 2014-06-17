@@ -45,6 +45,8 @@
             this.button6 = new System.Windows.Forms.Button();
             this.button7 = new System.Windows.Forms.Button();
             this.btbABMRol = new System.Windows.Forms.Button();
+            this.btnCalificar = new System.Windows.Forms.Button();
+            this.btnFacturar = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -83,7 +85,7 @@
             this.loginToolStripMenuItem.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.loginToolStripMenuItem.Image = global::FrbaCommerce.Properties.Resources.Custom_Icon_Design_Pretty_Office_6_Logout;
             this.loginToolStripMenuItem.Name = "loginToolStripMenuItem";
-            this.loginToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.loginToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
             this.loginToolStripMenuItem.Text = "Iniciar sesión";
             this.loginToolStripMenuItem.Click += new System.EventHandler(this.loginToolStripMenuItem_Click);
             // 
@@ -92,7 +94,7 @@
             this.logoutToolStripMenuItem.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.logoutToolStripMenuItem.Image = global::FrbaCommerce.Properties.Resources.Custom_Icon_Design_Pretty_Office_11_Logout;
             this.logoutToolStripMenuItem.Name = "logoutToolStripMenuItem";
-            this.logoutToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.logoutToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
             this.logoutToolStripMenuItem.Text = "Cerrar sesión";
             this.logoutToolStripMenuItem.Visible = false;
             this.logoutToolStripMenuItem.Click += new System.EventHandler(this.logoutToolStripMenuItem_Click);
@@ -134,7 +136,7 @@
             this.lblTitulo.Font = new System.Drawing.Font("Arial", 20.25F, System.Drawing.FontStyle.Bold);
             this.lblTitulo.Location = new System.Drawing.Point(38, 52);
             this.lblTitulo.Name = "lblTitulo";
-            this.lblTitulo.Size = new System.Drawing.Size(241, 32);
+            this.lblTitulo.Size = new System.Drawing.Size(243, 32);
             this.lblTitulo.TabIndex = 7;
             this.lblTitulo.Text = "FRBA Commerce";
             // 
@@ -211,11 +213,33 @@
             this.btbABMRol.UseVisualStyleBackColor = true;
             this.btbABMRol.Click += new System.EventHandler(this.btbABMRol_Click);
             // 
+            // btnCalificar
+            // 
+            this.btnCalificar.Location = new System.Drawing.Point(159, 273);
+            this.btnCalificar.Name = "btnCalificar";
+            this.btnCalificar.Size = new System.Drawing.Size(113, 23);
+            this.btnCalificar.TabIndex = 16;
+            this.btnCalificar.Text = "Calificar";
+            this.btnCalificar.UseVisualStyleBackColor = true;
+            this.btnCalificar.Click += new System.EventHandler(this.btnCalificar_Click);
+            // 
+            // btnFacturar
+            // 
+            this.btnFacturar.Location = new System.Drawing.Point(40, 273);
+            this.btnFacturar.Name = "btnFacturar";
+            this.btnFacturar.Size = new System.Drawing.Size(113, 23);
+            this.btnFacturar.TabIndex = 17;
+            this.btnFacturar.Text = "Facturar";
+            this.btnFacturar.UseVisualStyleBackColor = true;
+            this.btnFacturar.Click += new System.EventHandler(this.btnFacturar_Click);
+            // 
             // MenuPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(303, 302);
+            this.ClientSize = new System.Drawing.Size(303, 321);
+            this.Controls.Add(this.btnFacturar);
+            this.Controls.Add(this.btnCalificar);
             this.Controls.Add(this.btbABMRol);
             this.Controls.Add(this.button7);
             this.Controls.Add(this.button6);
@@ -263,6 +287,8 @@
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.Button button7;
         private System.Windows.Forms.Button btbABMRol;
+        private System.Windows.Forms.Button btnCalificar;
+        private System.Windows.Forms.Button btnFacturar;
     }
 }
 

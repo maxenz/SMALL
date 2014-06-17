@@ -37,6 +37,11 @@ namespace FrbaCommerce.Calificar_Vendedor
 
         }
 
+        private void Calificar_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            FormHelper.volverAPadre(_padre);
+        }
+
         private void btnBuscar_Click(object sender, EventArgs e)
         {
             searchPublicaciones();
@@ -45,9 +50,8 @@ namespace FrbaCommerce.Calificar_Vendedor
 
         private void Buscar(int IdRubro, string Descripcion)
         {
-            int idPersona = 37;
 
-            List<Publicacion> lPublicaciones = ADOPublicacion.getPublicacionesACalificar(idPersona);
+            List<Publicacion> lPublicaciones = ADOPublicacion.getPublicacionesACalificar(_persona);
 
             if (IdRubro != 0)
             {
@@ -116,7 +120,7 @@ namespace FrbaCommerce.Calificar_Vendedor
         private void dgvGrillaPublicaciones_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             int idPublicacion = Convert.ToInt32(dgvGrillaPublicaciones.Rows[e.RowIndex].Cells["ID"].Value);
-            FormHelper.mostrarNuevaVentana(new CalificarDetalle(this, 37, idPublicacion), this);
+            FormHelper.mostrarNuevaVentana(new CalificarDetalle(this, Globals.userID, idPublicacion), this);
             this.Hide();
         }
 

@@ -36,6 +36,12 @@ namespace FrbaCommerce.CapaADO
             executeProcedure("resetInvalidLogins", nombreUsuario);
         }
 
+        public static int GetUserID(string nombreUsuario)
+        {
+            return Convert.ToInt32(SqlConnector.retrieveDataTable("GetUserID", nombreUsuario)
+                    .Rows[0]["ID"]);
+        }
+
         public static Usuario GetUsuario(string nombreUsuario, string password)
         {
             var passObtenido = GetUserPassword(nombreUsuario); //Traigo el hash del password del usuario en la tabla

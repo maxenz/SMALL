@@ -53,12 +53,13 @@ namespace FrbaCommerce
 
         private void btnFacturarPublicaciones_Click(object sender, EventArgs e)
         {
-            FormHelper.mostrarNuevaVentana(new frmFacturarPublicaciones(), this);
+            FormHelper.mostrarNuevaVentana(new frmFacturarPublicaciones(this), this);
         }
 
         private void btnCalificar_Click(object sender, EventArgs e)
         {
             FormHelper.mostrarNuevaVentana(new Calificar(this,37), this);
+            
         }
     }
 }

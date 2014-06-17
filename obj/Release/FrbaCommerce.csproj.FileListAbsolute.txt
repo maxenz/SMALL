@@ -21,7 +21,6 @@ C:\tpgestion\small\obj\Release\FrbaCommerce.Gestion_de_Preguntas.ResponderForm.r
 C:\tpgestion\small\obj\Release\FrbaCommerce.Gestion_de_Preguntas.ResponderPreguntasForm.resources
 C:\tpgestion\small\obj\Release\FrbaCommerce.MenuInicio.resources
 C:\tpgestion\small\obj\Release\FrbaCommerce.Generar_Publicacion.frmGenerarPublicacion.resources
-C:\tpgestion\small\obj\Release\FrbaCommerce.Login.Form1.resources
 C:\tpgestion\small\obj\Release\FrbaCommerce.Properties.Resources.resources
 C:\tpgestion\small\obj\Release\FrbaCommerce.Registro_de_Usuario.Form1.resources
 C:\tpgestion\small\obj\Release\FrbaCommerce.csproj.GenerateResource.Cache
@@ -30,3 +29,17 @@ C:\tpgestion\small\obj\Release\FrbaCommerce.pdb
 C:\tpgestion\small\obj\Release\FrbaCommerce.Facturar_Publicaciones.frmFacturarPublicaciones.resources
 C:\tpgestion\small\obj\Release\FrbaCommerce.Calificar_Vendedor.Calificar.resources
 C:\tpgestion\small\obj\Release\FrbaCommerce.Calificar_Vendedor.CalificarDetalle.resources
+C:\tpgestion\small\obj\Release\FrbaCommerce.Abm_Cliente.AbmClienteForm.resources
+C:\tpgestion\small\obj\Release\FrbaCommerce.Abm_Cliente.AltaClienteForm.resources
+C:\tpgestion\small\obj\Release\FrbaCommerce.Abm_Cliente.FiltrarClienteForm.resources
+C:\tpgestion\small\obj\Release\FrbaCommerce.Abm_Cliente.ModClienteForm.resources
+C:\tpgestion\small\obj\Release\FrbaCommerce.Abm_Empresa.AbmEmpresaForm.resources
+C:\tpgestion\small\obj\Release\FrbaCommerce.Abm_Empresa.AltaEmpresaForm.resources
+C:\tpgestion\small\obj\Release\FrbaCommerce.Abm_Empresa.FiltrarEmpresaForm.resources
+C:\tpgestion\small\obj\Release\FrbaCommerce.Abm_Empresa.ModificarEmpresaForm.resources
+C:\tpgestion\small\obj\Release\FrbaCommerce.ABM_Rol.AbmRolForm.resources
+C:\tpgestion\small\obj\Release\FrbaCommerce.ABM_Rol.AltaRolForm.resources
+C:\tpgestion\small\obj\Release\FrbaCommerce.ABM_Rol.FiltrarRolForm.resources
+C:\tpgestion\small\obj\Release\FrbaCommerce.ABM_Rol.ModificarRolForm.resources
+C:\tpgestion\small\obj\Release\FrbaCommerce.Login.LoginForm.resources
+C:\tpgestion\small\obj\Release\FrbaCommerce.MenuPrincipal.resources

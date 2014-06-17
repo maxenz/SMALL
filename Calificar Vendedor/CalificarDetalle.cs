@@ -45,7 +45,7 @@ namespace FrbaCommerce.Calificar_Vendedor
             MessageBox.Show("La calificación se ha enviado correctamente");
 
             this.Hide();
-            FormHelper.mostrarNuevaVentana(new Calificar(this, 37), new MenuInicio());
+            FormHelper.mostrarNuevaVentana(new Calificar(this, Globals.userID), new MenuInicio());
             
             
 

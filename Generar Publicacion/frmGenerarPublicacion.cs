@@ -50,6 +50,11 @@ namespace FrbaCommerce.Generar_Publicacion
             }
         }
 
+        private void frmGenerarPublicacion_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            FormHelper.volverAPadre(_padre);
+        }
+
         // --> Lleno el todos los controles del form con los datos de la publicacion
         private void setPublicacion()
         {
@@ -360,7 +365,7 @@ namespace FrbaCommerce.Generar_Publicacion
             double vis;
             vis = txtValorInicialSubasta.Text == "" ? 0 : Convert.ToDouble(txtValorInicialSubasta.Text);
 
-            int idPersona = 37;
+            int idPersona = Globals.userID;
             int codPublicacion = Convert.ToInt32(txtCodPublicacion.Text);
 
             publicacion = new Publicacion(codPublicacion,
@@ -393,7 +398,7 @@ namespace FrbaCommerce.Generar_Publicacion
         {
             bool vBool = true;
 
-            var idUsuario = 37;
+            var idUsuario = Globals.userID;
 
             //valido que el usr no puede tener mas de 3 publicaciones gratis al mismo tiempo
 

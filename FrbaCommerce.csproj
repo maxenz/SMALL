@@ -393,6 +393,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Listado Store Procedures\StoresProcedures.txt" />
+    <Content Include="Listado Store Procedures\StoresProceduresLeo.txt" />
     <Content Include="Listado Store Procedures\StoresProceduresLucho.txt" />
     <Content Include="Resources\Custom-Icon-Design-Pretty-Office-11-Logout.ico" />
     <Content Include="Resources\Custom-Icon-Design-Pretty-Office-6-Logout.ico" />

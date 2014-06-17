@@ -326,5 +326,16 @@ VALUES
 
 GO
 
+/********** GetUserID **********/
+
+CREATE PROCEDURE [SMALL].[GetUserID]
+(@nomUsuario VARCHAR(200))
+
+AS
+
+SELECT ID FROM SMALL.Usuario WHERE Usuario = @nomUsuario
+
+GO
+
  
  

@@ -82,7 +82,7 @@ namespace FrbaCommerce
         private void btnGenerarPublicacion_Click(object sender, EventArgs e)
         {
             var frmGenPub = new frmGenerarPublicacion(this);
-            frmGenPub.publicacion = DAO.ADOPublicacion.getPublicacion(1);
+            //frmGenPub.publicacion = DAO.ADOPublicacion.getPublicacion(1);
             FormHelper.mostrarNuevaVentana(frmGenPub, this);
         }
 
@@ -96,6 +96,18 @@ namespace FrbaCommerce
         {
             var nuevaForma = new AbmRolForm(this);
             FormHelper.mostrarNuevaVentana(nuevaForma, this);
+        }
+
+        private void btnFacturar_Click(object sender, EventArgs e)
+        {
+            var frmFacturar = new Facturar_Publicaciones.frmFacturarPublicaciones(this);
+            FormHelper.mostrarNuevaVentana(frmFacturar, this);
+        }
+
+        private void btnCalificar_Click(object sender, EventArgs e)
+        {
+            var frmCalificar = new Calificar_Vendedor.Calificar(this, Globals.userID);
+            FormHelper.mostrarNuevaVentana(frmCalificar, this);
         }
 
     }

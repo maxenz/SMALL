@@ -14,9 +14,18 @@ namespace FrbaCommerce.Facturar_Publicaciones
 {
     public partial class frmFacturarPublicaciones : Form
     {
-        public frmFacturarPublicaciones()
+
+        private Form _padre;
+
+        public frmFacturarPublicaciones(Form padre)
         {
             InitializeComponent();
+            _padre = padre;
+        }
+
+        private void frmFacturarPublicaciones_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            FormHelper.volverAPadre(_padre);
         }
 
         private void frmFacturarPublicaciones_Load(object sender, EventArgs e)
@@ -24,6 +33,14 @@ namespace FrbaCommerce.Facturar_Publicaciones
             // --> Seteo opciones generales del form
             setComboFormasDePago();
             setComboPersonas();
+
+            if (!Globals.adminLoggeado())
+            {
+                cmbPersonaFacturar.DataSource = ADOPersona.getPersonas()
+                                                .Where(x => x.ID == Globals.userID).ToList();
+                cmbPersonaFacturar.SelectedIndex = 0;
+            }
+           
         }
 
         // --> Seteo el combo de formas de pago
@@ -39,9 +56,11 @@ namespace FrbaCommerce.Facturar_Publicaciones
         // --> Seteo el combo de las personas
         private void setComboPersonas()
         {
-            cmbPersonaFacturar.DataSource = ADOPersona.getPersonas();
             cmbPersonaFacturar.DisplayMember = "Descripcion";
             cmbPersonaFacturar.ValueMember = "ID";
+            cmbPersonaFacturar.DataSource = ADOPersona.getPersonas();
+            cmbPersonaFacturar.SelectedIndex = 0;
+
         }
 
         // --> Cuando cambio la forma de pago..
@@ -69,9 +88,6 @@ namespace FrbaCommerce.Facturar_Publicaciones
             // --> obtengo idPersona del combo, y cantidad a facturar de textbox
             int idPersona = Convert.ToInt32(cmbPersonaFacturar.SelectedValue);
             int cantAFacturar = Convert.ToInt32(txtCantidadRendir.Text);
-
-            // --> esto lo tengo que obtener de una variable global
-            idPersona = 37;
 
             // --> dependiendo de la forma de pago seleccionado, son los datos que genero en la factura
             string formaDePago;
