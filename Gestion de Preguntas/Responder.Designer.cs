@@ -105,7 +105,7 @@
             this.Controls.Add(this.gbRespuesta);
             this.Controls.Add(this.gbPregunta);
             this.Name = "ResponderForm";
-            this.Text = "Form1";
+            this.Text = "Responder";
             this.Load += new System.EventHandler(this.ResponderForm_Load);
             this.gbPregunta.ResumeLayout(false);
             this.gbPregunta.PerformLayout();

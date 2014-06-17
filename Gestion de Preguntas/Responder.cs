@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using FrbaCommerce.Helpers;
+using FrbaCommerce.DAO;
 using FrbaCommerce.Gestion_de_Preguntas;
 
 namespace FrbaCommerce.Gestion_de_Preguntas
@@ -16,9 +17,9 @@ namespace FrbaCommerce.Gestion_de_Preguntas
         int _IdPreguntaRespuesta;
         int _IdPublicacion;
         string _pregunta;
-        Form _padre;
+        ResponderPreguntasForm _padre;
 
-        public ResponderForm(Form Padre, int IdPreguntaRespuesta, int IdPublicacion, string Pregunta)
+        public ResponderForm(ResponderPreguntasForm Padre, int IdPreguntaRespuesta, int IdPublicacion, string Pregunta)
         {
             _IdPreguntaRespuesta = IdPreguntaRespuesta;
             _IdPublicacion = IdPublicacion;
@@ -40,8 +41,21 @@ namespace FrbaCommerce.Gestion_de_Preguntas
 
         private void btnResponder_Click(object sender, EventArgs e)
         {
-            
-            //Acá llamo al SP que me inserta la pregunta en el ID de pregunta correspondiente!!
+
+            //Acá llamo al SP que me inserta la respuesta en el ID de pregunta correspondiente!!
+            if (Convert.ToInt32(txtRespuesta.Text.Length.ToString()) >= 255)
+                MessageBox.Show("Su respuesta es muy larga y supera los 255 caracteres, acórtela.", "Ojo!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            else
+            {
+                ADOPreguntarResponder.InsertaRespuesta(_IdPreguntaRespuesta, txtRespuesta.Text.ToString(), Globals.getFechaSistema());
+                MessageBox.Show("Su consulta ha sido procesada correctamente.", ";)", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                //ResponderPreguntasForm.ActiveForm.;
+                //ver de actualizar la grilla del padre
+                this.Close();
+                _padre.UpdateGrid();
+                FormHelper.volverAPadre(_padre);                
+            }
+
         }
 
 

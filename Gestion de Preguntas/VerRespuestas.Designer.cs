@@ -77,7 +77,7 @@
             this.Controls.Add(this.gbDataGrid);
             this.Name = "VerRespuestasForm";
             this.Text = "Ver Respuestas";
-            this.Load += new System.EventHandler(this.ResponderPreguntas_Load);
+            this.Load += new System.EventHandler(this.VerRespuestas_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvPreguntas)).EndInit();
             this.gbDataGrid.ResumeLayout(false);
             this.ResumeLayout(false);

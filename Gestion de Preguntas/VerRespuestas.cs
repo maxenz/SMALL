@@ -6,7 +6,6 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-
 using FrbaCommerce.Modelo;
 using FrbaCommerce.DAO;
 using FrbaCommerce.Helpers;
@@ -26,15 +25,15 @@ namespace FrbaCommerce.Gestion_de_Preguntas
             InitializeComponent();
         }
 
-        private void ResponderPreguntas_Load(object sender, EventArgs e)
+        private void VerRespuestas_Load(object sender, EventArgs e)
         {
             //Acá me debe traer todas las preguntas que yo hice a otras publicaciones.
-            dgvPreguntas.DataSource = ADOPreguntarResponder.getPeguntasRespondidas(12353); //Le paso mi usuario para saber que preguntas hice y devuelvo las que tienen respuestas
+            dgvPreguntas.DataSource = ADOPreguntarResponder.getPeguntasRespondidas(_persona); //Le paso mi usuario para saber que preguntas hice y devuelvo las que tienen respuestas
             dgvPreguntas.Columns[0].Visible = false;
             dgvPreguntas.Columns[1].Visible = false;
-            dgvPreguntas.Columns[2].Width = 350;
+            dgvPreguntas.Columns[2].Visible = false;
             dgvPreguntas.Columns[3].Width = 350;
-            dgvPreguntas.Columns[4].Visible = false;
+            dgvPreguntas.Columns[4].Width = 350;
         }
 
         private void btnVolver_Click(object sender, EventArgs e)
@@ -45,7 +44,6 @@ namespace FrbaCommerce.Gestion_de_Preguntas
 
         private void dgvPreguntas_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            //Publicacion p = new Publicacion();
             DataGridViewRow r = (DataGridViewRow)dgvPreguntas.Rows[e.RowIndex];
 
             int IdPublicacion = Convert.ToInt32(r.Cells[1].Value);
