@@ -165,6 +165,7 @@
       <DependentUpon>CalificarDetalle.cs</DependentUpon>
     </Compile>
     <Compile Include="CapaADO\ADOComprar.cs" />
+    <Compile Include="CapaADO\ADOListados.cs" />
     <Compile Include="CapaADO\ADOPreguntarResponder.cs" />
     <Compile Include="CapaADO\ADORubro.cs" />
     <Compile Include="CapaADO\ADOPublicacion.cs" />
@@ -226,6 +227,12 @@
     </Compile>
     <Compile Include="Helpers\CleanFormHelper.cs" />
     <Compile Include="Helpers\ValidationHelper.cs" />
+    <Compile Include="Listado Estadistico\Listados.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Listado Estadistico\Listados.Designer.cs">
+      <DependentUpon>Listados.cs</DependentUpon>
+    </Compile>
     <Compile Include="Login\LoginForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -255,12 +262,6 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Historial Cliente\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Listado Estadistico\Form1.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Listado Estadistico\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="MenuPrincipal.cs">
@@ -348,6 +349,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Gestion de Preguntas\ResponderPreguntas.resx">
       <DependentUpon>ResponderPreguntas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listado Estadistico\Listados.resx">
+      <DependentUpon>Listados.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Login\LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
