@@ -1,0 +1,270 @@
+
+/********** LOGIN **********/ 
+CREATE PROCEDURE [SMALL].[getUserPassword](@usuario nvarchar(255))
+AS
+SELECT U.Pswd AS PassSHA256
+FROM SMALL.Usuario U
+WHERE U.Usuario = @usuario
+GO
+
+CREATE PROCEDURE [SMALL].[raiseInvalidLogin](@usuario nvarchar(255))
+AS
+UPDATE SMALL.Usuario
+SET IntentosFallidos=IntentosFallidos+1
+WHERE Usuario=@usuario
+GO
+
+CREATE PROCEDURE [SMALL].[getInvalidLogins](@usuario nvarchar(255))
+AS
+SELECT IntentosFallidos AS InvalidLogins
+FROM SMALL.Usuario
+WHERE Usuario=@usuario;
+GO
+
+CREATE PROCEDURE [SMALL].[resetInvalidLogins](@usuario nvarchar(255))
+AS
+UPDATE SMALL.Usuario
+SET IntentosFallidos=0
+WHERE Usuario=@usuario;
+GO
+
+
+
+/********** TIPOS DOCUMENTO ********/
+CREATE PROCEDURE [SMALL].[getTiposDocumento]
+AS
+SELECT Descripcion 
+FROM SMALL.Tipo_Documento
+GO
+
+
+
+/********** CLIENTE **********/ 
+CREATE PROCEDURE [SMALL].[getClientes]
+AS
+SELECT * 
+FROM SMALL.Cliente C LEFT JOIN SMALL.Persona P ON (C.ID_Persona = P.ID)
+GO
+
+CREATE PROCEDURE [SMALL].[getCliente](@id int)
+AS
+SELECT * 
+FROM SMALL.Cliente C
+WHERE C.ID_Persona = @id;
+GO
+
+CREATE PROCEDURE [SMALL].[agregarCliente](@id int, @nom nvarchar(255), @ape nvarchar(50), @tipo int, @doc numeric(18,0), @cuil nvarchar(50), @fecha datetime)
+AS
+INSERT INTO SMALL.Cliente 
+(
+	ID_Persona,
+	Nombre,
+	Apellido,
+	Tipo_Doc,
+	Num_Doc,
+	Cuil,
+	Fecha_Nac
+	) 
+VALUES 
+(
+	@id,
+	@nom,
+	@ape,
+	@tipo,
+	@doc,
+	@cuil,
+	@fecha
+	);
+GO
+
+CREATE PROCEDURE [SMALL].[updateCliente](@id int, @nom nvarchar(255), @ape nvarchar(50), @tipo int, @doc numeric(18,0), @cuil nvarchar(50), @fecha datetime)
+AS
+UPDATE SMALL.Cliente 
+SET Nombre = @nom, Apellido = @ape, Tipo_Doc = @tipo, Num_Doc = @doc, Cuil = @cuil, Fecha_Nac = @fecha
+WHERE ID_Persona = @id;
+GO
+
+CREATE PROCEDURE [SMALL].[getClienteDni](@dni numeric(18,0), @tipo int)
+AS
+SELECT C.ID_Persona AS Id
+FROM SMALL.Cliente C
+WHERE C.Num_Doc = @dni and c.Tipo_Doc =@tipo;
+GO
+
+CREATE PROCEDURE [SMALL].[getClienteTel](@tel numeric(18,0))
+AS
+SELECT C.ID_Persona AS Id
+FROM SMALL.Cliente C, SMALL.Persona P
+WHERE C.ID_Persona = P.ID and P.Telefono = @tel;
+GO
+
+
+
+/********** EMPRESA **********/ 
+CREATE PROCEDURE [SMALL].[getEmpresas]
+AS
+SELECT * 
+FROM SMALL.Empresa emp LEFT JOIN SMALL.Persona per ON (emp.ID_Persona = per.ID)
+GO
+
+CREATE PROCEDURE [SMALL].[getEmpresa](@IdPersona int)
+AS
+SELECT * 
+FROM SMALL.Empresa E
+WHERE E.ID_Persona = @IdPersona;
+GO
+
+CREATE PROCEDURE [SMALL].[agregarEmpresa](@id int, @razonSoc nvarchar(255), @cuit nvarchar(50), @nom nvarchar(255), @fecha datetime)
+AS
+INSERT INTO SMALL.Empresa 
+(
+	ID_Persona,
+	Razon_Social,
+	Cuit,
+	Nombre_Contacto,
+	Fecha_Creacion
+	) 
+VALUES 
+(
+	@id,
+	@razonSoc,
+	@cuit,
+	@nom,
+	@fecha
+	);
+GO
+
+CREATE PROCEDURE [SMALL].[updateEmpresa](@nom nvarchar(255), @id int)
+AS
+UPDATE SMALL.Empresa 
+SET Nombre_Contacto = @nom WHERE ID_Persona = @id;
+GO
+
+
+
+/********** PERSONA **********/ 
+CREATE PROCEDURE [SMALL].[getPersonas]
+AS
+SELECT * 
+FROM SMALL.Persona;
+GO
+
+CREATE PROCEDURE [SMALL].[getPersona](@id int)
+AS
+SELECT * 
+FROM SMALL.Persona E
+WHERE E.ID = @id;
+GO
+
+CREATE PROCEDURE [SMALL].[activarPersona](@id int,@baja bit)
+AS
+UPDATE SMALL.Persona SET Activo = @baja WHERE ID = @id;
+GO
+
+CREATE PROCEDURE [SMALL].[agregarPersona](@mail nvarchar(255),@tel numeric(18,0),@dom nvarchar(255),@nro numeric(18,0),@piso tinyint,@dpto nvarchar(50),@loc nvarchar(255),@cp nvarchar(50),@ciudad nvarchar(255),@activo bit)
+AS
+INSERT INTO SMALL.Persona 
+(
+	Mail,
+	Telefono,
+	Domicilio_Calle,
+	Nro_Calle,
+	Piso,
+	Departamento,
+	Localidad,
+	Cod_Postal,
+	Ciudad,
+	Activo
+	)
+VALUES 
+(
+	@mail,
+	@tel,
+	@dom,
+	@nro,
+	@piso,
+	@dpto,
+	@loc,
+	@cp,
+	@ciudad,
+	@activo
+	);
+RETURN @@IDENTITY
+GO
+
+CREATE PROCEDURE [SMALL].[updatePersona](@id int, @mail nvarchar(255),@tel numeric(18,0),@dom nvarchar(255),@nro numeric(18,0),@piso tinyint,@dpto nvarchar(50),@loc nvarchar(255),@cp nvarchar(50),@ciudad nvarchar(255))
+AS
+UPDATE SMALL.Persona SET Mail = @mail, Telefono = @tel, Domicilio_Calle = @dom, Nro_Calle = @nro, Piso = @piso, Departamento = @dpto, Localidad = @loc, Cod_Postal = @cp, Ciudad = @ciudad
+WHERE ID = @id;
+GO
+
+
+
+/********** FUNCIONALIDADES Y ROLES**********/ 
+CREATE PROCEDURE [SMALL].[getFuncionalidades]
+AS
+SELECT * 
+FROM SMALL.Funcionalidades;
+GO
+
+CREATE PROCEDURE [SMALL].[getRoles]
+AS
+SELECT *
+FROM SMALL.Rol;
+GO
+
+CREATE PROCEDURE [SMALL].[getRolNom](@nombre nvarchar(255))
+AS
+SELECT *
+FROM SMALL.Rol R
+WHERE R.Nombre = @nombre;
+GO
+
+CREATE PROCEDURE [SMALL].[getRolId](@id int)
+AS
+SELECT *
+FROM SMALL.Rol R
+WHERE R.ID = @id;
+GO
+
+CREATE PROCEDURE [SMALL].[agregarRol](@nombre nvarchar(255), @act bit)
+AS
+INSERT INTO SMALL.Rol 
+(
+	Nombre,
+	Activo
+	)
+VALUES 
+(
+	@nombre,
+	@act
+	);
+RETURN @@IDENTITY
+GO
+
+CREATE PROCEDURE [SMALL].[agregarRolFuncionalidad](@idRol int, @idFunc int)
+AS
+INSERT INTO SMALL.Rol_Funcionalidad
+(
+	ID_Rol,
+	ID_Funcionalidad
+	)
+VALUES 
+(
+	@idRol,
+	@idFunc
+	);
+GO
+
+CREATE PROCEDURE [SMALL].[activarRol](@id int,@baja bit)
+AS
+UPDATE SMALL.Rol SET Activo = @baja WHERE ID = @id;
+GO
+
+CREATE PROCEDURE [SMALL].[getRolFunc](@id int)
+AS
+SELECT *
+FROM SMALL.Rol_Funcionalidad R
+WHERE R.ID_Rol = @id;
+GO
+
