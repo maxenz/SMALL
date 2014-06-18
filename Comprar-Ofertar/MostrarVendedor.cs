@@ -27,18 +27,18 @@ namespace FrbaCommerce.Comprar_Ofertar
         private void MostrarVendedor_Load(object sender, EventArgs e)
         {
 
-            //Persona Ven =  ADOPersona.getPersonas(_idVendedor);
+            Persona Ven =  ADOPersona.getVendedor(_idVendedor);
 
-            //lblNombre.Text = Ven.Descripcion;
-            //lblTel.Text = Ven.Telefono.ToString();
-            //lblMail.Text = Ven.Mail;
-            //lblCalle.Text = Ven.Domicilio_Calle;
-            //lblNum.Text = Ven.Nro_Calle.ToString();
-            //lblPiso.Text = Ven.Piso.ToString();
-            //lblDto.Text = Ven.Departamento.ToString();
-            //lblCP.Text = Ven.Cod_Postal.ToString();
-            //lblCiudad.Text = Ven.Ciudad;
-            //lblLoc.Text = Ven.Localidad;
+            lblNombre.Text = Ven.Descripcion;
+            lblTel.Text = Ven.Telefono.ToString();
+            lblMail.Text = Ven.Mail;
+            lblCalle.Text = Ven.Domicilio_Calle;
+            lblNum.Text = Ven.Nro_Calle.ToString();
+            lblPiso.Text = Ven.Piso.ToString();
+            lblDto.Text = Ven.Departamento.ToString();
+            lblCP.Text = Ven.Cod_Postal.ToString();
+            lblCiudad.Text = Ven.Ciudad;
+            lblLoc.Text = Ven.Localidad;
 
         }
 

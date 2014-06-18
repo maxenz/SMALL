@@ -166,3 +166,14 @@ where SMALL.Calificacion.ID_Publicacion = SMALL.Publicacion.ID
 and Publicacion.ID_Persona_Venta = @idPersona
 
 Go
+
+/********** GetVendedor **********/ 
+
+CREATE PROCEDURE [SMALL].[GetVendedor](@IdVendedor int)
+AS
+
+	SELECT * FROM SMALL.Persona per
+	LEFT JOIN SMALL.Cliente cli ON (cli.ID_Persona = per.ID)
+	LEFT JOIN SMALL.Empresa emp ON (emp.ID_Persona = per.ID)
+	where per.ID = @IdVendedor
+GO
