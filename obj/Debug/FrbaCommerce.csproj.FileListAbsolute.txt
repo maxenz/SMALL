@@ -113,3 +113,4 @@ C:\gestion\SMALL\obj\Debug\FrbaCommerce.MenuPrincipal.resources
 C:\gestion\SMALL\obj\Debug\FrbaCommerce.Properties.Resources.resources
 C:\gestion\SMALL\obj\Debug\FrbaCommerce.Registro_de_Usuario.Form1.resources
 C:\gestion\SMALL\obj\Debug\FrbaCommerce.csproj.GenerateResource.Cache
+C:\gestion\SMALL\obj\Debug\FrbaCommerce.Editar_Publicacion.SeleccionPublicacionForm.resources

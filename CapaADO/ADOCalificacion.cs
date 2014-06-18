@@ -21,6 +21,16 @@ namespace FrbaCommerce.DAO
                 detalle, fechaActual, idPersona);
 
         }
+
+        public static DataTable getComprasACalificar(int _persona)
+        {
+            return SqlConnector.retrieveDataTable("GetComprasACalificar", _persona);
+        }
+
+        public static DataTable getSubastasACalificar(int _persona)
+        {
+            return SqlConnector.retrieveDataTable("GetSubastasACalificar", _persona);
+        }
     }
  
 

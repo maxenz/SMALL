@@ -30,10 +30,7 @@ namespace FrbaCommerce.Calificar_Vendedor
 
         private void searchPublicaciones()
         {
-            int IdRubro = Convert.ToInt32(cmbRubros.SelectedValue);
-            string Descripcion = txtDescripcion.Text;
-            this.Buscar(IdRubro, Descripcion);
-            dgvGrillaPublicaciones.Columns[0].Visible = false;
+            this.Buscar();
 
         }
 
@@ -48,42 +45,46 @@ namespace FrbaCommerce.Calificar_Vendedor
 
         }
 
-        private void Buscar(int IdRubro, string Descripcion)
+        private ProductoACalificar rowToProducto(DataRow r)
+        {
+            ProductoACalificar p = new ProductoACalificar(
+                Convert.ToInt32(r["ID_Publicacion"]), Convert.ToDateTime(r["Fecha"]));
+            return p;
+        }
+
+        private void Buscar()
         {
 
-            List<Publicacion> lPublicaciones = ADOPublicacion.getPublicacionesACalificar(_persona);
+            DataTable dtCompras = ADOCalificacion.getComprasACalificar(_persona);
 
-            if (IdRubro != 0)
+            DataTable dtSubastas = ADOCalificacion.getSubastasACalificar(_persona);
+
+            List<ProductoACalificar> prodsToCal = new List<ProductoACalificar>();
+
+            foreach (DataRow r in dtCompras.Rows)
             {
-               
-                lPublicaciones = lPublicaciones
-                    .Where(x => x.Rubros.Exists(j => j.ID == IdRubro))
-                    .ToList();
-            }
-            
-            if (Descripcion != "")
-            {
-                lPublicaciones = lPublicaciones
-                                .Where(x => x.Descripcion.Contains(Descripcion))
-                                .ToList();
+                prodsToCal.Add(rowToProducto(r));
+
             }
 
+            foreach (DataRow r in dtSubastas.Rows)
+            {
+                prodsToCal.Add(rowToProducto(r));
+
+            }
+  
             int skipReg = (nroPagina * 10) - 10;
-            fin = (lPublicaciones.Count() / 10);
-            if (lPublicaciones.Count() % 10 > 0) fin++;
+            fin = (prodsToCal.Count() / 10);
+            if (prodsToCal.Count() % 10 > 0) fin++;
 
-            lPublicaciones = lPublicaciones.Skip(skipReg).Take(10).ToList();
-            dgvGrillaPublicaciones.DataSource = lPublicaciones;
+            prodsToCal = prodsToCal.Skip(skipReg).Take(10).ToList();
+            dgvGrillaPublicaciones.DataSource = prodsToCal;
 
         }
 
         private void Calificar_Load(object sender, EventArgs e)
         {
-            //En este load debería verificar el estado de las publicaciones en relacion a la fecha del momento.
-            cmbRubros.DataSource = ADORubro.getRubros();
-            cmbRubros.DisplayMember = "Descripcion";
-            cmbRubros.ValueMember = "ID";
-            cmbRubros.SelectedItem = null;
+
         }
 
         private void btnPrimero_Click(object sender, EventArgs e)
@@ -119,7 +120,7 @@ namespace FrbaCommerce.Calificar_Vendedor
 
         private void dgvGrillaPublicaciones_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            int idPublicacion = Convert.ToInt32(dgvGrillaPublicaciones.Rows[e.RowIndex].Cells["ID"].Value);
+            int idPublicacion = Convert.ToInt32(dgvGrillaPublicaciones.Rows[e.RowIndex].Cells["ID_Publicacion"].Value);
             FormHelper.mostrarNuevaVentana(new CalificarDetalle(this, Globals.userID, idPublicacion), this);
             this.Hide();
         }

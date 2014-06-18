@@ -277,6 +277,7 @@
     <Compile Include="MenuPrincipal.designer.cs">
       <DependentUpon>MenuPrincipal.cs</DependentUpon>
     </Compile>
+    <Compile Include="Modelo\ProductoACalificar.cs" />
     <Compile Include="Modelo\RubroPublicacion.cs" />
     <Compile Include="Modelo\EstadoPublicacion.cs" />
     <Compile Include="Modelo\Globals.cs" />

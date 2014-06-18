@@ -337,5 +337,36 @@ SELECT ID FROM SMALL.Usuario WHERE Usuario = @nomUsuario
 
 GO
 
+/********** GetComprasACalificar **********/
+
+CREATE PROCEDURE [SMALL].[GetComprasACalificar]
+(@idUsuario INT)
+
+AS
+
+SELECT * FROM SMALL.Compra cmp
+WHERE cmp.ID_Publicacion NOT IN (
+SELECT cal.ID_Publicacion FROM SMALL.Calificacion cal )
+AND cmp.ID_Persona_Compra = @idUsuario
+
+GO
+
+
+/********** GetSubastasACalificar **********/
+
+CREATE PROCEDURE [SMALL].[GetSubastasACalificar]
+(@idUsuario INT)
+
+AS
+
+SELECT * FROM SMALL.Oferta ofe
+JOIN SMALL.Publicacion pub ON (pub.ID = ofe.ID_Publicacion)
+WHERE ofe.ID_Publicacion NOT IN (
+SELECT cal.ID_Publicacion FROM SMALL.Calificacion cal )
+AND ofe.ID_Persona_Oferta = @idUsuario
+AND Es_Oferta_Ganadora = 1
+AND pub.ID_Estado = 3
+
+GO
  
  

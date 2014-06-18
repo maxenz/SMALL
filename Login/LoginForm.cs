@@ -64,6 +64,7 @@ namespace FrbaCommerce.Login
 
             //Loggeo directo hasta que esten hechos los procedimientos en la BDD
             _principal.mostrarPantallaUsuario(new Usuario("", new List<Rol>()));
+            Globals.userID = 37;
             DialogResult = DialogResult.OK;
             Close();
             return;
