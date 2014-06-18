@@ -118,3 +118,51 @@ Where ID_Persona_Respuesta = @IdPersonaPregunta
 and Respuesta is not null
 
 Go
+
+/********* getMisComprasRealizadas ********************/
+
+Create Procedure [SMALL].[getMisComprasRealizadas](@idPersona int)
+As
+--Compras hechas
+select Publicacion.Descripcion as Publicación, SMALL.Compra.Cantidad, SMALL.Compra.Fecha
+from SMALL.Compra, SMALL.Publicacion
+where SMALL.Compra.ID_Publicacion = SMALL.Publicacion.ID
+and Compra.ID_Persona_Compra = @idPersona
+
+Go
+
+/********* getMisOfertasRealizadas ********************/
+
+Create Procedure [SMALL].[getMisOfertasRealizadas](@idPersona int)
+As
+--Ofertas hechas
+select Publicacion.Descripcion as Publicación, SMALL.Oferta.Fecha, SMALL.Oferta.Monto, SMALL.Oferta.Es_Oferta_Ganadora as 'Es Ganadora'
+from SMALL.Oferta, SMALL.Publicacion
+where SMALL.Oferta.ID_Publicacion = SMALL.Publicacion.ID
+and Oferta.ID_Persona_Oferta = @idPersona
+
+Go
+
+/********* getCalificacionesOtorgadas ********************/
+
+Create Procedure [SMALL].[getCalificacionesOtorgadas](@idPersona int)
+As
+--Calificaciones otorgadas
+select Publicacion.Descripcion as Publicacion, SMALL.Calificacion.Estrellas, SMALL.Calificacion.Descripcion as 'Descripción Calificación', SMALL.Calificacion.Fecha 
+From SMALL.Calificacion, SMALL.Publicacion
+where SMALL.Calificacion.ID_Publicacion = SMALL.Publicacion.ID
+and Calificacion.ID_Persona_Calificacion = @idPersona
+
+Go
+
+/********* getCalificacionesRecibidas ********************/
+
+Create Procedure [SMALL].[getCalificacionesRecibidas](@idPersona int)
+As
+--Calificaciones Recibidas
+select Publicacion.Descripcion as Publicación, SMALL.Calificacion.Estrellas, SMALL.Calificacion.Descripcion as 'Descripción Calificación', SMALL.Calificacion.Fecha 
+From SMALL.Calificacion, SMALL.Publicacion
+where SMALL.Calificacion.ID_Publicacion = SMALL.Publicacion.ID
+and Publicacion.ID_Persona_Venta = @idPersona
+
+Go

@@ -23,7 +23,7 @@ namespace FrbaCommerce.Listado_Estadistico
 
         private void ListadosForm_Load(object sender, EventArgs e)
         {
-            gridListado.Visible = true;
+            dgvListado.Visible = true;
             label4.Visible = false;
             cboxMes.Visible = false;
             cargarComboBoxAños();
@@ -134,8 +134,8 @@ namespace FrbaCommerce.Listado_Estadistico
                 default:
                     break;
             }
-            gridListado.AutoResizeColumns();
-            gridListado.AutoResizeRows();
+            dgvListado.AutoResizeColumns();
+            dgvListado.AutoResizeRows();
         }
 
         private int getAnio()
@@ -155,8 +155,8 @@ namespace FrbaCommerce.Listado_Estadistico
 
         private void cargarGrid(DataTable dt)
         {
-            gridListado.Visible = true;
-            gridListado.DataSource = dt;
+            dgvListado.Visible = true;
+            dgvListado.DataSource = dt;
         }
 
         private void cboxTrimestre_SelectedIndexChanged(object sender, EventArgs e)

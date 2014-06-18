@@ -30,17 +30,17 @@
         {
             this.label1 = new System.Windows.Forms.Label();
             this.cboxListado = new System.Windows.Forms.ComboBox();
-            this.gridListado = new System.Windows.Forms.DataGridView();
+            this.dgvListado = new System.Windows.Forms.DataGridView();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.cboxAnio = new System.Windows.Forms.ComboBox();
             this.cboxTrimestre = new System.Windows.Forms.ComboBox();
             this.buttonConsultar = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.cboxMes = new System.Windows.Forms.ComboBox();
             this.button1 = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.gridListado)).BeginInit();
+            this.cboxMes = new System.Windows.Forms.ComboBox();
+            this.label4 = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvListado)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -68,20 +68,20 @@
             this.cboxListado.TabIndex = 1;
             this.cboxListado.SelectedIndexChanged += new System.EventHandler(this.cboxListado_SelectedIndexChanged);
             // 
-            // gridListado
+            // dgvListado
             // 
-            this.gridListado.AllowUserToAddRows = false;
-            this.gridListado.AllowUserToDeleteRows = false;
-            this.gridListado.AllowUserToResizeColumns = false;
-            this.gridListado.AllowUserToResizeRows = false;
-            this.gridListado.BackgroundColor = System.Drawing.SystemColors.Control;
-            this.gridListado.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.gridListado.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.gridListado.Location = new System.Drawing.Point(5, 117);
-            this.gridListado.Name = "gridListado";
-            this.gridListado.ReadOnly = true;
-            this.gridListado.Size = new System.Drawing.Size(602, 147);
-            this.gridListado.TabIndex = 2;
+            this.dgvListado.AllowUserToAddRows = false;
+            this.dgvListado.AllowUserToDeleteRows = false;
+            this.dgvListado.AllowUserToResizeColumns = false;
+            this.dgvListado.AllowUserToResizeRows = false;
+            this.dgvListado.BackgroundColor = System.Drawing.SystemColors.Control;
+            this.dgvListado.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dgvListado.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvListado.Location = new System.Drawing.Point(5, 117);
+            this.dgvListado.Name = "dgvListado";
+            this.dgvListado.ReadOnly = true;
+            this.dgvListado.Size = new System.Drawing.Size(602, 147);
+            this.dgvListado.TabIndex = 2;
             // 
             // label2
             // 
@@ -149,24 +149,6 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Listados";
             // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(290, 46);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(27, 13);
-            this.label4.TabIndex = 8;
-            this.label4.Text = "Mes";
-            // 
-            // cboxMes
-            // 
-            this.cboxMes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboxMes.FormattingEnabled = true;
-            this.cboxMes.Location = new System.Drawing.Point(323, 43);
-            this.cboxMes.Name = "cboxMes";
-            this.cboxMes.Size = new System.Drawing.Size(103, 21);
-            this.cboxMes.TabIndex = 9;
-            // 
             // button1
             // 
             this.button1.Location = new System.Drawing.Point(345, 75);
@@ -177,20 +159,38 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // cboxMes
+            // 
+            this.cboxMes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboxMes.FormattingEnabled = true;
+            this.cboxMes.Location = new System.Drawing.Point(323, 43);
+            this.cboxMes.Name = "cboxMes";
+            this.cboxMes.Size = new System.Drawing.Size(103, 21);
+            this.cboxMes.TabIndex = 9;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(290, 46);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(27, 13);
+            this.label4.TabIndex = 8;
+            this.label4.Text = "Mes";
+            // 
             // ListadosForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(619, 268);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.gridListado);
+            this.Controls.Add(this.dgvListado);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "ListadosForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Listados Estadisticos";
             this.Load += new System.EventHandler(this.ListadosForm_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.gridListado)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvListado)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
@@ -201,7 +201,7 @@
 
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox cboxListado;
-        private System.Windows.Forms.DataGridView gridListado;
+        private System.Windows.Forms.DataGridView dgvListado;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ComboBox cboxAnio;
