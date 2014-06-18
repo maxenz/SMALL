@@ -101,8 +101,12 @@ namespace FrbaCommerce.Facturar_Publicaciones
             }
             
             // --> obtengo la fecha de la ultima publicacion facturada
-            DateTime fecUltPubFacturada = Convert.ToDateTime(ADOFacturacion
-                                    .getLastPublicacionFacturada(idPersona).Rows[0]["Fecha_Vencimiento"]);
+            DateTime fecUltPubFacturada = new DateTime(1900, 1, 1);
+            DataTable dtUltPubFact = ADOFacturacion.getLastPublicacionFacturada(Globals.userID);
+            if (dtUltPubFact.Rows.Count != 0)
+            {
+                fecUltPubFacturada = Convert.ToDateTime(dtUltPubFact.Rows[0]["Fecha_Vencimiento"]);
+            }
             
             // --> obtengo las publicaciones a facturar
             DataTable dtPubAFacturar = ADOFacturacion

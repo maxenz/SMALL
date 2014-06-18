@@ -62,11 +62,11 @@ namespace FrbaCommerce.Login
         private void button1_Click(object sender, EventArgs e)
         {
 
-            ////Loggeo directo hasta que esten hechos los procedimientos en la BDD
-            //_principal.mostrarPantallaUsuario(new Usuario("", new List<Rol>()));
-            //DialogResult = DialogResult.OK;
-            //Close();
-            //return;
+            //Loggeo directo hasta que esten hechos los procedimientos en la BDD
+            _principal.mostrarPantallaUsuario(new Usuario("", new List<Rol>()));
+            DialogResult = DialogResult.OK;
+            Close();
+            return;
             //
             string nombreUsuario = tBoxNombreUsuario.Text;
             string password = tBoxPassword.Text;
