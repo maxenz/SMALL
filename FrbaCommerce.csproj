@@ -200,11 +200,11 @@
       <DependentUpon>MostrarVendedor.cs</DependentUpon>
     </Compile>
     <Compile Include="Controller.cs" />
-    <Compile Include="Editar Publicacion\Form1.cs">
+    <Compile Include="Editar Publicacion\SeleccionPublicacion.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Editar Publicacion\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Editar Publicacion\SeleccionPublicacion.Designer.cs">
+      <DependentUpon>SeleccionPublicacion.cs</DependentUpon>
     </Compile>
     <Compile Include="Exceptions\PasswordIncorrectoException.cs" />
     <Compile Include="Exceptions\RecorridoNotFoundException.cs" />
@@ -347,6 +347,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Comprar-Ofertar\MostrarVendedor.resx">
       <DependentUpon>MostrarVendedor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editar Publicacion\SeleccionPublicacion.resx">
+      <DependentUpon>SeleccionPublicacion.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Facturar Publicaciones\frmFacturarPublicaciones.resx">
       <DependentUpon>frmFacturarPublicaciones.cs</DependentUpon>

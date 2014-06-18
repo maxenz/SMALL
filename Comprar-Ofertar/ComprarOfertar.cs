@@ -49,11 +49,6 @@ namespace FrbaCommerce.Comprar_Ofertar
 
         private void btnBuscar_Click(object sender, EventArgs e)
         {
-            //List<Publicacion> lPublicaciones = new List<Publicacion>();
-
-            //lPublicaciones = ADOPublicacion.GetPublicaciones();
-
-            //this.dgvGrillaPublicaciones.DataSource = lPublicaciones;
             int IdRubro = Convert.ToInt32(cmbRubros.SelectedValue);
             string Descripcion = txtDescripcion.Text;
             this.Buscar(IdRubro, Descripcion);

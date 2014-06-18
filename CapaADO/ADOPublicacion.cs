@@ -217,5 +217,10 @@ namespace FrbaCommerce.DAO
             DataTable dt = SqlConnector.retrieveDataTable("GetCantPublActualesGratis", idUsuario);
             return Convert.ToInt32(dt.Rows[0]["Cantidad"]);
         }
+
+        public static DataTable getMisPublicaciones(int idPersona)
+        {
+            return SqlConnector.retrieveDataTable("getMisPublicaciones", idPersona);
+        }
     }
 }

@@ -27,7 +27,7 @@ namespace FrbaCommerce.DAO
 
         public static Persona getVendedor(int IdVendedor)
         {
-            DataTable table = SqlConnector.retrieveDataTable("GetVendedor", IdVendedor);
+            DataTable table = SqlConnector.retrieveDataTable("getVendedor", IdVendedor);
 
             Persona vendedor = dataRowToPersona(table.Rows[0]);
             
