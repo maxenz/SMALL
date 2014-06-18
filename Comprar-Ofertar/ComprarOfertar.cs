@@ -82,8 +82,11 @@ namespace FrbaCommerce.Comprar_Ofertar
             }
             else
             {
-                dgvGrillaPublicaciones.Rows.Clear();//Si no encuentra, limpiamos el datagridview
+                if (dgvGrillaPublicaciones.DataSource != null)
+                    dgvGrillaPublicaciones.DataSource = null;//dgvGrillaPublicaciones.Rows.Clear();//Si no encuentra, limpiamos el datagridview
                 lblCantidadTotal.Text = "Publicaciones Encontradas: 0";
+                lblPaginaActual.Text = ".";
+                lblTotalPagina.Text = ".";
             }
         }
 
